@@ -82,6 +82,8 @@ const Form = forwardRef(({className, enterSubmit, scrollToError, type, size, chi
 });
 
 Form.defaultProps = {
+    type: 'default',
+    size: 'default',
     scrollToError: true,
     enterSubmit: false
 };
