@@ -1,0 +1,52 @@
+{
+  "name": "@kne/react-form-antd",
+  "version": "0.1.0",
+  "description": "把@kne/react-form 表单校验逻辑应用到antd",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
+  "scripts": {
+    "build": "rollup -c",
+    "start-demo": "cd example&&npm start",
+    "start": "rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kne-union/react-form-antd.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "form",
+    "validate"
+  ],
+  "author": "linzp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kne-union/react-form-antd/issues"
+  },
+  "homepage": "https://github.com/kne-union/react-form-antd#readme",
+  "peerDependencies": {
+    "prop-types": "15.x",
+    "react": "16.x",
+    "react-dom": "16.x",
+    "antd": "3.x"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.7.7",
+    "@kne/react-form": "^0.1.0",
+    "@kne/text-width": "^0.1.0",
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.7",
+    "babel-preset-react-app": "^9.1.0",
+    "rollup": "^1.27.14",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-css-bundle": "^1.0.4"
+  }
+}
