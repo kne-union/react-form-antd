@@ -7,5 +7,6 @@ const _Select = (props) => {
 };
 
 _Select.Option = Select.Option;
+_Select.OptGroup = Select.OptGroup;
 
 export default _Select;

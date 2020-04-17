@@ -25,6 +25,6 @@ const _WeekPicker = (props) => {
 
 _DatePicker.MonthPicker = _MonthPicker;
 _DatePicker.RangePicker = _RangePicker;
-_DatePicker.RangePicker = _WeekPicker;
+_DatePicker.WeekPicker = _WeekPicker;
 
 export default _DatePicker;

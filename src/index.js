@@ -8,6 +8,7 @@ export {default as DatePicker} from './DatePicker';
 export {default as Input} from './Input';
 export {default as InputNumber} from './InputNumber';
 export {default as RadioGroup} from './RadioGroup';
+export {default as CheckboxGroup} from './CheckboxGroup';
 export {default as ResetButton} from './ResetButton';
 export {default as Select} from './Select';
 export {default as SubmitButton} from './SubmitButton';

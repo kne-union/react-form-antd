@@ -1,4 +1,5 @@
 import React, {
+    useState,
     forwardRef, useCallback,
     useEffect
 } from 'react';
@@ -6,7 +7,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import get from 'lodash/get';
 import './assets/index.scss';
-import ReactForm, {useApi} from '@kne/react-form';
+import ReactForm, {useApi as _useApi} from '@kne/react-form';
+import {Provider} from './context';
 
 export * from '@kne/react-form';
 
@@ -14,6 +16,7 @@ export {default as useChangeDecorator} from './useChangeDecorator';
 export {default as useBlurDecorator} from './useBlurDecorator';
 export {useOnChange, useOnBlur, default as useDecorator} from './useDecorator';
 export {default as useUIDecorator} from './useUIDecorator';
+export const useApi = _useApi;
 
 
 const isElementInViewport = (el, offset = 0) => {
@@ -63,6 +66,8 @@ const EnterSubmit = ({enterSubmit, ...props}) => {
 };
 
 const Form = forwardRef(({className, enterSubmit, scrollToError, type, size, children, ...props}, ref) => {
+    const [maxLabelWidth, setMaxLabelWidth] = useState(0);
+
     let computedClass = 'react-form';
     if (type !== 'default') {
         computedClass += `--${type}`;
@@ -73,10 +78,12 @@ const Form = forwardRef(({className, enterSubmit, scrollToError, type, size, chi
     }
     return (
         <ReactForm {...props} ref={ref}>
-            <EnterSubmit className={classnames(computedClass, className)} enterSubmit={enterSubmit}>
-                {scrollToError ? <ScrollToError/> : null}
-                {children}
-            </EnterSubmit>
+            <Provider value={{maxLabelWidth, setMaxLabelWidth}}>
+                <EnterSubmit className={classnames(computedClass, className)} enterSubmit={enterSubmit}>
+                    {scrollToError ? <ScrollToError/> : null}
+                    {children}
+                </EnterSubmit>
+            </Provider>
         </ReactForm>
     );
 });

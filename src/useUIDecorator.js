@@ -1,5 +1,6 @@
-import React, {useRef, useState, useCallback, useEffect} from 'react';
+import React, {useRef, useState, useContext, useCallback, useEffect} from 'react';
 import {useApi} from '@kne/react-form';
+import content from './context';
 import classnames from 'classnames';
 import getMaxWidth from './util/getMaxWidth';
 import get from 'lodash/get';
@@ -9,7 +10,7 @@ export default ({name, className, onChange, label, errorMsg, errorState, fieldRe
     const {fieldList, emitter} = useApi();
 
     const [isREQ, setIsREQ] = useState(false),
-        [maxLabelWidth, setMaxLabelWidth] = useState(0),
+        {maxLabelWidth, setMaxLabelWidth} = useContext(content),
         labelRef = useRef(null),
         [isSubmit, setIsSubmit] = useState(false),
         [changed, setChanged] = useState(false);
@@ -38,7 +39,7 @@ export default ({name, className, onChange, label, errorMsg, errorState, fieldRe
                 );
             }
         }
-    }, [fieldList, ignoreLabelWidth, name]);
+    }, [fieldList, setIsREQ, setMaxLabelWidth, ignoreLabelWidth, name]);
 
     //当表单提交时设置状态
     useEffect(() => {
