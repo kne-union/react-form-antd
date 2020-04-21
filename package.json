@@ -1,10 +1,12 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "把@kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
+  "umd": "dist/react-form.js",
+  "umd:min": "dist/react-form.min.js",
   "scripts": {
     "build": "rollup -c",
     "start-demo": "cd example&&npm start",
@@ -32,21 +34,26 @@
     "prop-types": "15.x",
     "react": "16.x",
     "react-dom": "16.x",
-    "antd": "3.x"
+    "antd": "4.x"
   },
   "dependencies": {
-    "@babel/runtime": "^7.7.7",
-    "@kne/react-form": "^0.1.0",
+    "@babel/runtime": "^7.9.2",
+    "@kne/react-fetch": "0.0.1",
+    "@kne/react-form": "^0.1.2",
     "@kne/text-width": "^0.1.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.7.6",
-    "@babel/preset-env": "^7.7.7",
-    "babel-preset-react-app": "^9.1.0",
-    "rollup": "^1.27.14",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-css-bundle": "^1.0.4"
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "babel-preset-react-app": "^9.1.2",
+    "rollup": "^1.32.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-css-bundle": "^1.0.4",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.2",
+    "rollup-plugin-terser": "^5.3.0"
   }
 }

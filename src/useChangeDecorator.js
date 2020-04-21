@@ -1,19 +1,19 @@
-import {useRef, useImperativeHandle, useEffect, useCallback} from 'react';
-import debounce from 'lodash/debounce';
+import {useRef, useEffect, useCallback} from 'react';
 
-export default ({triggerValidate, debounce: time = 0, value, onChange, ...others}) => {
-    const debounceValidate = useCallback(debounce((callback) => callback(), time), []),
-        hasChanged = useRef(false), validate = useRef(null);
-
-    useImperativeHandle(validate, () => triggerValidate);
+export default ({triggerValidate, value, onChange, ...others}) => {
+    const hasChanged = useRef(false), validate = useRef();
     const handlerChange = useCallback((...args) => {
         onChange && onChange(...args);
         hasChanged.current = true;
     }, [onChange]);
 
     useEffect(() => {
-        hasChanged.current && debounceValidate(validate.current);
-    }, [value, debounceValidate]);
+        validate.current = triggerValidate;
+    }, [triggerValidate]);
+
+    useEffect(() => {
+        hasChanged.current && validate.current();
+    }, [value]);
 
     return {
         value,

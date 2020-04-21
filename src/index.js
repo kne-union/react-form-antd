@@ -3,6 +3,7 @@ import Form from './Form';
 export * from './Form';
 
 export default Form;
+export {default as FormModal} from './FormModal';
 export {default as Cascader} from './Cascader';
 export {default as DatePicker} from './DatePicker';
 export {default as Input} from './Input';
