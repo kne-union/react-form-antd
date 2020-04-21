@@ -6,9 +6,8 @@ import getMaxWidth from './util/getMaxWidth';
 import get from 'lodash/get';
 import getValues from 'lodash/values';
 
-export default ({name, className, onChange, label, errorMsg, errorState, fieldRef, wrappedClassName, important, ignoreLabelWidth, ...others}) => {
+export default ({name, className, onChange, label, labelHidden, errorMsg, errorState, fieldRef, wrappedClassName, important, ignoreLabelWidth, ...others}) => {
     const {fieldList, emitter} = useApi();
-
     const [isREQ, setIsREQ] = useState(false),
         {maxLabelWidth, setMaxLabelWidth} = useContext(content),
         labelRef = useRef(null),
@@ -80,7 +79,7 @@ export default ({name, className, onChange, label, errorMsg, errorState, fieldRe
                     wrappedClassName
                 )}>
                 <div className="react-form__field-main">
-                    {label ? (
+                    {label && !labelHidden ? (
                         <div
                             className={classnames('react-form__field-label', {
                                 'is-req': important !== undefined ? important : isREQ

@@ -1,12 +1,12 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "0.1.7",
+  "version": "0.1.10",
   "description": "把@kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
-  "umd": "dist/react-form.js",
-  "umd:min": "dist/react-form.min.js",
+  "umd": "dist/react-form-antd.js",
+  "umd:min": "dist/react-form-antd.min.js",
   "scripts": {
     "build": "rollup -c",
     "start-demo": "cd example&&npm start",
