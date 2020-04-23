@@ -5,7 +5,7 @@ import Button from 'antd/es/button';
 const SubmitButton = (props) => {
     const {isPass, isLoading, ...submitProps} = useSubmit(props);
     return (
-        <Button disabled={isLoading} {...submitProps}/>
+        <Button loading={isLoading} {...submitProps}/>
     );
 };
 

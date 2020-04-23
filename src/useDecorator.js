@@ -4,9 +4,8 @@ import useBlurDecorator from './useBlurDecorator';
 import useChangeDecorator from './useChangeDecorator';
 
 export default ({realtime, ...props}) => {
-    const {debounce = 300} = props;
     const fieldProps = useField(props),
-        changeProps = useChangeDecorator(Object.assign({debounce}, fieldProps)),
+        changeProps = useChangeDecorator(fieldProps),
         blurProps = useBlurDecorator(fieldProps);
     return useUIDecorator(realtime ? changeProps : blurProps);
 };
