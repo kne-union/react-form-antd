@@ -1,4 +1,4 @@
-import {useOnChange} from './useDecorator';
+import {useOnChange} from '../hooks/useDecorator';
 import DatePicker from 'antd/es/date-picker';
 
 const {MonthPicker, RangePicker, WeekPicker} = DatePicker;

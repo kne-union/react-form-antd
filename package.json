@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "0.1.12",
+  "version": "0.1.18",
   "description": "把@kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -8,7 +8,7 @@
   "umd": "dist/react-form-antd.js",
   "umd:min": "dist/react-form-antd.min.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "node scripts/createIndex.js && rollup -c",
     "start-demo": "cd example&&npm start",
     "start": "rollup -c -w"
   },
@@ -34,20 +34,23 @@
     "prop-types": "15.x",
     "react": "16.x",
     "react-dom": "16.x",
+    "@kne/react-fetch": "0.1.x",
     "antd": "4.x"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
-    "@kne/react-fetch": "0.0.1",
-    "@kne/react-form": "^0.1.2",
+    "@babel/runtime": "^7.9.6",
+    "@kne/react-form": "^0.1.4",
     "@kne/text-width": "^0.1.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
     "babel-preset-react-app": "^9.1.2",
+    "fs-extra": "^9.0.0",
+    "glob": "^7.1.6",
+    "pify": "^5.0.0",
     "rollup": "^1.32.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",

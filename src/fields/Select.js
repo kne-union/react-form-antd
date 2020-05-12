@@ -1,4 +1,4 @@
-import {useOnChange} from './useDecorator';
+import {useOnChange} from '../hooks/useDecorator';
 import Select from 'antd/es/select';
 
 const _Select = (props) => {

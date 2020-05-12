@@ -1,4 +1,4 @@
-import {useOnChange} from './useDecorator';
+import {useOnChange} from '../hooks/useDecorator';
 import Checkbox from 'antd/es/checkbox';
 
 const CheckboxGroup = Checkbox.Group;

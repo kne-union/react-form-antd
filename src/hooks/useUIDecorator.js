@@ -1,8 +1,8 @@
 import React, {useRef, useState, useContext, useCallback, useEffect} from 'react';
 import {useApi} from '@kne/react-form';
-import content from './context';
+import content from '../context';
 import classnames from 'classnames';
-import getMaxWidth from './util/getMaxWidth';
+import getMaxWidth from '../util/getMaxWidth';
 import get from 'lodash/get';
 import getValues from 'lodash/values';
 

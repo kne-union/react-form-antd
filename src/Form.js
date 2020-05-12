@@ -12,10 +12,10 @@ import {Provider} from './context';
 
 export * from '@kne/react-form';
 
-export {default as useChangeDecorator} from './useChangeDecorator';
-export {default as useBlurDecorator} from './useBlurDecorator';
-export {useOnChange, useOnBlur, default as useDecorator} from './useDecorator';
-export {default as useUIDecorator} from './useUIDecorator';
+export {default as useChangeDecorator} from './hooks/useChangeDecorator';
+export {default as useBlurDecorator} from './hooks/useBlurDecorator';
+export {useOnChange, useOnBlur, default as useDecorator} from './hooks/useDecorator';
+export {default as useUIDecorator} from './hooks/useUIDecorator';
 export const useApi = _useApi;
 
 
@@ -77,14 +77,16 @@ const Form = forwardRef(({className, enterSubmit, scrollToError, type, size, chi
         computedClass += `--${size}`;
     }
     return (
-        <ReactForm {...props} ref={ref}>
-            <Provider value={{maxLabelWidth, setMaxLabelWidth}}>
-                <EnterSubmit className={classnames(computedClass, className)} enterSubmit={enterSubmit}>
-                    {scrollToError ? <ScrollToError/> : null}
-                    {children}
-                </EnterSubmit>
-            </Provider>
-        </ReactForm>
+      <form onSubmit={(e)=>e.preventDefault()}>
+          <ReactForm {...props} ref={ref}>
+              <Provider value={{maxLabelWidth, setMaxLabelWidth}}>
+                  <EnterSubmit className={classnames(computedClass, className)} enterSubmit={enterSubmit}>
+                      {scrollToError ? <ScrollToError/> : null}
+                      {children}
+                  </EnterSubmit>
+              </Provider>
+          </ReactForm>
+      </form>
     );
 });
 

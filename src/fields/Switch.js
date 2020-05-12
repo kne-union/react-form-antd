@@ -1,6 +1,6 @@
-import {useOnChange} from './useDecorator';
+import {useOnChange} from '../hooks/useDecorator';
 import Switch from 'antd/es/switch';
-import useCheckedToValue from './useCheckedToValue';
+import useCheckedToValue from '../hooks/useCheckedToValue';
 
 export default (props) => {
     const checkedProps = useCheckedToValue(props);

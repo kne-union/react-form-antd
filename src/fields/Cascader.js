@@ -1,4 +1,4 @@
-import {useOnChange} from './useDecorator';
+import {useOnChange} from '../hooks/useDecorator';
 import Cascader from 'antd/es/calendar';
 
 export default (props) => {

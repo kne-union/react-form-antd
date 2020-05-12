@@ -1,18 +1,43 @@
 import Form from './Form';
-
 export * from './Form';
-
 export default Form;
-export {default as FormModal} from './FormModal';
-export {default as Cascader} from './Cascader';
-export {default as DatePicker} from './DatePicker';
-export {default as Input} from './Input';
-export {default as InputNumber} from './InputNumber';
-export {default as RadioGroup} from './RadioGroup';
-export {default as CheckboxGroup} from './CheckboxGroup';
 export {default as ResetButton} from './ResetButton';
-export {default as Select} from './Select';
 export {default as SubmitButton} from './SubmitButton';
-export {default as Switch} from './Switch';
-export {default as TextArea} from './TextArea';
-export {default as TreeSelect} from './TreeSelect';
+
+import Cascader$ from './fields/Cascader';
+export const Cascader = Cascader$;
+  
+import CheckboxGroup$ from './fields/CheckboxGroup';
+export const CheckboxGroup = CheckboxGroup$;
+  
+import DatePicker$ from './fields/DatePicker';
+export const DatePicker = DatePicker$;
+  
+import Input$ from './fields/Input';
+export const Input = Input$;
+  
+import InputNumber$ from './fields/InputNumber';
+export const InputNumber = InputNumber$;
+  
+import RadioGroup$ from './fields/RadioGroup';
+export const RadioGroup = RadioGroup$;
+  
+import Select$ from './fields/Select';
+export const Select = Select$;
+  
+import SelectFetch$ from './fields/SelectFetch';
+export const SelectFetch = SelectFetch$;
+  
+import SelectSearch$ from './fields/SelectSearch';
+export const SelectSearch = SelectSearch$;
+  
+import Switch$ from './fields/Switch';
+export const Switch = Switch$;
+  
+import TextArea$ from './fields/TextArea';
+export const TextArea = TextArea$;
+  
+import TreeSelect$ from './fields/TreeSelect';
+export const TreeSelect = TreeSelect$;
+  
+export const fields = { Cascader, CheckboxGroup, DatePicker, Input, InputNumber, RadioGroup, Select, SelectFetch, SelectSearch, Switch, TextArea, TreeSelect };

@@ -1,4 +1,4 @@
-import {useOnChange} from './useDecorator';
+import {useOnChange} from '../hooks/useDecorator';
 import Radio from 'antd/es/radio';
 
 const RadioGroup = Radio.Group;

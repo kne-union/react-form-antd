@@ -3,6 +3,10 @@
   text-align: left;
   font-size: 12px;
 
+  .ant-select {
+    width: 100%;
+  }
+
   &--large {
     @extend #{$root};
 
@@ -133,26 +137,36 @@
   &__field {
     margin-bottom: 24px;
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-
     transition: border-color 300ms;
 
     &.is-req-error,
     &.is-error {
       #{$root + '__field-component'} {
-        border-color: #fc3333;
-
-        &:focus {
+        @mixin error-border {
+          border-color: #fc3333;
+        }
+        @mixin error-focus {
           box-shadow: 0 0 0 2px rgba(252, 51, 51, 0.2);
         }
-
-        .ant-select-selection, .ant-input, .ant-radio-inner {
-          border-color: #fc3333;
+        @mixin error-state {
+          @include error-border;
 
           &:focus {
-            box-shadow: 0 0 0 2px rgba(252, 51, 51, 0.2);
+            @include error-focus;
+          }
+        }
+        @include error-state;
+
+        .ant-select-selection, .ant-input, .ant-radio-inner {
+          @include error-state;
+        }
+        &.ant-select{
+          > .ant-select-selector {
+            @include error-border;
+          }
+
+          &.ant-select-focused > .ant-select-selector {
+            @include error-focus;
           }
         }
       }

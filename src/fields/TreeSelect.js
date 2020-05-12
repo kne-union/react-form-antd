@@ -1,4 +1,4 @@
-import {useOnChange} from './useDecorator';
+import {useOnChange} from '../hooks/useDecorator';
 import TreeSelect from 'antd/es/tree-select';
 
 const _TreeSelect = (props) => {
