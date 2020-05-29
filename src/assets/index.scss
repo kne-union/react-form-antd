@@ -160,6 +160,11 @@
         .ant-select-selection, .ant-input, .ant-radio-inner {
           @include error-state;
         }
+
+        .ant-upload.ant-upload-select-picture-card{
+          @include error-border;
+        }
+
         &.ant-select{
           > .ant-select-selector {
             @include error-border;
@@ -185,5 +190,20 @@
 .react-form-modal {
   .ant-modal-content > .ant-modal-body {
     padding: 0;
+  }
+}
+
+.react-form-avatar{
+  .preview{
+    width: 85px;
+    height: 85px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img{
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
 }

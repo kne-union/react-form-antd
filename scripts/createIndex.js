@@ -9,6 +9,8 @@ glob(path.resolve(__dirname,'../src/fields/**/*.js')).then((files)=>{
   const fileContent = `import Form from './Form';
 export * from './Form';
 export default Form;
+export {default as preset} from './preset';
+export {default as FormModal} from './FormModal';
 export {default as ResetButton} from './ResetButton';
 export {default as SubmitButton} from './SubmitButton';
 ${filenames.map((name)=>`

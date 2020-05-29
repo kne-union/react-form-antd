@@ -3,13 +3,13 @@ import {withFetch} from '@kne/react-fetch';
 import {useOnChange} from '../hooks/useDecorator';
 import Select from 'antd/es/select';
 
-const _SelectFetch = withFetch(({data, refresh, children, ...props}) => {
-    return <Select {...props}>{children(data, refresh)}</Select>;
+const _SelectFetch = withFetch(({data, setData, refresh, children, ...props}) => {
+  return <Select {...props}>{children({data, refresh, setData})}</Select>;
 });
 
 const SelectFetch = (props) => {
-    const render = useOnChange(props);
-    return render(_SelectFetch);
+  const render = useOnChange(props);
+  return render(_SelectFetch);
 };
 
 SelectFetch.Option = Select.Option;
