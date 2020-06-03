@@ -165,7 +165,15 @@
           @include error-border;
         }
 
-        &.ant-select{
+        &.ant-input-affix-wrapper .ant-input{
+          box-shadow: none;
+        }
+
+        &.ant-input-affix-wrapper-focused{
+          @include error-focus;
+        }
+
+        &.ant-select {
           > .ant-select-selector {
             @include error-border;
           }

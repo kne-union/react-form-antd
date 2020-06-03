@@ -1,7 +1,6 @@
 # react-form
 用于表单验证的react组件
 
-
 # Change Log
 
 20200430 v0.1.13 添加了SelectFetch和SelectSearch控件
@@ -11,3 +10,4 @@
 20200522 v0.1.20 添加头像上传组件
 20200525 v0.1.22 更新@kne/react-fetch以支持setData方法
 20200529 v0.1.23 添加头像上传组件field Avatar
+20200603 v0.1.24 修正Switch的值转换bug
