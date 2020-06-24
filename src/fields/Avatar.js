@@ -67,7 +67,11 @@ _Avatar.defaultProps = {
   onError: (info) => message.error(info)
 };
 
-export default (props) => {
+const AvatarInput = (props) => {
   const render = useOnChange(props);
   return render(_Avatar);
 };
+
+AvatarInput.field = _Avatar;
+
+export default AvatarInput;

@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "0.1.24",
+  "version": "0.1.25",
   "description": "把@kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -38,7 +38,7 @@
     "antd": "4.x"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.6",
+    "@babel/runtime": "^7.10.3",
     "@kne/react-form": "^0.1.5",
     "@kne/text-width": "^0.1.0",
     "classnames": "^2.2.6",
@@ -46,10 +46,10 @@
   },
   "devDependencies": {
     "@ant-design/icons": "^4.1.0",
-    "@babel/plugin-transform-runtime": "^7.9.6",
-    "@babel/preset-env": "^7.9.6",
+    "@babel/plugin-transform-runtime": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
     "babel-preset-react-app": "^9.1.2",
-    "fs-extra": "^9.0.0",
+    "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "pify": "^5.0.0",
     "rollup": "^1.32.1",
