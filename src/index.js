@@ -12,6 +12,9 @@ export const Avatar = Avatar$;
 import Cascader$ from './fields/Cascader';
 export const Cascader = Cascader$;
   
+import Checkbox$ from './fields/Checkbox';
+export const Checkbox = Checkbox$;
+  
 import CheckboxGroup$ from './fields/CheckboxGroup';
 export const CheckboxGroup = CheckboxGroup$;
   
@@ -42,4 +45,4 @@ export const TextArea = TextArea$;
 import TreeSelect$ from './fields/TreeSelect';
 export const TreeSelect = TreeSelect$;
   
-export const fields = { Avatar, Cascader, CheckboxGroup, DatePicker, Input, InputNumber, RadioGroup, Select, SelectFetch, Switch, TextArea, TreeSelect };
+export const fields = { Avatar, Cascader, Checkbox, CheckboxGroup, DatePicker, Input, InputNumber, RadioGroup, Select, SelectFetch, Switch, TextArea, TreeSelect };
