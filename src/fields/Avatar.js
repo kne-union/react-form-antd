@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Upload, message} from 'antd';
-import {useOnChange} from '@kne/react-form-antd';
+import {useOnChange} from '../hooks/useDecorator';
 import {globalParams} from '../preset';
 import classnames from 'classnames';
 import {

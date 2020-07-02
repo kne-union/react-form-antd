@@ -45,4 +45,7 @@ export const TextArea = TextArea$;
 import TreeSelect$ from './fields/TreeSelect';
 export const TreeSelect = TreeSelect$;
   
-export const fields = { Avatar, Cascader, Checkbox, CheckboxGroup, DatePicker, Input, InputNumber, RadioGroup, Select, SelectFetch, Switch, TextArea, TreeSelect };
+import Upload$ from './fields/Upload';
+export const Upload = Upload$;
+  
+export const fields = { Avatar, Cascader, Checkbox, CheckboxGroup, DatePicker, Input, InputNumber, RadioGroup, Select, SelectFetch, Switch, TextArea, TreeSelect, Upload };
