@@ -11,7 +11,7 @@ import {
 const avatarParams = globalParams.field.avatar;
 
 
-const _Avatar = ({className, value: imageUrl, onChange: propsChange, transformResponse, action, imageType, size, children, onError}) => {
+const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUpload: onBeforeUpload, transformResponse, action, imageType, size, children, onError}) => {
   const [loading, setLoading] = useState(false);
   const uploadButton = (
     <div>
@@ -27,12 +27,14 @@ const _Avatar = ({className, value: imageUrl, onChange: propsChange, transformRe
         type: imageType,
         fileType: file.type
       });
+      return false;
     }
     const isLt = file.size / 1024 / 1024 < size;
     if (!isLt) {
       onError(`图片不能超过${size}MB!`, 'sizeError', {size, fileSize: file.size});
+      return false;
     }
-    return isJpgOrPng && isLt;
+    return onBeforeUpload && onBeforeUpload(file);
   };
 
   const onChange = (info) => {
