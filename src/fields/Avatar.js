@@ -12,6 +12,7 @@ const avatarParams = globalParams.field.avatar;
 
 
 const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUpload: onBeforeUpload, transformResponse, action, imageType, size, children, onError}) => {
+  console.log('\n\n\n/n/n/n',imageUrl);
   const [loading, setLoading] = useState(false);
   const uploadButton = (
     <div>
@@ -21,6 +22,7 @@ const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUploa
   );
 
   const beforeUpload = (file) => {
+    console.log('文件', file);
     const isJpgOrPng = imageType.indexOf(file.type) > -1;
     if (!isJpgOrPng) {
       onError(`只支持${imageType.map((str) => str.replace('image/', '')).join('/')}格式图片!`, 'typeError', {
