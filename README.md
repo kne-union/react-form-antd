@@ -1,6 +1,28 @@
 # react-form
 用于表单验证的react组件
 
+### demo
+``
+
+            <Avatar editor={{open: true, width: 250, height: 250, borderRadius: 1}}
+                    beforeUpload={(file) => {}}/>
+
+            <Input realtime debounce={1000} name="name" label="姓名" rule="REQ TEL EXIT"/>
+            {isShow ? <Input name="rname" label="姓名哈哈哈" rule="REQ TEL EXIT"/> : null}
+            <Select name="select" label="选项" rule="REQ">
+                <Select.Option value="1">选项一</Select.Option>
+                <Select.Option value="2">选项二</Select.Option>
+                <Select.Option value="3">选项三</Select.Option>
+            </Select>
+            <DatePicker name="date" label="日期" rule="REQ" format="" YYYY-MM-DD/>
+            <RadioGroup name="radio" label="单选" rule="REQ">
+                <RadioGroup.Radio value="1">选项一</RadioGroup.Radio>
+                <RadioGroup.Radio value="2">选项二</RadioGroup.Radio>
+                <RadioGroup.Radio value="3">选项三</RadioGroup.Radio>
+            </RadioGroup>
+      
+``
+
 # Change Log
 
 20200430 v0.1.13 添加了SelectFetch和SelectSearch控件

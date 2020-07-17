@@ -66,23 +66,23 @@ const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUploa
             }
 
             /*剪切图像*/
-            // editor:{width:250,height:250,borderRadius:0-100,text:'剪切'}
-            if (editor) {
+            // editor:{open:false,width:250,height:250,borderRadius:0-100,text:'剪切'}
+            if (editor.open) {
                 Modal.success({
                     // title: '剪切图像',
                     icon: '',
                     content: <AvatarEditor
                         ref={editorRef}
                         image={file}
-                        width={editor.width || 250}
-                        height={editor.height || 250}
+                        width={editor.width}
+                        height={editor.height}
                         border={50}
-                        borderRadius={editor.borderRadius || 1}
+                        borderRadius={editor.borderRadius}
                         color={[255, 255, 255, 0.9]} // RGBA
                         scale={1.2}
                         rotate={0}
                     />,
-                    okText: editor.text || '剪切',
+                    okText: editor.text,
                     onOk: (close) => {
                         console.log(editorRef.current);
                         let base64 = editorRef.current.getImage().toDataURL();
@@ -94,7 +94,8 @@ const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUploa
                     }
                 })
             } else {
-                return onBeforeUpload && onBeforeUpload(file);
+                resolve(onBeforeUpload && onBeforeUpload(file))
+                // return onBeforeUpload && onBeforeUpload(file);
             }
         })
 
@@ -133,7 +134,7 @@ _Avatar.defaultProps = {
     size: 2, // 单位MB
     children: <div className="ant-upload-text">点击上传</div>,
     onError: (info) => message.error(info),
-    editor: false
+    editor: {open: false, width: 250, height: 250, borderRadius: 1, text: '剪切'}
 };
 
 const AvatarInput = (props) => {
