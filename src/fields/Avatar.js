@@ -94,7 +94,8 @@ const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUploa
                     }
                 })
             } else {
-                return onBeforeUpload && onBeforeUpload(file);
+                resolve(onBeforeUpload && onBeforeUpload(file))
+                // return onBeforeUpload && onBeforeUpload(file);
             }
         })
 
