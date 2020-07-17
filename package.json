@@ -31,21 +31,26 @@
   },
   "homepage": "https://github.com/kne-union/react-form-antd#readme",
   "peerDependencies": {
+    "@kne/react-fetch": "0.1.x",
+    "antd": "4.x",
     "prop-types": "15.x",
     "react": "16.x",
-    "react-dom": "16.x",
-    "@kne/react-fetch": "0.1.x",
-    "antd": "4.x"
+    "react-dom": "16.x"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.2.1",
     "@babel/runtime": "^7.10.3",
+    "@kne/react-fetch": "^0.1.10",
     "@kne/react-form": "^0.1.7",
     "@kne/text-width": "^0.1.0",
+    "antd": "^4.4.2",
+    "axios": "^0.19.2",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "node-sass": "^4.14.1",
+    "react-avatar-editor": "^11.0.9"
   },
   "devDependencies": {
-    "@ant-design/icons": "^4.1.0",
     "@babel/plugin-transform-runtime": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
     "babel-preset-react-app": "^9.1.2",
