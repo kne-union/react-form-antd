@@ -1,8 +1,9 @@
 {
   "name": "example",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
+    "@juliewang/react-form-antd": "^0.2.3",
     "@kne/react-form-antd": "^0.1.7",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -12,7 +13,8 @@
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.3.0",
+    "react-scripts": "3.4.0",
+    "tinymce": "^5.4.1",
     "use-debounce": "^3.4.1"
   },
   "scripts": {

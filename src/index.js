@@ -21,6 +21,9 @@ export const CheckboxGroup = CheckboxGroup$;
 import DatePicker$ from './fields/DatePicker';
 export const DatePicker = DatePicker$;
   
+import Editor$ from './fields/Editor';
+export const Editor = Editor$;
+  
 import Input$ from './fields/Input';
 export const Input = Input$;
   
@@ -48,4 +51,4 @@ export const TreeSelect = TreeSelect$;
 import Upload$ from './fields/Upload';
 export const Upload = Upload$;
   
-export const fields = { Avatar, Cascader, Checkbox, CheckboxGroup, DatePicker, Input, InputNumber, RadioGroup, Select, SelectFetch, Switch, TextArea, TreeSelect, Upload };
+export const fields = { Avatar, Cascader, Checkbox, CheckboxGroup, DatePicker, Editor, Input, InputNumber, RadioGroup, Select, SelectFetch, Switch, TextArea, TreeSelect, Upload };

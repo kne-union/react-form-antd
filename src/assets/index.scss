@@ -215,3 +215,16 @@
     }
   }
 }
+.tox-tinymce {
+  border: 1px solid #d9d9d9;
+  .tox .tox-menubar {
+    background: 0 0;
+  }
+  .tox .tox-toolbar, .tox .tox-toolbar__overflow, .tox .tox-toolbar__primary {
+    background: 0 0;
+  }
+  .tox .tox-menubar+.tox-toolbar, .tox .tox-menubar+.tox-toolbar-overlord .tox-toolbar__primary{
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+  }
+}
