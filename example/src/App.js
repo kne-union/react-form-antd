@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Input, Select, DatePicker, RadioGroup, FormModal, Editor} from '@juliewang/react-form-antd';
+import {Input, Select, DatePicker, RadioGroup, FormModal, Editor, Checkbox} from '@juliewang/react-form-antd';
 // import {Input, Select, DatePicker, RadioGroup, FormModal} from './dist/index';
 import {Button} from 'antd';
 import '@juliewang/react-form-antd/dist/style.scss';
@@ -43,6 +43,7 @@ export default () => {
         <RadioGroup.Radio value="2">选项二</RadioGroup.Radio>
         <RadioGroup.Radio value="3">选项三</RadioGroup.Radio>
       </RadioGroup>
+      <Checkbox name="check" lable="选择">是否同意</Checkbox>
       <Editor name="template" label="邮件模板" rule="REQ"/>
     </FormModal>
     <Button onClick={() => {
