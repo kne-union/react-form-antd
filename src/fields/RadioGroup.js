@@ -1,7 +1,13 @@
+import React, {useCallback} from 'react';
 import {useOnChange} from '../hooks/useDecorator';
 import Radio from 'antd/es/radio';
 
-const RadioGroup = Radio.Group;
+const RadioGroup = ({onChange, ...props})=>{
+    const handler = useCallback((e) => {
+        onChange && onChange(e.target.value);
+    }, [onChange]);
+    return <Radio.Group {...props} onChange={handler}/>
+};
 
 const _RadioGroup = (props) => {
     const render = useOnChange(props);
