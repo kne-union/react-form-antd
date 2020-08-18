@@ -183,6 +183,10 @@
           }
         }
       }
+      .tox-tinymce {
+        border-color: #fc3333;
+        box-shadow: 0 0 0 2px rgba(252, 51, 51, 0.2);
+      }
     }
 
     &-error {
@@ -217,6 +221,7 @@
 }
 .tox-tinymce {
   border: 1px solid #d9d9d9;
+  border-right: 2px;
   .tox .tox-menubar {
     background: 0 0;
   }
