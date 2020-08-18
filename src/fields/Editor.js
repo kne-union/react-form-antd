@@ -21,6 +21,7 @@ const _Editor = ({init, value: editorValue, onChange: propsChange, plugins, tool
         id={tinymceId}
         {...props}
         value={editor}
+        tinymceScriptSrc={'https://static.knxgalaxy.com/upload_assets/tinymce/tinymce.min.js'}
         init={init}
         plugins={plugins}
         toolbar={toolbar}
