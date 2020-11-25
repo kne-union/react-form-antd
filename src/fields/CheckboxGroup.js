@@ -1,13 +1,15 @@
-import {useOnChange} from '../hooks/useDecorator';
 import Checkbox from 'antd/es/checkbox';
+import {hooks} from '@kne/react-form-helper';
 
-const CheckboxGroup = Checkbox.Group;
+const {useOnChange} = hooks;
 
-const _CheckboxGroup = (props) => {
+const _CheckboxGroup = Checkbox.Group;
+
+const CheckboxGroup = (props) => {
     const render = useOnChange(props);
-    return render(CheckboxGroup);
+    return render(_CheckboxGroup);
 };
 
-_CheckboxGroup.Checkbox = Checkbox;
+CheckboxGroup.Checkbox = Checkbox;
 
-export default _CheckboxGroup;
+export default CheckboxGroup;

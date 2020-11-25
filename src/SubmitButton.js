@@ -3,9 +3,9 @@ import {useSubmit} from '@kne/react-form';
 import Button from 'antd/es/button';
 
 const SubmitButton = (props) => {
-    const {isPass, isLoading, ...submitProps} = useSubmit(props);
+    const {isPass, isLoading,...submitProps} = useSubmit(props);
     return (
-        <Button loading={isLoading} {...submitProps}/>
+        <Button loading={isLoading} {...submitProps} {...props}/>
     );
 };
 

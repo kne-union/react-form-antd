@@ -1,12 +1,14 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {Upload, message, Button} from 'antd';
-import {useOnChange} from '../hooks/useDecorator';
 import {
   UploadOutlined
 } from '@ant-design/icons';
 import get from 'lodash/get';
 import uniqueId from 'lodash/uniqueId';
 import isEqual from 'lodash/isEqual';
+import {hooks} from '@kne/react-form-helper';
+
+const {useOnChange} = hooks;
 
 const {Dragger} = Upload;
 const uploadParams = {

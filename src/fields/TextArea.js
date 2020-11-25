@@ -1,7 +1,11 @@
-import useDecorator from '../hooks/useDecorator';
 import Input from 'antd/es/input';
+import {hooks} from '@kne/react-form-helper';
 
-export default (props) => {
+const {useDecorator} = hooks;
+
+const TextArea = (props) => {
     const render = useDecorator(props);
     return render(Input.TextArea);
 };
+
+export default TextArea;

@@ -1,8 +1,12 @@
-import {useOnChange} from '../hooks/useDecorator';
-import Cascader from 'antd/es/calendar';
+import _Cascader from 'antd/es/calendar';
+import {hooks} from '@kne/react-form-helper';
 
-export default (props) => {
+const {useOnChange} = hooks;
+
+const Cascader = (props) => {
     const render = useOnChange(props);
-    return render(Cascader);
+    return render(_Cascader);
 };
+
+export default Cascader;
 

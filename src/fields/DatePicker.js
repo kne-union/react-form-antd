@@ -1,5 +1,7 @@
-import {useOnChange} from '../hooks/useDecorator';
 import DatePicker from 'antd/es/date-picker';
+import {hooks} from '@kne/react-form-helper';
+
+const {useOnChange} = hooks;
 
 const {MonthPicker, RangePicker, WeekPicker} = DatePicker;
 

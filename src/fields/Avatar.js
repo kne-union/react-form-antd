@@ -1,6 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {Upload, message, Modal} from 'antd';
-import {useOnChange} from '../hooks/useDecorator';
 import {globalParams} from '../preset';
 import classnames from 'classnames';
 import {
@@ -8,7 +7,9 @@ import {
     LoadingOutlined
 } from '@ant-design/icons';
 import AvatarEditor from "react-avatar-editor";
+import {hooks} from '@kne/react-form-helper';
 
+const {useOnChange} = hooks;
 const avatarParams = globalParams.field.avatar;
 
 

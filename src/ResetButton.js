@@ -3,9 +3,9 @@ import {useReset} from '@kne/react-form';
 import Button from 'antd/es/button';
 
 const ResetButton = (props) => {
-    const submitProps = useReset(props);
+    const resetProps = useReset();
     return (
-        <Button {...submitProps}/>
+        <Button {...resetProps} {...props}/>
     );
 };
 

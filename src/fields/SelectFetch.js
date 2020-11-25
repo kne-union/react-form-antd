@@ -1,7 +1,9 @@
 import React from 'react';
 import {withFetch} from '@kne/react-fetch';
-import {useOnChange} from '../hooks/useDecorator';
 import Select from 'antd/es/select';
+import {hooks} from '@kne/react-form-helper';
+
+const {useOnChange} = hooks;
 
 const _SelectFetch = withFetch(({data, setData, refresh, children, ...props}) => {
   return <Select {...props}>{children({data, refresh, setData})}</Select>;

@@ -1,6 +1,8 @@
 import React, {useCallback} from 'react';
-import {useOnChange} from '../hooks/useDecorator';
 import Radio from 'antd/es/radio';
+import {hooks} from '@kne/react-form-helper';
+
+const {useOnChange} = hooks;
 
 const RadioGroup = ({onChange, ...props})=>{
     const handler = useCallback((e) => {

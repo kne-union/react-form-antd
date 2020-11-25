@@ -1,5 +1,7 @@
-import {useOnChange} from '../hooks/useDecorator';
 import TreeSelect from 'antd/es/tree-select';
+import {hooks} from '@kne/react-form-helper';
+
+const {useOnChange} = hooks;
 
 const _TreeSelect = (props) => {
     const render = useOnChange(props);

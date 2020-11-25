@@ -1,11 +1,15 @@
-import {useOnChange} from '../hooks/useDecorator';
-import Checkbox from 'antd/es/checkbox';
-import useCheckedToValue, {withChecked} from '../hooks/useCheckedToValue';
+import _Checkbox from 'antd/es/checkbox';
+import {hooks, hoc} from '@kne/react-form-helper';
 
-const _Checkbox = withChecked(Checkbox);
+const {useOnChange, useCheckedToValue} = hooks;
+const {withChecked} = hoc;
 
-export default (props) => {
-  const checkedProps = useCheckedToValue(props);
-  const render = useOnChange(checkedProps);
-  return render(_Checkbox);
+const WithCheckbox = withChecked(_Checkbox);
+
+const Checkbox = (props) => {
+    const checkedProps = useCheckedToValue(props);
+    const render = useOnChange(checkedProps);
+    return render(WithCheckbox);
 };
+
+export default Checkbox;

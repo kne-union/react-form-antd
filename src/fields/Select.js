@@ -1,5 +1,7 @@
-import {useOnChange} from '../hooks/useDecorator';
 import Select from 'antd/es/select';
+import {hooks} from '@kne/react-form-helper';
+
+const {useOnChange} = hooks;
 
 const _Select = (props) => {
     const render = useOnChange(props);
