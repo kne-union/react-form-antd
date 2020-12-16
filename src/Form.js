@@ -8,7 +8,7 @@ import './assets/index.scss';
 export * from '@kne/react-form';
 export {hooks, utils} from '@kne/react-form-helper';
 
-const {ScrollToError, EnterSubmit, FormStore, MaxLabelProvider} = widget;
+const {ScrollToError, EnterSubmit, FormStore, MaxLabelProvider, SizeProvider} = widget;
 
 const Form = forwardRef(({className, cache, enterSubmit, scrollToError, type, size, children, ...props}, ref) => {
     let computedClass = 'react-form';
@@ -16,7 +16,7 @@ const Form = forwardRef(({className, cache, enterSubmit, scrollToError, type, si
         computedClass += `--${type}`;
     }
 
-    if (size !== 'default') {
+    if (size !== 'middle') {
         computedClass += `--${size}`;
     }
 
@@ -29,20 +29,22 @@ const Form = forwardRef(({className, cache, enterSubmit, scrollToError, type, si
             e.preventDefault();
             e.stopPropagation();
         }}>
-            <ReactForm {...props} ref={ref}>
-                {cache ? <FormStore cache={cache}/> : null}
-                {scrollToError ? <ScrollToError/> : null}
-                {enterSubmit ? <EnterSubmit>
-                    {maxLabel}
-                </EnterSubmit> : maxLabel}
-            </ReactForm>
+            <SizeProvider value={{size}}>
+                <ReactForm {...props} ref={ref}>
+                    {cache ? <FormStore cache={cache}/> : null}
+                    {scrollToError ? <ScrollToError/> : null}
+                    {enterSubmit ? <EnterSubmit>
+                        {maxLabel}
+                    </EnterSubmit> : maxLabel}
+                </ReactForm>
+            </SizeProvider>
         </form>
     );
 });
 
 Form.defaultProps = {
     type: 'default',
-    size: 'default',
+    size: 'middle',
     scrollToError: true,
     enterSubmit: false
 };
@@ -50,7 +52,7 @@ Form.defaultProps = {
 Form.propTypes = {
     className: PropTypes.string,
     type: PropTypes.oneOf(['inline', 'default', 'inner']),
-    size: PropTypes.oneOf(['small', 'default', 'large']),
+    size: PropTypes.oneOf(['small', 'middle', 'large']),
     enterSubmit: PropTypes.bool,
     scrollToError: PropTypes.bool
 };
