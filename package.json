@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.1",
   "description": "把@kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -31,22 +31,20 @@
   },
   "homepage": "https://github.com/kne-union/react-form-antd#readme",
   "peerDependencies": {
-    "@kne/react-fetch": "0.1.x",
-    "antd": "4.x",
-    "prop-types": "15.x",
-    "react": "16.x",
-    "react-dom": "16.x"
+    "@kne/react-fetch": ">=0.1.x",
+    "antd": ">=4.x",
+    "prop-types": ">=15.x",
+    "react": ">=16.x"
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@babel/runtime": "^7.10.3",
     "@kne/react-fetch": "^0.1.10",
-    "@kne/react-form": "^1.0.0-alpha.7",
-    "@kne/react-form-helper": "^1.0.0-alpha.10",
+    "@kne/react-form": "^1.1.0",
+    "@kne/react-form-helper": "^1.0.0",
     "antd": "^4.4.2",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
-    "node-sass": "^4.14.1",
     "react-avatar-editor": "11.0.9"
   },
   "devDependencies": {
@@ -55,13 +53,15 @@
     "babel-preset-react-app": "^9.1.2",
     "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
+    "node-sass": "^4.14.1",
     "pify": "^5.0.0",
+    "postcss": "^8.2.1",
     "rollup": "^1.32.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-css-bundle": "^1.0.4",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.2",
+    "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-terser": "^5.3.0"
   }
 }

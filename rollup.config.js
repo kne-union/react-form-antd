@@ -1,9 +1,9 @@
 import babel from 'rollup-plugin-babel'
-import cssBundle from 'rollup-plugin-css-bundle'
 import commonjs from 'rollup-plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
 import resolve from 'rollup-plugin-node-resolve'
 import {terser} from 'rollup-plugin-terser'
+import postcss from 'rollup-plugin-postcss';
 
 import path from 'path';
 import pkg from './package.json'
@@ -28,9 +28,8 @@ export default [
                 exclude: 'node_modules/**',
                 runtimeHelpers: true
             }),
-            cssBundle({
-                include: ['**/*.scss'],
-                output: path.resolve('dist/style.scss')
+            postcss({
+
             })
         ]
     },
@@ -57,10 +56,7 @@ export default [
                 exclude: 'node_modules/**',
                 runtimeHelpers: true
             }),
-            cssBundle({
-                include: ['**/*.scss'],
-                output: path.resolve('dist/style.scss')
-            }),
+            postcss({}),
             resolve(),
             commonjs()
         ]
