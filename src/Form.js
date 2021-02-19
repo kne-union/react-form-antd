@@ -10,7 +10,7 @@ export {hooks, utils} from '@kne/react-form-helper';
 
 const {ScrollToError, EnterSubmit, FormStore, MaxLabelProvider, SizeProvider} = widget;
 
-const Form = forwardRef(({className, cache, enterSubmit, scrollToError, type, size, children, ...props}, ref) => {
+const Form = forwardRef(({className, cache, enterSubmit, scrollToError, scrollProps, type, size, children, ...props}, ref) => {
     let computedClass = 'react-form';
     if (type !== 'default') {
         computedClass += `--${type}`;
@@ -32,7 +32,7 @@ const Form = forwardRef(({className, cache, enterSubmit, scrollToError, type, si
             <SizeProvider value={{size}}>
                 <ReactForm {...props} ref={ref}>
                     {cache ? <FormStore cache={cache}/> : null}
-                    {scrollToError ? <ScrollToError/> : null}
+                    {scrollToError ? <ScrollToError scrollProps={scrollProps}/> : null}
                     {enterSubmit ? <EnterSubmit>
                         {maxLabel}
                     </EnterSubmit> : maxLabel}
@@ -46,7 +46,10 @@ Form.defaultProps = {
     type: 'default',
     size: 'middle',
     scrollToError: true,
-    enterSubmit: false
+    enterSubmit: false,
+    scrollProps: {
+        block: 'center'
+    }
 };
 
 Form.propTypes = {
@@ -54,7 +57,12 @@ Form.propTypes = {
     type: PropTypes.oneOf(['inline', 'default', 'inner']),
     size: PropTypes.oneOf(['small', 'middle', 'large']),
     enterSubmit: PropTypes.bool,
-    scrollToError: PropTypes.bool
+    scrollToError: PropTypes.bool,
+    scrollProps: PropTypes.shape({
+        block: PropTypes.oneOf(['start', 'center', 'end', 'nearest']),
+        behavior: PropTypes.oneOf(['auto', 'smooth']),
+        inline: PropTypes.oneOf(['start', 'center', 'end', 'nearest'])
+    })
 };
 
 export default Form;

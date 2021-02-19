@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "把@kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -41,7 +41,7 @@
     "@babel/runtime": "^7.10.3",
     "@kne/react-fetch": "^0.1.10",
     "@kne/react-form": "^1.1.0",
-    "@kne/react-form-helper": "^1.0.0",
+    "@kne/react-form-helper": "^1.0.2",
     "antd": "^4.4.2",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
