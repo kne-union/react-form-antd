@@ -13,7 +13,7 @@ const {useOnChange} = hooks;
 const avatarParams = globalParams.field.avatar;
 
 
-const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUpload: onBeforeUpload, transformResponse, action, imageType, size, children, onError, editor}) => {
+const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUpload: onBeforeUpload, transformResponse, action, imageType, imageSize: size, children, onError, editor}) => {
     const [loading, setLoading] = useState(false);
     const [showImageUrl, setImageUrl] = useState(imageUrl);
     const editorRef = useRef();
@@ -132,7 +132,7 @@ const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUploa
 
 _Avatar.defaultProps = {
     imageType: ['image/jpeg', 'image/png'],
-    size: 2, // 单位MB
+    imageSize: 2, // 单位MB
     children: <div className="ant-upload-text">点击上传</div>,
     onError: (info) => message.error(info),
     editor: {open: false, width: 250, height: 250, borderRadius: 1, text: '剪切'}
