@@ -1,4 +1,4 @@
-import _Cascader from 'antd/es/calendar';
+import {Cascader as _Cascader} from 'antd';
 import {hooks} from '@kne/react-form-helper';
 
 const {useOnChange} = hooks;

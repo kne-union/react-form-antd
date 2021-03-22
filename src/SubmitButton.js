@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSubmit} from '@kne/react-form';
-import Button from 'antd/es/button';
+import {Button} from 'antd';
 
 const SubmitButton = (props) => {
     const {isPass, isLoading,...submitProps} = useSubmit(props);

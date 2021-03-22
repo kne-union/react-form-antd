@@ -1,4 +1,4 @@
-import _Switch from 'antd/es/switch';
+import {Switch as _Switch} from 'antd';
 import {hooks, hoc} from '@kne/react-form-helper';
 
 const {useOnChange, useCheckedToValue} = hooks;

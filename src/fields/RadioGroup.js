@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import Radio from 'antd/es/radio';
+import {Radio} from 'antd';
 import {hooks} from '@kne/react-form-helper';
 
 const {useOnChange} = hooks;

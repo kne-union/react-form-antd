@@ -1,4 +1,4 @@
-import TreeSelect from 'antd/es/tree-select';
+import {TreeSelect} from 'antd';
 import {hooks} from '@kne/react-form-helper';
 
 const {useOnChange} = hooks;

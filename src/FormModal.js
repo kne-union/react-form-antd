@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from 'antd/es/modal';
+import {Modal} from 'antd';
 import SubmitButton from './SubmitButton';
 import ResetButton from './ResetButton';
 import Space from 'antd/es/space';

@@ -1,4 +1,4 @@
-import Select from 'antd/es/select';
+import {Select} from 'antd';
 import {hooks} from '@kne/react-form-helper';
 
 const {useOnChange} = hooks;

@@ -1,17 +1,17 @@
 import React from 'react';
 import {withFetch} from '@kne/react-fetch';
-import Select from 'antd/es/select';
+import {Select} from 'antd';
 import {hooks} from '@kne/react-form-helper';
 
 const {useOnChange} = hooks;
 
 const _SelectFetch = withFetch(({data, setData, refresh, children, ...props}) => {
-  return <Select {...props}>{children({data, refresh, setData})}</Select>;
+    return <Select {...props}>{children({data, refresh, setData})}</Select>;
 });
 
 const SelectFetch = (props) => {
-  const render = useOnChange(props);
-  return render(_SelectFetch);
+    const render = useOnChange(props);
+    return render(_SelectFetch);
 };
 
 SelectFetch.Option = Select.Option;

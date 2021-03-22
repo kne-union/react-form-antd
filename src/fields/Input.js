@@ -1,4 +1,4 @@
-import Input from 'antd/es/input';
+import {Input} from 'antd';
 import {hooks} from '@kne/react-form-helper';
 
 const {useDecorator} = hooks;

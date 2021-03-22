@@ -1,4 +1,4 @@
-import Checkbox from 'antd/es/checkbox';
+import {Checkbox} from 'antd';
 import {hooks} from '@kne/react-form-helper';
 
 const {useOnChange} = hooks;
