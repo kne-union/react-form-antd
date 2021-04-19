@@ -67,14 +67,14 @@ const _Upload = ({className, value: list, onChange: setList, onUploadComplete, b
         if (maxLength === 1) {
             setList([]);
         }
-        const typeAllowed = accept.length === 0 || !!accept.find((type) => type === file.type);
+        /*const typeAllowed = accept.length === 0 || !!accept.find((type) => type === file.type);
         if (!typeAllowed) {
             onError(`只支持${accept.join('/')}格式文件!`, 'typeError', {
                 type: accept,
                 fileType: file.type
             });
             return false;
-        }
+        }*/
         const isLt = file.size / 1024 / 1024 < size;
         if (!isLt) {
             onError(`文件不能超过${size}MB!`, 'sizeError', {size, fileSize: file.size});
