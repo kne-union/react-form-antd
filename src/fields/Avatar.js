@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {Upload, message, Modal} from 'antd';
+import {Upload, message, Modal, Slider, Row, Col, Space} from 'antd';
 import {globalParams} from '../preset';
 import classnames from 'classnames';
 import {
@@ -39,6 +39,49 @@ const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUploa
         });
     };
 
+
+
+    const AvatarEditorBox = ({file})=>{
+        const [rotate, setRotate] = useState(0);
+        const [scale, setScale] = useState(1);
+
+        const onChange = (v)=>{
+            console.log(v);
+            setRotate(v);
+        }
+        const onChangeScale = (v)=>{
+            console.log(v);
+            setScale(v);
+        }
+        return (
+            <div style={{'marginLeft':'50px'}}>
+                <AvatarEditor
+                    ref={editorRef}
+                    image={file}
+                    width={editor.width}
+                    height={editor.height}
+                    border={1}
+                    borderRadius={editor.borderRadius}
+                    color={[24, 144, 255, 1]} // RGBA
+                    scale={scale}
+                    rotate={rotate}
+                />
+                <Row gutter={4}>
+                    <Col span={4}><span>旋转</span></Col>
+                    <Col span={15}>
+                        <Slider tooltipVisible={false} defaultValue={rotate} min={-180} max={180} onChange={onChange} />
+                    </Col>
+                </Row>
+                <Row gutter={4}>
+                    <Col span={4}><span>放大</span></Col>
+                    <Col span={15}>
+                        <Slider tooltipVisible={false} defaultValue={scale} step={0.1} min={1} max={3} onChange={onChangeScale} />
+                    </Col>
+                </Row>
+            </div>
+        )
+    }
+
     const uploadButton = (
         <div>
             {loading ? <LoadingOutlined/> : <PlusOutlined/>}
@@ -72,30 +115,27 @@ const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUploa
                 Modal.success({
                     // title: '剪切图像',
                     icon: '',
-                    content: <AvatarEditor
-                        ref={editorRef}
-                        image={file}
-                        width={editor.width}
-                        height={editor.height}
-                        border={50}
-                        borderRadius={editor.borderRadius}
-                        color={[255, 255, 255, 0.9]} // RGBA
-                        scale={1.2}
-                        rotate={0}
-                    />,
+                    content: <AvatarEditorBox file={file}/>,
                     okText: editor.text,
                     onOk: (close) => {
-                        console.log(editorRef.current);
+                        // console.log(editorRef.current);
                         let base64 = editorRef.current.getImage().toDataURL();
                         setImageUrl(base64);
                         let blob = dataURLtoBlob(base64);
-                        // console.log(blob);
+                        const files = new window.File(
+                            [blob],
+                            file.name,
+                            { type: file.type }
+                        );
+                        onBeforeUpload && onBeforeUpload(files);
+                        resolve(files);
+                        // console.log(files);
                         close();
-                        resolve(onBeforeUpload && onBeforeUpload(blob))
                     }
                 })
             } else {
-                resolve(onBeforeUpload && onBeforeUpload(file))
+                onBeforeUpload && onBeforeUpload(file);
+                resolve(file);
                 // return onBeforeUpload && onBeforeUpload(file);
             }
         })
