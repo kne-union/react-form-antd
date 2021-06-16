@@ -5,8 +5,8 @@ import {hooks} from '@kne/react-form-helper';
 
 const {useOnChange} = hooks;
 
-const _SelectFetch = withFetch(({data, setData, refresh, children, ...props}) => {
-    return <Select {...props}>{children({data, refresh, setData})}</Select>;
+const _SelectFetch = withFetch(({data, setData, refresh, isLoading, children, ...props}) => {
+    return <Select {...props}>{children({data, refresh, isLoading, setData})}</Select>;
 });
 
 const SelectFetch = (props) => {
