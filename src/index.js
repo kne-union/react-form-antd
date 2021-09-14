@@ -12,6 +12,7 @@ import Select$ from './fields/Select';
 import SelectFetch$ from './fields/SelectFetch';
 import Switch$ from './fields/Switch';
 import TextArea$ from './fields/TextArea';
+import TimePicker$ from './fields/TimePicker';
 import TreeSelect$ from './fields/TreeSelect';
 import Upload$ from './fields/Upload';
 
@@ -34,7 +35,8 @@ export const Select = Select$;
 export const SelectFetch = SelectFetch$;
 export const Switch = Switch$;
 export const TextArea = TextArea$;
+export const TimePicker = TimePicker$;
 export const TreeSelect = TreeSelect$;
 export const Upload = Upload$;
 
-export const fields = { Avatar, Cascader, Checkbox, CheckboxGroup, DatePicker, Input, InputNumber, RadioGroup, Select, SelectFetch, Switch, TextArea, TreeSelect, Upload };
+export const fields = { Avatar, Cascader, Checkbox, CheckboxGroup, DatePicker, Input, InputNumber, RadioGroup, Select, SelectFetch, Switch, TextArea, TimePicker, TreeSelect, Upload };

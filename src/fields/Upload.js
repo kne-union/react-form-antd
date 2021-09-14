@@ -3,24 +3,16 @@ import {Upload, message, Button} from 'antd';
 import {
     UploadOutlined
 } from '@ant-design/icons';
-import get from 'lodash/get';
 import uniqueId from 'lodash/uniqueId';
 import isEqual from 'lodash/isEqual';
 import {hooks} from '@kne/react-form-helper';
+import {globalParams} from "../preset";
 
 const {useOnChange} = hooks;
 
 const {Dragger} = Upload;
-const uploadParams = {
-    action: '/open-api/upload_static_file/interview-manager',
-    transformResponse: (response) => {
-        return {
-            code: response.code,
-            msg: response.msg,
-            results: get(response, 'results[0].targetPath')
-        };
-    }
-};
+
+const uploadParams = globalParams.field.upload;
 
 const valueToList = (value) => {
     if (!value) {
