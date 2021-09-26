@@ -1,8 +1,7 @@
 import React from 'react';
-import {Modal} from 'antd';
+import {Modal, Space} from 'antd';
 import SubmitButton from './SubmitButton';
 import ResetButton from './ResetButton';
-import Space from 'antd/es/space';
 import Form from "./Form";
 import {withFetch} from '@kne/react-fetch';
 import classnames from 'classnames';

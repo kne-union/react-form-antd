@@ -1,7 +1,7 @@
 import React from 'react';
-import {withFetch} from '@kne/react-fetch';
 import {Select} from 'antd';
 import {hooks} from '@kne/react-form-helper';
+import {withFetch} from '@kne/react-fetch';
 
 const {useOnChange} = hooks;
 
