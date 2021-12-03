@@ -40,20 +40,27 @@ const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUploa
     };
 
 
-    const AvatarEditorBox = ({file}) => {
-        const [rotate, setRotate] = useState(0);
-        const [scale, setScale] = useState(1);
 
-        const onChange = (v) => {
+    const AvatarEditorBox = ({file})=>{
+        const [rotate, setRotate] = useState(0);
+        const [scale, setScale] = useState(()=>{
+            if(editor.width===editor.height){
+                return 1
+            }
+            return 0.35
+        });
+
+        const onChange = (v)=>{
             console.log(v);
             setRotate(v);
         }
-        const onChangeScale = (v) => {
+        const onChangeScale = (v)=>{
             console.log(v);
             setScale(v);
         }
         return (
-            <div style={{'marginLeft': '50px'}}>
+            <div style={{'width': editor.width,
+                'margin': 'auto'}}>
                 <AvatarEditor
                     ref={editorRef}
                     image={file}
@@ -68,14 +75,13 @@ const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUploa
                 <Row gutter={4}>
                     <Col span={4}><span>旋转</span></Col>
                     <Col span={15}>
-                        <Slider tooltipVisible={false} defaultValue={rotate} min={-180} max={180} onChange={onChange}/>
+                        <Slider tooltipVisible={false} defaultValue={rotate} min={-180} max={180} onChange={onChange} />
                     </Col>
                 </Row>
                 <Row gutter={4}>
                     <Col span={4}><span>放大</span></Col>
                     <Col span={15}>
-                        <Slider tooltipVisible={false} defaultValue={scale} step={0.1} min={1} max={3}
-                                onChange={onChangeScale}/>
+                        <Slider tooltipVisible={false} defaultValue={scale} step={0.05} min={0.2} max={3} onChange={onChangeScale} />
                     </Col>
                 </Row>
             </div>
@@ -115,6 +121,7 @@ const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUploa
                 Modal.success({
                     // title: '剪切图像',
                     icon: '',
+                    width: editor.width*2,
                     content: <AvatarEditorBox file={file}/>,
                     okText: editor.text,
                     onOk: (close) => {
@@ -125,7 +132,7 @@ const _Avatar = ({className, value: imageUrl, onChange: propsChange, beforeUploa
                         const files = new window.File(
                             [blob],
                             file.name,
-                            {type: file.type}
+                            { type: file.type }
                         );
                         onBeforeUpload && onBeforeUpload(files);
                         resolve(files);
