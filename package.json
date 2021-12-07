@@ -64,6 +64,7 @@
     "@kne/react-form-helper": "^1.0.8",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
+    "moment": "^2.29.1",
     "react-avatar-editor": "11.0.9"
   },
   "devDependencies": {

@@ -226,3 +226,35 @@
     }
   }
 }
+
+.data_range_picker{
+  color: rgba(0, 0, 0, 0.85);
+  position: relative;
+  .zhijin{
+    position: absolute;
+    line-height: 31px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+    margin-left: 12px;
+    pointer-events: auto;
+  }
+  .zhijin_show{
+    z-index: 9;
+  }
+}
+
+.data_range_picker_dis{
+  input{
+    color: transparent;
+  }
+}
+.svg_box{
+  display: flex;
+  align-items: center;
+  color: #bfbfbf;
+  margin: 0 4px;
+  svg{
+    width: 16px;
+    height: 16px;
+  }
+}
