@@ -21,10 +21,6 @@ const RangePickerToday = (props) => {
     }
   }, [data]);
 
-  useEffect(() => {
-    //   console.log(showZj);
-  }, [data]);
-
   const startChange = (v) => {
     // 比较日期大小
     if (!newData.showZj && newData.end && v && newData.end.isBefore(v)) {
