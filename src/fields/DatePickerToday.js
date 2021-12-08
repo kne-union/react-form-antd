@@ -1,81 +1,52 @@
 import {Button, DatePicker} from 'antd';
-import React, {useState, useRef, useEffect, useMemo} from 'react'
+import React, {useRef, useEffect, useMemo} from 'react'
 import moment from 'moment'
 import get from 'lodash/get'
-// import { useFormContext, useField } from '@kne/react-form';
+import useControlValue from '@kne/use-control-value'
 
 const RangePickerToday = (props) => {
-  // const _useFormContext = useFormContext();
-  // const fields = _useFormContext.fields;
-  // const emitter = _useFormContext.emitter;
-  // console.log('???????');
-
-  const [value1, setV1] = useState();
-  const [value2, setV2] = useState();
+  // console.log('>>>>data', data);
+  const [data, onChange] = useControlValue(props);
   const ref_d = useRef();
-  const [showZj, setZJ] = useState(); // 至今
-  const [placeholder, setPlaceholder] = useState();
-
-  useMemo(() => {
-    console.log(props);
-    if (props.value) {
-      const s = get(props, ['value', 0], '') || '';
-      setV1(s ? moment(s) : '');
-      const d = get(props, ['value', 1], '') || '';
-      d === '至今' ? setV2(moment('2999-09-09')) : setV2(d ? moment(d) : '');
-      setZJ(d === '至今');
+  const newData = useMemo(() => {
+    // console.log('......', data);
+    const s = get(data, 0, '');
+    const d = get(data, 1, '');
+    const p = get(props, ['placeholder'], ['开始日期', '结束日期']);
+    return {
+      start: s ? moment(s) : '',
+      end: d === '至今' ? moment('2099-09-09') : (d ? moment(d) : ''),
+      showZj: d === '至今',
+      placeholder: p
     }
-    setPlaceholder(props.placeholder || '结束日期');
-  }, [props.value]);
+  }, [data]);
 
-  // useEffect(() => {
-  //   console.log(showZj);
-  // }, [showZj]);
+  useEffect(() => {
+    //   console.log(showZj);
+  }, [data]);
 
-  const change1 = (v) => {
-    if (!showZj && value2 && v) { // 日期大小比较交换
-      value2.isBefore(v);
-      props.onChange && props.onChange([value2, v]);
-      setV2(v);
-      setV1(value2);
+  const startChange = (v) => {
+    // 比较日期大小
+    if (!newData.showZj && newData.end && v && newData.end.isBefore(v)) {
+      onChange([newData.end, v]);
       return
     }
-    setV1(v);
-    props.onChange && props.onChange([v, value2]);
-    ref_d.current.focus();
+    onChange([v || '', newData.showZj ? '至今' : newData.end]);
   };
 
-  const change2 = (v) => {
-    setZJ(false);
-    console.log('xxxxxxxxxx', showZj, value1);
-    if (value1 && v) { // 日期大小比较交换
-      v.isBefore(value1);
-      props.onChange && props.onChange([v, value1]);
-      setV2(value1);
-      setV1(v);
+  const endChange = (v) => {
+    if (newData.start && v && v.isBefore(newData.start)) {
+      onChange([v, newData.start]);
       return
     }
-    setV2(v);
-    setPlaceholder(props.placeholder || '');
-    props.onChange && props.onChange([value1, v]);
+    onChange([newData.start, v || '']);
   };
-
 
   const foot = () => {
     return (
         <Button onClick={(v) => {
-          console.log('click');
-          console.log(ref_d.current);
-          setZJ(true);
-          setPlaceholder('');
-          // emitter.emit('form-data-set', {
-          //   time: moment('2999-09-09')
-          // });
-          // form.setFieldsValue()
-          // ref_d.value = moment('2999-09-09');
           ref_d.current.blur();
-          setV2(moment('2099-09-09'));
-          props.onChange && props.onChange([value1, '至今']);
+          onChange([newData.start || '', '至今']);
         }}>
           至今
         </Button>
@@ -83,8 +54,8 @@ const RangePickerToday = (props) => {
   }
   return (
       <div style={{display: 'flex'}}>
-        <DatePicker {...{showToday: false, placeholder: '开始日期', ...props, value: value1}} onChange={change1}/>
-        {/*<div style={{'color': 'rgba(0, 0, 0, 0.85)'}}>__</div>*/}
+        <DatePicker {...{showToday: false, ...props, placeholder: newData.placeholder[0], value: newData.start}}
+                    onChange={startChange}/>
         <div className={'svg_box'}>
           <svg viewBox="0 0 1024 1024" focusable="false" data-icon="swap-right" width="1em" height="1em"
                fill="currentColor" aria-hidden="true">
@@ -92,10 +63,15 @@ const RangePickerToday = (props) => {
                 d="M873.1 596.2l-164-208A32 32 0 00684 376h-64.8c-6.7 0-10.4 7.7-6.3 13l144.3 183H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h695.9c26.8 0 41.7-30.8 25.2-51.8z"/>
           </svg>
         </div>
-        <div className={showZj ? 'data_range_picker data_range_picker_dis' : 'data_range_picker'}>
-          <span className={showZj ? 'zhijin zhijin_show' : 'zhijin'}>至今</span>
-          <DatePicker {...{showToday: false, placeholder: placeholder, ...props, value: value2}} ref={ref_d}
-                      onChange={change2} renderExtraFooter={foot}/>
+        <div className={newData.showZj ? 'data_range_picker data_range_picker_dis' : 'data_range_picker'}>
+          <span className={newData.showZj ? 'zhijin zhijin_show' : 'zhijin'}>至今</span>
+          <DatePicker {...{
+            showToday: false,
+            ...props,
+            placeholder: newData.showZj ? '' : newData.placeholder[1],
+            value: newData.end
+          }} ref={ref_d}
+                      onChange={endChange} renderExtraFooter={foot}/>
         </div>
       </div>
   );
