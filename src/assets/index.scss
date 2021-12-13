@@ -244,8 +244,10 @@
 }
 
 .data_range_picker_dis{
-  input{
-    color: transparent;
+  .ant-picker-input{
+    input{
+      color: transparent;
+    }
   }
 }
 .svg_box{
