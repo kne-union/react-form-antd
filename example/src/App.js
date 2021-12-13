@@ -1,11 +1,11 @@
 import React from 'react';
 import {ConfigProvider} from 'antd';
-import Form, {Input, SubmitButton, Avatar, DatePicker} from '@kne/react-form-antd';
+import Form, {Input, SubmitButton, Avatar, DatePickerToday} from '@kne/react-form-antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
-const { TodayPicker } = DatePicker;
+// const { TodayPicker } = DatePicker;
 
 
 const App = () => {
@@ -53,7 +53,7 @@ const App = () => {
             {/*    name="time"*/}
             {/*/>*/}
             {/*<RangePicker/>*/}
-            <TodayPicker label="时间" rule="REQ" name="time" selectToday={true} onChange={onChange} />
+            <DatePickerToday label="时间" rule="REQ" name="time" selectToday={true} onChange={onChange} />
             <SubmitButton>提交</SubmitButton>
         </Form>
     </ConfigProvider>;

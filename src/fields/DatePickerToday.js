@@ -3,8 +3,11 @@ import React, {useRef, useEffect, useMemo} from 'react'
 import moment from 'moment'
 import get from 'lodash/get'
 import useControlValue from '@kne/use-control-value'
+import {hooks} from '@kne/react-form-helper';
 
-const RangePickerToday = (props) => {
+const {useOnChange} = hooks;
+
+const PickerToday = (props) => {
   // console.log('>>>>data', data);
   const [data, onChange] = useControlValue(props);
   const ref_d = useRef();
@@ -72,5 +75,13 @@ const RangePickerToday = (props) => {
       </div>
   );
 }
+
+
+const RangePickerToday = (props) => {
+  const render = useOnChange(props);
+  return render(PickerToday);
+};
+
+RangePickerToday.field = PickerToday;
 
 export default RangePickerToday;
