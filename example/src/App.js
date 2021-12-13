@@ -22,11 +22,11 @@ const App = () => {
     // }
 
     return <ConfigProvider autoInsertSpaceInButton={false} locale={zhCN}>
-        <Form cache="hahha" data={{
+        <Form cache="hahha"  data={{
             name:'xx',
             // time:['2020-09-12','至今']
         }} onSubmit={(data) => {
-            console.log(data);
+            console.log('提交',data);
         }}>
             <Input name="name" label="名称" rule="REQ LEN-0-4"/>
             <Avatar
@@ -53,7 +53,7 @@ const App = () => {
             {/*    name="time"*/}
             {/*/>*/}
             {/*<RangePicker/>*/}
-            <TodayPicker label="名称" rule="REQ" name="time" selectToday={true} onChange={onChange} />
+            <TodayPicker label="时间" rule="REQ" name="time" selectToday={true} onChange={onChange} />
             <SubmitButton>提交</SubmitButton>
         </Form>
     </ConfigProvider>;
