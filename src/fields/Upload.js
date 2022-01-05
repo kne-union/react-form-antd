@@ -5,6 +5,7 @@ import {
 } from '@ant-design/icons';
 import uniqueId from 'lodash/uniqueId';
 import isEqual from 'lodash/isEqual';
+import get from 'lodash/get';
 import {hooks} from '@kne/react-form-helper';
 import {globalParams} from "../preset";
 
@@ -94,12 +95,15 @@ const _Upload = ({className, value: list, onChange: setList, onUploadComplete, b
                 onError(info.file.response.msg, 'xhrError', info.file.response);
             }
         }
-        const newList = list.slice(0);
+        const newList = list.slice(0).filter((info) => {
+            return get(info, 'file.status') !== 'removed';
+        });
         const index = newList.findIndex(({uid}) => uid === info.file.uid);
         index > -1 && newList.splice(index, 1);
         if (info.file.status !== 'removed') {
             newList.push(info.file);
         }
+        console.log(newList);
         setList(newList);
     };
 
