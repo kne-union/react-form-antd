@@ -3,6 +3,8 @@ import {Upload, message, Button} from 'antd';
 import {
     UploadOutlined
 } from '@ant-design/icons';
+import get from 'lodash/get';
+import groupBy from 'lodash/groupBy';
 import uniqueId from 'lodash/uniqueId';
 import {hooks} from '@kne/react-form-helper';
 import {globalParams} from "../preset";
@@ -49,16 +51,10 @@ const listToValue = (value) => {
 const _Upload = ({action, value, onChange, drag, children, displayFilename, accept, fileSize: size, onError, onUploadComplete, onBeforeUpload, maxLength, transformResponse, ...props}) => {
     const [list, setList] = useState([]);
     const valueList = useMemo(() => {
-        const newList = list.slice(0);
-        const valueList = valueToList(value, displayFilename);
-        valueList.forEach((file) => {
-            if (list.find(({name}) => name === file.name)) {
-                return;
-            }
-            newList.push(file);
-        });
-        return newList;
-    }, [value, list, displayFilename]);
+        return valueToList(value.filter((url) => {
+            return !list.find((file) => get(file, 'response.results') === url);
+        })).concat(list);
+    }, [list, value, displayFilename]);
     const changeHandler = (info) => {
         if (['uploading', 'done', 'error', 'removed'].indexOf(info.file.status) === -1) {
             return;
@@ -71,30 +67,31 @@ const _Upload = ({action, value, onChange, drag, children, displayFilename, acce
             info.file.response = (transformResponse || uploadParams.transformResponse)(info.file.response);
             if (info.file.response.code === 200) {
                 info.file.name = computedFilename(info.file.response.results.substr(info.file.response.results.lastIndexOf('/') + 1), displayFilename);
-                onUploadComplete(info.file);
+                onUploadComplete(info);
             } else {
                 info.file.status = 'error';
                 onError(info.file.response.msg, 'xhrError', info.file.response);
             }
         }
+        const {done} = groupBy(info.fileList, (file) => file.status === 'done' ? 'done' : 'uploading');
+        if (['done', 'removed'].indexOf(info.file.status) > -1) {
+            onChange(listToValue(done));
+        }
         setList(info.fileList);
-        onChange(listToValue(info.fileList));
     };
     const beforeUploadHandler = (file) => {
-        if (maxLength === 1) {
-            onChange([]);
-            setList([]);
-        }
         const isLt = file.size / 1024 / 1024 < size;
         if (!isLt) {
             onError(`文件不能超过${size}MB!`, 'sizeError', {size, fileSize: file.size});
             return false;
         }
-
+        if (maxLength === 1) {
+            onChange([]);
+            setList([]);
+        }
         return onBeforeUpload && onBeforeUpload(file);
     };
     const UploadComponent = drag ? Dragger : Upload;
-
     return <UploadComponent {...props} action={action || uploadParams.action} fileList={valueList}
                             accept={accept.join(',')} onChange={changeHandler} beforeUpload={beforeUploadHandler}>
         {children}

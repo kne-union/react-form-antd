@@ -41,7 +41,9 @@ const App = () => {
                     imageType={['image/jpeg', 'image/png', 'image/gif']}/>
             <Upload label="文件" name="file" value={['/upload_assets/interview-manager/c16a43389ebcf03fea834f6b84ae79a0.jpg']}/>
             <DatePickerToday label="时间" name="time" selectToday={true} onChange={onChange}/>
-            <Upload name="file2" label="文件" maxLength={3} multiple fileSize={20}/>
+            <Upload name="file2" label="文件" maxLength={3} multiple fileSize={20} onChange={(list)=>{
+                console.log('onChange',list);
+            }}/>
             <SubmitButton>提交</SubmitButton>
         </Form>
     </ConfigProvider>;
