@@ -39,8 +39,9 @@ const App = () => {
             />
             <Avatar name="icon" editor={{open: true, height: 200, width: 400}} size={500}
                     imageType={['image/jpeg', 'image/png', 'image/gif']}/>
-            <Upload label="文件" name="file" maxLength={3} value={['/upload_assets/interview-manager/c16a43389ebcf03fea834f6b84ae79a0.jpg']}/>
+            <Upload label="文件" name="file" value={['/upload_assets/interview-manager/c16a43389ebcf03fea834f6b84ae79a0.jpg']}/>
             <DatePickerToday label="时间" name="time" selectToday={true} onChange={onChange}/>
+            <Upload name="file2" label="文件" maxLength={3} multiple fileSize={20}/>
             <SubmitButton>提交</SubmitButton>
         </Form>
     </ConfigProvider>;

@@ -1,11 +1,9 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useMemo} from 'react';
 import {Upload, message, Button} from 'antd';
 import {
     UploadOutlined
 } from '@ant-design/icons';
 import uniqueId from 'lodash/uniqueId';
-import isEqual from 'lodash/isEqual';
-import get from 'lodash/get';
 import {hooks} from '@kne/react-form-helper';
 import {globalParams} from "../preset";
 
@@ -15,69 +13,53 @@ const {Dragger} = Upload;
 
 const uploadParams = globalParams.field.upload;
 
-const valueToList = (value) => {
+const computedFilename = (path, displayFilename = 'filename') => {
+    const strArray = path.split('?');
+    if (strArray[1]) {
+        const query = {};
+        strArray[1].split('&').forEach((str) => {
+            const [key, value] = str.split('=');
+            query[key] = value;
+        });
+        if (query[displayFilename]) {
+            return decodeURIComponent(query[displayFilename]);
+        }
+    }
+    return path;
+};
+
+const valueToList = (value, displayFilename) => {
     if (!value) {
         return [];
     }
-    return value.map((item) => ({
-        uid: uniqueId(),
-        name: item.substr(item.lastIndexOf('/') + 1),
-        status: 'done',
-        response: {code: 200, results: item}
-    }));
+    return value.map((item) => {
+        return {
+            uid: uniqueId(),
+            name: computedFilename(item.substr(item.lastIndexOf('/') + 1), displayFilename),
+            status: 'done',
+            response: {code: 200, results: item}
+        }
+    });
 };
 
 const listToValue = (value) => {
-    return value.slice(0).filter(({status}) => status === 'done').map(({response}) => response.results);
+    return (value || []).slice(0).filter(({status}) => status === 'done').map(({response}) => response.results);
 };
 
-const withValueAdapter = (WrappedComponent) => ({value, onChange, ...props}) => {
+const _Upload = ({action, value, onChange, drag, children, displayFilename, accept, fileSize: size, onError, onUploadComplete, onBeforeUpload, maxLength, transformResponse, ...props}) => {
     const [list, setList] = useState([]);
-
-    const targetListRef = useRef([]);
-
-    useEffect(() => {
-        if (isEqual(value, targetListRef.current)) {
-            return;
-        }
-        setList(valueToList(value));
-    }, [value]);
-
-    return <WrappedComponent {...props} value={list} onChange={(value) => {
-        value = value.map((item) => Object.assign({}, item));
-        setList(value);
-        const targetList = listToValue(value);
-        targetListRef.current = targetList;
-        if (isEqual(targetList, value)) {
-            return;
-        }
-        onChange(targetList);
-    }}/>;
-};
-
-const _Upload = ({className, value: list, onChange: setList, onUploadComplete, beforeUpload: onBeforeUpload, maxLength, drag, transformResponse, action, accept, fileSize: size, children, onError, ...props}) => {
-    const beforeUpload = (file) => {
-        if (maxLength === 1) {
-            setList([]);
-        }
-        /*const typeAllowed = accept.length === 0 || !!accept.find((type) => type === file.type);
-        if (!typeAllowed) {
-            onError(`只支持${accept.join('/')}格式文件!`, 'typeError', {
-                type: accept,
-                fileType: file.type
-            });
-            return false;
-        }*/
-        const isLt = file.size / 1024 / 1024 < size;
-        if (!isLt) {
-            onError(`文件不能超过${size}MB!`, 'sizeError', {size, fileSize: file.size});
-            return false;
-        }
-
-        return onBeforeUpload && onBeforeUpload(file);
-    };
-
-    const onChange = (info) => {
+    const valueList = useMemo(() => {
+        const newList = list.slice(0);
+        const valueList = valueToList(value, displayFilename);
+        valueList.forEach((file) => {
+            if (list.find(({name}) => name === file.name)) {
+                return;
+            }
+            newList.push(file);
+        });
+        return newList;
+    }, [value, list, displayFilename]);
+    const changeHandler = (info) => {
         if (['uploading', 'done', 'error', 'removed'].indexOf(info.file.status) === -1) {
             return;
         }
@@ -88,35 +70,35 @@ const _Upload = ({className, value: list, onChange: setList, onUploadComplete, b
         if (info.file.status === 'done') {
             info.file.response = (transformResponse || uploadParams.transformResponse)(info.file.response);
             if (info.file.response.code === 200) {
-                info.file.name = info.file.response.results.substr(info.file.response.results.lastIndexOf('/') + 1);
+                info.file.name = computedFilename(info.file.response.results.substr(info.file.response.results.lastIndexOf('/') + 1), displayFilename);
                 onUploadComplete(info.file);
             } else {
                 info.file.status = 'error';
                 onError(info.file.response.msg, 'xhrError', info.file.response);
             }
         }
-        const newList = list.slice(0).filter((info) => {
-            return get(info, 'file.status') !== 'removed';
-        });
-        const index = newList.findIndex(({uid}) => uid === info.file.uid);
-        index > -1 && newList.splice(index, 1);
-        if (info.file.status !== 'removed') {
-            newList.push(info.file);
-        }
-        console.log(newList);
-        setList(newList);
+        setList(info.fileList);
+        onChange(listToValue(info.fileList));
     };
+    const beforeUploadHandler = (file) => {
+        if (maxLength === 1) {
+            onChange([]);
+            setList([]);
+        }
+        const isLt = file.size / 1024 / 1024 < size;
+        if (!isLt) {
+            onError(`文件不能超过${size}MB!`, 'sizeError', {size, fileSize: file.size});
+            return false;
+        }
 
+        return onBeforeUpload && onBeforeUpload(file);
+    };
     const UploadComponent = drag ? Dragger : Upload;
 
-    return (
-        <UploadComponent {...props} action={action || uploadParams.action} fileList={list} accept={accept.join(',')}
-                         onChange={onChange}
-                         beforeUpload={beforeUpload}
-        >
-            {children}
-        </UploadComponent>
-    );
+    return <UploadComponent {...props} action={action || uploadParams.action} fileList={valueList}
+                            accept={accept.join(',')} onChange={changeHandler} beforeUpload={beforeUploadHandler}>
+        {children}
+    </UploadComponent>
 };
 
 _Upload.defaultProps = {
@@ -124,18 +106,18 @@ _Upload.defaultProps = {
     accept: [],
     fileSize: 2,
     maxLength: 1,
+    displayFilename: 'filename',
     children: <Button><UploadOutlined/>点击上传</Button>,
     onError: (info) => message.error(info),
     onUploadComplete: () => {
     }
 };
 
-const AdapterUpload = withValueAdapter(_Upload);
-
 const UploadInput = (props) => {
     const render = useOnChange(props);
-    return render(AdapterUpload);
+    return render(_Upload);
 };
+
 
 UploadInput.field = _Upload;
 

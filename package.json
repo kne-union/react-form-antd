@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "2.0.4",
+  "version": "2.0.6",
   "description": "把@kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
@@ -52,21 +52,21 @@
   },
   "homepage": "https://github.com/kne-union/react-form-antd#readme",
   "peerDependencies": {
+    "@kne/react-fetch": "0.1.x",
     "antd": ">=4.x",
     "prop-types": ">=15.x",
-    "react": ">=16.x",
-    "@kne/react-fetch": "0.1.x"
+    "react": ">=16.x"
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@babel/runtime": "^7.10.3",
-    "@kne/react-form": "^2.0.3",
-    "@kne/react-form-helper": "^1.0.9",
-    "@kne/use-control-value": "^0.1.0",
+    "@kne/react-form": "^2.0.4",
+    "@kne/react-form-helper": "^1.0.10",
+    "@kne/use-control-value": "^0.1.1",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
     "moment": "^2.29.1",
-    "react-avatar-editor": "11.0.9"
+    "react-avatar-editor": "^12.0.0"
   },
   "devDependencies": {
     "@kne/react-fetch": "^0.1.12",
@@ -78,7 +78,7 @@
     "glob": "^7.1.6",
     "husky": "^7.0.2",
     "microbundle": "^0.13.3",
-    "node-sass": "^4.14.1",
+    "node-sass": "^6.0.1",
     "npm-run-all": "^4.1.5",
     "pify": "^5.0.0",
     "prettier": "^2.4.1",
