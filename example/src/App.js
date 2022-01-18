@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {ConfigProvider, Button} from 'antd';
-import Form, {Input, SubmitButton, Avatar, DatePickerToday, Upload, GroupList} from '@kne/react-form-antd';
+import Form, {Input, SubmitButton, Avatar, DatePickerToday, Upload, GroupList, Group} from '@kne/react-form-antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
@@ -30,6 +30,16 @@ const App = () => {
             console.log('提交', data);
         }}>
             <Input name="name" label="名称" rule="REQ LEN-0-4"/>
+            <br/>
+            <Group name="target">
+                <Input name="name" label="名称"/>
+                <Input name="des" label="描述"/>
+            </Group>
+            <Group name="target">
+                <Input name="name" label="名称"/>
+                <Input name="des" label="描述"/>
+            </Group>
+            <br/>
             <div>
                 <Button onClick={() => {
                     addButton.current.onAdd();
