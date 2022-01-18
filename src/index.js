@@ -41,4 +41,4 @@ export const TimePicker = TimePicker$;
 export const TreeSelect = TreeSelect$;
 export const Upload = Upload$;
 
-export const fields = { Avatar, Cascader, Checkbox, CheckboxGroup, DatePicker, Input, InputNumber, RadioGroup, Select, SelectFetch, Switch, TextArea, TimePicker, TreeSelect, Upload, DatePickerToday };
+export const fields = { Avatar, Cascader, Checkbox, CheckboxGroup, DatePicker, DatePickerToday, Input, InputNumber, RadioGroup, Select, SelectFetch, Switch, TextArea, TimePicker, TreeSelect, Upload };
