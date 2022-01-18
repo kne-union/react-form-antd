@@ -1,18 +1,21 @@
 import React from 'react';
 import {ConfigProvider} from 'antd';
-import Form, {Input, SubmitButton, Avatar, DatePickerToday} from '@kne/react-form-antd';
+import Form, {Input, SubmitButton, Avatar, DatePickerToday, TreeSelect,Select} from '@kne/react-form-antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
+const { TreeNode } = TreeSelect;
 // const { TodayPicker } = DatePicker;
+const OPTIONS = [{ label:'Apples', value:'x' },{ label:'Apples1', value:'x1' },{ label:'Apples2', value:'x3' }];
+
 
 
 const App = () => {
 
 
     const onChange=(v)=>{
-        console.log(v);
+        console.log('wwww',v);
     }
     // const onCalendarChange=(v)=>{
     //     console.log('onCalendarChange',v);
@@ -54,6 +57,33 @@ const App = () => {
             {/*/>*/}
             {/*<RangePicker/>*/}
             <DatePickerToday label="时间" rule="REQ" name="time" selectToday={true} onChange={onChange} />
+
+            <TreeSelect
+                label="时间" rule="REQ" name="sle"
+                showSearch
+                multiple
+                dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                placeholder="Please select"
+                allowClear
+                treeDefaultExpandAll
+                onChange={onChange}
+            >
+                <div>
+                    <TreeNode value="parent 1" title="parent 1">
+                        <TreeNode value="parent 1-0" title="parent 1-0">
+                            <TreeNode value="leaf1" title="leaf1" />
+                            <TreeNode value="leaf2" title="leaf2" />
+                        </TreeNode>
+                        <TreeNode value="parent 1-1" title="parent 1-1">
+                            <TreeNode value="leaf3" disabled title={<b style={{ color: '#08c' }}>leaf3</b>} />
+                        </TreeNode>
+                    </TreeNode>
+                </div>
+
+            </TreeSelect>
+
+            <Select label="选择" rule="REQ" name="nanana" mode="multiple" options={OPTIONS}
+            onChange={onChange} max={2}/>
             <SubmitButton>提交</SubmitButton>
         </Form>
     </ConfigProvider>;
