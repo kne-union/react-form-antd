@@ -8,10 +8,12 @@ export const globalParams = {
         upload: {
             action: '/open-api/upload_static_file/interview-manager',
             transformResponse: (response) => {
+                const targetPath = get(response, 'results[0].targetPath');
+                const filename = get(response, 'results[0].filename');
                 return {
                     code: response.code,
                     msg: response.msg,
-                    results: get(response, 'results[0].targetPath')
+                    results: targetPath + (filename ? '?filename=' + encodeURIComponent(filename) : '')
                 };
             }
         },
