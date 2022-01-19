@@ -1,12 +1,29 @@
 import React, {useRef} from 'react';
 import {ConfigProvider, Button} from 'antd';
-import Form, {Input, SubmitButton, Avatar, DatePickerToday, Upload, GroupList, Group} from '@kne/react-form-antd';
+import Form, {
+    Input,
+    SubmitButton,
+    Avatar,
+    DatePickerToday,
+    Upload,
+    GroupList,
+    Group,
+    preset
+} from '@kne/react-form-antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 
 moment.locale('zh-cn');
 // const { TodayPicker } = DatePicker;
+
+preset({
+    field: {
+        upload: {
+            displayFilename: 'attname'
+        }
+    }
+});
 
 
 const App = () => {
@@ -64,9 +81,10 @@ const App = () => {
             <Upload label="文件" name="file"
                     value={['/upload_assets/interview-manager/c16a43389ebcf03fea834f6b84ae79a0.jpg']}/>
             <DatePickerToday label="时间" name="time" selectToday={true} onChange={onChange}/>
-            <Upload name="file2" label="文件" maxLength={3} multiple fileSize={20} onChange={(list) => {
-                console.log('onChange', list);
-            }}/>
+            <Upload name="file2" label="文件" maxLength={3} multiple fileSize={20}
+                    onChange={(list) => {
+                        console.log('onChange', list);
+                    }}/>
             <SubmitButton>提交</SubmitButton>
         </Form>
     </ConfigProvider>;

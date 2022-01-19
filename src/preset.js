@@ -6,6 +6,7 @@ export const globalParams = {
     rules: {},
     field: {
         upload: {
+            displayFilename: 'filename',
             action: '/open-api/upload_static_file/interview-manager',
             transformResponse: (response) => {
                 const targetPath = get(response, 'results[0].targetPath');
@@ -13,7 +14,7 @@ export const globalParams = {
                 return {
                     code: response.code,
                     msg: response.msg,
-                    results: targetPath + (filename ? '?filename=' + encodeURIComponent(filename) : '')
+                    results: targetPath + (filename ? `?${globalParams.field.upload.displayFilename}=` + encodeURIComponent(filename) : '')
                 };
             }
         },

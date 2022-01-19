@@ -49,6 +49,7 @@ const listToValue = (value) => {
 };
 
 const _Upload = ({action, value, onChange, drag, children, displayFilename, accept, fileSize: size, onError, onUploadComplete, onBeforeUpload, maxLength, transformResponse, ...props}) => {
+    displayFilename = displayFilename || uploadParams.displayFilename;
     const [list, setList] = useState([]);
     const valueList = useMemo(() => {
         return valueToList(value.filter((url) => {
@@ -103,7 +104,6 @@ _Upload.defaultProps = {
     accept: [],
     fileSize: 2,
     maxLength: 1,
-    displayFilename: 'filename',
     children: <Button><UploadOutlined/>点击上传</Button>,
     onError: (info) => message.error(info),
     onUploadComplete: () => {
