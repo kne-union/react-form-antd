@@ -6,7 +6,7 @@ import {widget} from '@kne/react-form-helper';
 import './assets/index.scss';
 
 export * from '@kne/react-form';
-export {hooks, utils} from '@kne/react-form-helper';
+export {hooks, widget, utils} from '@kne/react-form-helper';
 
 const {ScrollToError, EnterSubmit, FormStore, MaxLabelProvider, SizeProvider} = widget;
 

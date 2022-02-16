@@ -54,7 +54,7 @@ const _Upload = ({action, value, onChange, drag, children, displayFilename, acce
     const valueList = useMemo(() => {
         return valueToList(value.filter((url) => {
             return !list.find((file) => get(file, 'response.results') === url);
-        })).concat(list);
+        }), displayFilename).concat(list);
     }, [list, value, displayFilename]);
     const changeHandler = (info) => {
         if (['uploading', 'done', 'error', 'removed'].indexOf(info.file.status) === -1) {

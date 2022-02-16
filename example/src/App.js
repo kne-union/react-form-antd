@@ -72,14 +72,14 @@ const App = () => {
                 }}
             </GroupList>
             <Avatar
-                label="租户图标："
+                label="租户图标"
                 name="miniIcon"
                 editor={{open: true, width: 200, height: 200}}
                 size={500}
                 imageType={['image/jpeg', 'image/png', 'image/gif']}
             />
             <Upload label="文件" name="file"
-                    value={['/upload_assets/interview-manager/c16a43389ebcf03fea834f6b84ae79a0.jpg']}/>
+                    value={['http://app.knxgalaxy.com/api/io/file/data/clickpaas/files/G3823/30614080ab084c6eb7262fbfd8676090.jpg?attname=90b8748f5f56784caa6dfc66fa5fcf18.jpg']}/>
             <DatePickerToday label="时间" name="time" selectToday={true} onChange={onChange}/>
             <Upload name="file2" label="文件" maxLength={3} multiple fileSize={20}
                     onChange={(list) => {
