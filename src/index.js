@@ -23,6 +23,7 @@ export {default as preset} from './preset';
 export {default as FormModal} from './FormModal';
 export {default as ResetButton} from './ResetButton';
 export {default as SubmitButton} from './SubmitButton';
+export {default as CancelButton} from './CancelButton';
 
 export const Avatar = Avatar$;
 export const Cascader = Cascader$;

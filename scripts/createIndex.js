@@ -16,6 +16,7 @@ export {default as preset} from './preset';
 export {default as FormModal} from './FormModal';
 export {default as ResetButton} from './ResetButton';
 export {default as SubmitButton} from './SubmitButton';
+export {default as CancelButton} from './CancelButton';
 ${filenames.map((name)=>`
 export const ${name} = ${name}$;`).join('')}
 
