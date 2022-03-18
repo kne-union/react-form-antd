@@ -4,7 +4,7 @@ import {hooks} from '@kne/react-form-helper';
 const {useOnChange} = hooks;
 
 const _Select = (props) => {
-    const render = useOnChange(props);
+    const render = useOnChange(Object.assign({placeholder: `请选择${props.label}`}, props));
     return render(Select);
 };
 

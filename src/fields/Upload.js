@@ -50,6 +50,7 @@ const listToValue = (value) => {
 
 const _Upload = ({action, value, onChange, drag, children, displayFilename, accept, fileSize: size, onError, onUploadComplete, onBeforeUpload, maxLength, transformResponse, ...props}) => {
     displayFilename = displayFilename || uploadParams.displayFilename;
+    value = value || [];
     const [list, setList] = useState([]);
     const valueList = useMemo(() => {
         return valueToList(value.filter((url) => {

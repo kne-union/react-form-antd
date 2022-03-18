@@ -6,17 +6,17 @@ const {useOnChange} = hooks;
 const {MonthPicker, RangePicker, WeekPicker} = DatePicker;
 
 const _DatePicker = (props) => {
-    const render = useOnChange(props);
+    const render = useOnChange(Object.assign({placeholder: `请选择${props.label}`}, props));
     return render(DatePicker);
 };
 
 const _MonthPicker = (props) => {
-    const render = useOnChange(props);
+    const render = useOnChange(Object.assign({placeholder: `请选择${props.label}`}, props));
     return render(MonthPicker);
 };
 
 const _RangePicker = (props) => {
-    const render = useOnChange(props);
+    const render = useOnChange(Object.assign({placeholder: `请选择${props.label}`}, props));
     // if(props.selectToday){
     //     return render(RangePickerToday);
     // }
@@ -24,7 +24,7 @@ const _RangePicker = (props) => {
 };
 
 const _WeekPicker = (props) => {
-    const render = useOnChange(props);
+    const render = useOnChange(Object.assign({placeholder: `请选择${props.label}`}, props));
     return render(WeekPicker);
 };
 
