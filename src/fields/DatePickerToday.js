@@ -7,8 +7,7 @@ import {hooks} from '@kne/react-form-helper';
 
 const {useOnChange} = hooks;
 
-const PickerToday = ({soFarButtonText, ...props}) => {
-    // console.log('>>>>data', data);
+const PickerToday = ({soFarText, ...props}) => {
     const [data, onChange] = useControlValue(props);
     const ref_d = useRef();
     const newData = useMemo(() => {
@@ -47,7 +46,7 @@ const PickerToday = ({soFarButtonText, ...props}) => {
                 ref_d.current.blur();
                 onChange([newData.start || '', '至今']);
             }}>
-                {soFarButtonText || '至今'}
+                {soFarText || '至今'}
             </Button>
         )
     }
@@ -63,7 +62,7 @@ const PickerToday = ({soFarButtonText, ...props}) => {
                 </svg>
             </div>
             <div className={newData.showZj ? 'data_range_picker data_range_picker_dis' : 'data_range_picker'}>
-                <span className={newData.showZj ? 'zhijin zhijin_show' : 'zhijin'}>至今</span>
+                <span className={newData.showZj ? 'zhijin zhijin_show' : 'zhijin'}>{soFarText || '至今'}</span>
                 <DatePicker {...{
                     showToday: false,
                     ...props,

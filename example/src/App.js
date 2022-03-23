@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {ConfigProvider, Button} from 'antd';
 import Form, {
     Input,
@@ -8,7 +8,8 @@ import Form, {
     Upload,
     GroupList,
     Group,
-    preset
+    preset,
+    useFormContext
 } from '@kne/react-form-antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import moment from 'moment';
@@ -24,6 +25,16 @@ preset({
         }
     }
 });
+
+const EventTest = () => {
+    const {emitter} = useFormContext();
+    useEffect(() => {
+        emitter.addListener('form-submit-success', (data) => {
+            console.log('>>>>>>>>---------form-submit-success', data);
+        });
+    }, [emitter]);
+    return null;
+};
 
 
 const App = () => {
@@ -46,6 +57,7 @@ const App = () => {
         }} onSubmit={(data) => {
             console.log('提交', data);
         }}>
+            <EventTest/>
             <Input name="name" label="名称" rule="REQ LEN-0-4"/>
             <br/>
             <Group name="target">
