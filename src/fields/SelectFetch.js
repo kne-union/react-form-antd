@@ -3,10 +3,22 @@ import {Select} from 'antd';
 import {hooks} from '@kne/react-form-helper';
 import {withFetch} from '@kne/react-fetch';
 import useEvent from '@kne/use-event'
+import getPopupContainer from "../common/getPopupContainer";
 
 const {useOnChange} = hooks;
 
-const _SelectFetch = withFetch(({data, setData, refresh, reload, emitter, isLoading, children, onLoaded, ...props}) => {
+const _SelectFetch = withFetch(({
+                                    data,
+                                    setData,
+                                    refresh,
+                                    reload,
+                                    emitter,
+                                    isLoading,
+                                    children,
+                                    onLoaded,
+                                    fetchProps,
+                                    ...props
+                                }) => {
     const refreshRef = useRef(refresh);
     refreshRef.current = refresh;
     const reloadRef = useRef(reload);
@@ -15,6 +27,7 @@ const _SelectFetch = withFetch(({data, setData, refresh, reload, emitter, isLoad
     setDataRef.current = setData;
     const dataRef = useRef(data);
     useEffect(() => {
+        console.warn('请使用Select.Fetch替代该组件，该组件会在未来某个版本被移除');
         const token1 = emitter.addListener('select-fetch-refresh', () => refreshRef.current());
         const token2 = emitter.addListener('select-fetch-reload', () => reloadRef.current());
         const token3 = emitter.addListener('select-fetch-set-data', () => setDataRef.current());
@@ -54,6 +67,10 @@ SelectFetch.field = forwardRef((props, ref) => {
     }, [emitter]);
     return <_SelectFetch {...props} emitter={emitter}/>
 });
+
+SelectFetch.defaultProps = {
+    getPopupContainer
+};
 
 SelectFetch.Option = Select.Option;
 SelectFetch.OptGroup = Select.OptGroup;

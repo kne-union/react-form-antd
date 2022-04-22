@@ -1,6 +1,7 @@
 import React, {useRef, useEffect} from 'react';
 import {ConfigProvider, Button} from 'antd';
 import Form, {
+    Select,
     Input,
     SubmitButton,
     Avatar,
@@ -51,6 +52,11 @@ const App = () => {
     // }
     const addButton = useRef();
     return <ConfigProvider autoInsertSpaceInButton={false} locale={zhCN}>
+        {/*<FormModal visible title="哈哈哈">
+            <Select name="select" label="哈哈哈" options={[
+                {label:'sss',value:1}
+            ]}/>
+        </FormModal>*/}
         <Form data={{
             name: 'xx',
             // time:['2020-09-12','至今']
@@ -58,7 +64,15 @@ const App = () => {
             console.log('提交', data);
         }}>
             <EventTest/>
+            <Select.Fetch name="remote-select" label="远程选择" url="/select-fetch.json">{({data}) => {
+                console.log(data.dataList);
+                return {options: data.dataList};
+            }}</Select.Fetch>
+            <Select name="select" label="哈哈哈" options={[
+                {label: 'sss', value: 1}
+            ]}/>
             <Input name="name" label="名称" rule="REQ LEN-0-4"/>
+            <Input.Password name="password" label="密码"/>
             <br/>
             <Group name="target">
                 <Input name="name" label="名称"/>

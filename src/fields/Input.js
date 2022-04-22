@@ -8,7 +8,12 @@ const InputField = (props) => {
     return render(Input);
 };
 
-InputField.defaultProps = {
+InputField.Password = (props) => {
+    const render = useDecorator(Object.assign({placeholder: `请输入${props.label}`}, props));
+    return render(Input.Password);
+};
+
+InputField.Password.defaultProps = InputField.defaultProps = {
     autoComplete: 'off'
 };
 
