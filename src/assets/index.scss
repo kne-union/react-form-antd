@@ -260,3 +260,13 @@
     height: 16px;
   }
 }
+.react-form-label_input {
+  .react-form-label_input_plus {
+    border: 1px dashed #d9d9d9;
+    cursor: pointer;
+  }
+  .react-form-edit-input {
+    display: inline-block;
+    width: 120px;
+  }
+}

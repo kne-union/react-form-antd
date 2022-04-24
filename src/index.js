@@ -16,6 +16,7 @@ import TextArea$ from './fields/TextArea';
 import TimePicker$ from './fields/TimePicker';
 import TreeSelect$ from './fields/TreeSelect';
 import Upload$ from './fields/Upload';
+import LabelInput$ from "./fields/LabelInput";
 
 export * from './Form';
 export default Form;
@@ -41,5 +42,6 @@ export const TextArea = TextArea$;
 export const TimePicker = TimePicker$;
 export const TreeSelect = TreeSelect$;
 export const Upload = Upload$;
+export const LabelInput = LabelInput$;
 
-export const fields = { Avatar, Cascader, Checkbox, CheckboxGroup, DatePicker, DatePickerToday, Input, InputNumber, RadioGroup, Select, SelectFetch, Switch, TextArea, TimePicker, TreeSelect, Upload };
+export const fields = { Avatar, Cascader, Checkbox, CheckboxGroup, DatePicker, DatePickerToday, Input, InputNumber, RadioGroup, Select, SelectFetch, Switch, TextArea, TimePicker, TreeSelect, Upload, LabelInput };

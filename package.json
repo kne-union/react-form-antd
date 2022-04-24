@@ -62,6 +62,7 @@
     "@babel/runtime": "^7.10.3",
     "@kne/react-form": "^2.0.6",
     "@kne/react-form-helper": "^1.0.12",
+    "@kne/use-callback-state": "^0.1.0",
     "@kne/use-control-value": "^0.1.1",
     "@kne/use-event": "^0.1.2",
     "classnames": "^2.2.6",
