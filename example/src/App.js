@@ -11,7 +11,7 @@ import Form, {
     Group,
     preset,
     useFormContext,
-    LabelInput
+    TagInput
 } from '@kne/react-form-antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import moment from 'moment';
@@ -58,15 +58,17 @@ const App = () => {
                 {label:'sss',value:1}
             ]}/>
         </FormModal>*/}
-        <Form data={{
+        <Form debug data={{
             name: 'xx',
+            // labelInput: ['tag1'] 
             // time:['2020-09-12','至今']
         }} onSubmit={(data) => {
             debugger
             console.log('提交', data);
         }}>
             <EventTest/>
-            <LabelInput label="自定义标签" name="labelInput" defaultValue={['tag1']}/>
+            {/* defaultValue={['tag1']} */}
+            <TagInput label="自定义标签" name="labelInput" defaultValue={['tag1']} />
             <Select.Fetch name="remote-select" label="远程选择" url="/select-fetch.json">{({data}) => {
                 console.log(data.dataList);
                 return {options: data.dataList};

@@ -1,36 +1,37 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Input, Tag, Tooltip } from "antd";
 import { hooks } from "@kne/react-form-helper";
 import { PlusOutlined } from "@ant-design/icons";
-import callbackState from "@kne/use-callback-state";
+import useControlValue from '@kne/use-control-value';
 
 const { useOnChange } = hooks;
 
-const defaultLabelProps = { value: "value", label: "label" };
-
-const _LabelInput = ({ defaultValue, addText, max, inputProps, onChange }) => {
+const _TagInput = ({ addText, max, inputProps, ...props }) => {
   const saveInputRef = useRef();
-  const [tags, setTags] = useState(defaultValue);
-  const [inputVisible, setInputVisible] = callbackState(false);
+  const [tags, setTags] = useControlValue(props);
+  const [inputVisible, setInputVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
   const handleInputConfirm = () => {
-    if (inputValue && tags.indexOf(inputValue) === -1) {
-      tags.push(inputValue);
+    const _tags = tags || [];
+    if (inputValue && _tags.indexOf(inputValue) === -1) {
+      _tags.push(inputValue);
     }
-    setTags([...tags]);
+    setTags([..._tags]);
     setInputVisible(false);
     setInputValue("");
-    onChange(tags);
   };
   const handleShowInput = () => {
-    setInputVisible(true, (state) => {
-      saveInputRef.current.focus();
-    });
+    setInputVisible(true);
   };
+  useEffect(() => {
+    if (inputVisible) {
+      saveInputRef.current.focus();
+    }
+  }, [inputVisible])
   return (
     <div className="react-form-label_input">
-      {tags.map((tag, index) => {
+      {(tags || []).map((tag, index) => {
         const isLongTag = tag.length > max;
         const tagElem = (
           <Tag
@@ -40,7 +41,6 @@ const _LabelInput = ({ defaultValue, addText, max, inputProps, onChange }) => {
             onClose={() => {
               const _tags = tags.filter(tag => tag !== _tag);
               setTags([..._tags]);
-              onChange(_tags);
             }}
           >
             <span
@@ -89,17 +89,16 @@ const _LabelInput = ({ defaultValue, addText, max, inputProps, onChange }) => {
   );
 };
 
-_LabelInput.defaultProps = {
-  value: [],
+_TagInput.defaultProps = {
   max: 20,
   addText: <><PlusOutlined /> 添加标签</>
 };
 
-const LabelInput = (props) => {
+const TagInput = (props) => {
   const render = useOnChange(props);
-  return render(_LabelInput);
+  return render(_TagInput);
 };
 
-LabelInput.field = _LabelInput;
+TagInput.field = _TagInput;
 
-export default LabelInput;
+export default TagInput;
