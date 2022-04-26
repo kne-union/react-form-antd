@@ -39,7 +39,7 @@ const _TagInput = ({ addText, max, inputProps, ...props }) => {
             key={tag}
             closable
             onClose={() => {
-              const _tags = tags.filter(tag => tag !== _tag);
+              const _tags = tags.filter(x => x !== tag);
               setTags([..._tags]);
             }}
           >

@@ -264,9 +264,14 @@
   .react-form-label_input_plus {
     border: 1px dashed #d9d9d9;
     cursor: pointer;
+    margin-top: 4px;
   }
   .react-form-edit-input {
     display: inline-block;
     width: 120px;
+    margin-top: 4px;
+  }
+  .react-form-edit-tag {
+    margin: 4px 8px 4px 0;
   }
 }
