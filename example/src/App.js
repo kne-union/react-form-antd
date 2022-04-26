@@ -58,17 +58,15 @@ const App = () => {
                 {label:'sss',value:1}
             ]}/>
         </FormModal>*/}
-        <Form debug data={{
+        <Form data={{
             name: 'xx',
-            // labelInput: ['tag1'] 
+            labelInput: ['tag1'] 
             // time:['2020-09-12','至今']
         }} onSubmit={(data) => {
-            debugger
             console.log('提交', data);
         }}>
             <EventTest/>
-            {/* defaultValue={['tag1']} */}
-            <TagInput label="自定义标签" name="labelInput" defaultValue={['tag1']} />
+            <TagInput label="自定义标签" name="labelInput" />
             <Select.Fetch name="remote-select" label="远程选择" url="/select-fetch.json">{({data}) => {
                 console.log(data.dataList);
                 return {options: data.dataList};
