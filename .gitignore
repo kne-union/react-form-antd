@@ -105,3 +105,4 @@ dist
 .idea
 package-lock.json
 example/build
+.DS_Store

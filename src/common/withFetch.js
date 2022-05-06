@@ -53,7 +53,8 @@ const withFetch = (WrappedComponent) => {
             setData
         })}/>;
     });
-    const Fetch = forwardRef((props, ref) => {
+
+    const useFetchEmitter = (ref) => {
         const emitter = useEvent();
         useImperativeHandle(ref, () => {
             return {
@@ -62,8 +63,20 @@ const withFetch = (WrappedComponent) => {
                 setData: (data) => emitter.emit('select-fetch-set-data', data)
             };
         }, [emitter]);
+        return emitter;
+    };
+
+    const Fetch = forwardRef((props, ref) => {
+        const emitter = useFetchEmitter();
+        useFetchEmitter();
         const render = useOnChange(Object.assign({placeholder: `请选择${props.label}`}, props, {fetchEmitter: emitter}));
         return render(FieldInner);
+    });
+
+    Fetch.field = forwardRef((props, ref) => {
+        const emitter = useFetchEmitter(ref);
+
+        return <FieldInner {...props} fetchEmitter={emitter}/>;
     });
 
     return Fetch;

@@ -16,6 +16,9 @@ const _SelectFetch = withFetch(({
                                     isLoading,
                                     children,
                                     onLoaded,
+                                    loadMore,
+                                    send,
+                                    isComplete,
                                     fetchProps,
                                     ...props
                                 }) => {
