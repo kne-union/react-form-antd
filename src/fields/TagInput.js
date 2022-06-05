@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Input, Tag, Tooltip } from "antd";
 import { hooks } from "@kne/react-form-helper";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
 import useControlValue from '@kne/use-control-value';
 
 const { useOnChange } = hooks;
 
-const _TagInput = ({ addText, max, inputProps, ...props }) => {
+const _TagInput = ({ addText, max, inputProps, closable, closeIcon, onClose, hoverClose = false, tagRender, tooltipProps, showAddInput, addInputPosition, ...props }) => {
   const saveInputRef = useRef();
   const [tags, setTags] = useControlValue(props);
   const [inputVisible, setInputVisible] = useState(false);
@@ -18,80 +18,88 @@ const _TagInput = ({ addText, max, inputProps, ...props }) => {
       _tags.push(inputValue);
     }
     setTags([..._tags]);
-    setInputVisible(false);
+    showAddInput && setInputVisible(false);
     setInputValue("");
   };
   const handleShowInput = () => {
     setInputVisible(true);
   };
+
+  const addInputTagRender = <>
+    {inputVisible && (
+      <Input
+        type="text"
+        size="small"
+        {...inputProps}
+        className="react-form-edit-input"
+        ref={saveInputRef}
+        value={inputValue}
+        onChange={(e) => {
+          setInputValue(e.target.value);
+        }}
+        onBlur={handleInputConfirm}
+        onPressEnter={handleInputConfirm}
+      />
+    )}
+    {!inputVisible && (
+      <Tag onClick={handleShowInput} className="react-form-edit-tag react-form-label_input_plus">
+        {addText}
+      </Tag>
+    )}
+  </>;
+
   useEffect(() => {
-    if (inputVisible) {
-      saveInputRef.current.focus();
+    if (showAddInput && inputVisible) {
+      saveInputRef.current && saveInputRef.current.focus();
     }
-  }, [inputVisible])
+  }, [showAddInput, inputVisible])
   return (
     <div className="react-form-label_input">
-      {(tags || []).map((tag, index) => {
+      {addInputPosition === 'left' && showAddInput && addInputTagRender}
+      {(tags || []).map((tag) => {
         const isLongTag = tag.length > max;
         const tagElem = (
           <Tag
             className="react-form-edit-tag"
             key={tag}
-            closable
-            onClose={() => {
-              const _tags = tags.filter(x => x !== tag);
-              setTags([..._tags]);
-            }}
+            closable={false}
           >
-            <span
-              onDoubleClick={e => {
-                if (index !== 0) {
-                  this.setState({ editInputIndex: index, editInputValue: tag }, () => {
-                    this.editInput.focus();
-                  });
-                  e.preventDefault();
-                }
-              }}
-            >
-              {isLongTag ? `${tag.slice(0, max)}...` : tag}
-            </span>
+            {tagRender ? tagRender(tag) : <>
+              <span>
+                {isLongTag ? `${tag.slice(0, max)}...` : tag}
+              </span>
+              {closable && <span className={`react-form-edit-tag-close-icon ${hoverClose ? 'hover-tag-close-icon' : ''}`} onClick={() => {
+                const _tags = tags.filter(x => x !== tag);
+                setTags([..._tags]);
+                onClose(tag, _tags);
+              }}>
+                {closeIcon}
+              </span>}
+            </>}
           </Tag>
         );
         return isLongTag ? (
-          <Tooltip title={tag} key={tag}>
+          <Tooltip title={tag} {...tooltipProps} key={tag}>
             {tagElem}
           </Tooltip>
         ) : (
           tagElem
         );
       })}
-      {inputVisible && (
-        <Input
-          type="text"
-          size="small"
-          {...inputProps}
-          className="react-form-edit-input"
-          ref={saveInputRef}
-          value={inputValue}
-          onChange={(e) => {
-            setInputValue(e.target.value);
-          }}
-          onBlur={handleInputConfirm}
-          onPressEnter={handleInputConfirm}
-        />
-      )}
-      {!inputVisible && (
-        <Tag onClick={handleShowInput} className="react-form-label_input_plus">
-          {addText}
-        </Tag>
-      )}
+      {addInputPosition === 'right' && showAddInput && addInputTagRender}
     </div>
   );
 };
 
 _TagInput.defaultProps = {
   max: 20,
-  addText: <><PlusOutlined /> 添加标签</>
+  addText: <><PlusOutlined /> 标签</>,
+  closeIcon: <CloseOutlined />,
+  addInputPosition: 'left',
+  showAddInput: true,
+  closable: true,
+  hoverClose: true,
+  onClose: (tag, tags) => { }
 };
 
 const TagInput = (props) => {

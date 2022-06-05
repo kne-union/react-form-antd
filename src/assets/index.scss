@@ -145,9 +145,11 @@
         @mixin error-border {
           border-color: #fc3333;
         }
+
         @mixin error-focus {
           box-shadow: 0 0 0 2px rgba(252, 51, 51, 0.2);
         }
+
         @mixin error-state {
           @include error-border;
 
@@ -155,9 +157,12 @@
             @include error-focus;
           }
         }
+
         @include error-state;
 
-        .ant-select-selection, .ant-input, .ant-radio-inner {
+        .ant-select-selection,
+        .ant-input,
+        .ant-radio-inner {
           @include error-state;
         }
 
@@ -174,11 +179,11 @@
         }
 
         &.ant-select {
-          > .ant-select-selector {
+          >.ant-select-selector {
             @include error-border;
           }
 
-          &.ant-select-focused > .ant-select-selector {
+          &.ant-select-focused>.ant-select-selector {
             @include error-focus;
           }
         }
@@ -196,7 +201,7 @@
 }
 
 .react-form-modal {
-  .ant-modal-content > .ant-modal-body {
+  .ant-modal-content>.ant-modal-body {
     padding: 0;
   }
 
@@ -205,7 +210,9 @@
   }
 
   &.ant-modal-confirm {
-    .ant-modal-header, .ant-modal-close {
+
+    .ant-modal-header,
+    .ant-modal-close {
       display: block;
     }
   }
@@ -227,10 +234,11 @@
   }
 }
 
-.data_range_picker{
+.data_range_picker {
   color: rgba(0, 0, 0, 0.85);
   position: relative;
-  .zhijin{
+
+  .zhijin {
     position: absolute;
     line-height: 31px;
     font-size: 14px;
@@ -238,40 +246,74 @@
     margin-left: 12px;
     pointer-events: auto;
   }
-  .zhijin_show{
+
+  .zhijin_show {
     z-index: 9;
   }
 }
 
-.data_range_picker_dis{
-  .ant-picker-input{
-    input{
+.data_range_picker_dis {
+  .ant-picker-input {
+    input {
       color: transparent;
     }
   }
 }
-.svg_box{
+
+.svg_box {
   display: flex;
   align-items: center;
   color: #bfbfbf;
   margin: 0 4px;
-  svg{
+
+  svg {
     width: 16px;
     height: 16px;
   }
 }
+
 .react-form-label_input {
+  display: flex;
+  align-items: center;
+
+  .ant-tag {
+    line-height: 22px;
+  }
+
   .react-form-label_input_plus {
     border: 1px dashed #d9d9d9;
     cursor: pointer;
     margin-top: 4px;
   }
+
   .react-form-edit-input {
     display: inline-block;
-    width: 120px;
-    margin-top: 4px;
+    width: 100px;
+    margin: 4px 8px 4px 0;
   }
+
   .react-form-edit-tag {
     margin: 4px 8px 4px 0;
+    cursor: default;
+    position: relative;
+
+    .react-form-edit-tag-close-icon {
+      margin-left: 6px;
+      cursor: pointer;
+      &.hover-tag-close-icon {
+        display: none;
+        position: absolute;
+        top: -12px;
+        right: -6px;
+      }
+    }
+
+    &:hover {
+      .react-form-edit-tag-close-icon {
+        &.hover-tag-close-icon {
+          display: inline-block;
+        }
+      }
+    }
   }
 }
