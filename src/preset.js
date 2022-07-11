@@ -1,9 +1,15 @@
 import {preset as presetRules} from '@kne/react-form';
 import merge from 'lodash/merge';
 import get from "lodash/get";
+import {preset as formHelperPreset} from '@kne/react-form-helper';
 
 export const globalParams = {
+    type: 'default',
+    size: 'middle',
     rules: {},
+    formModal: {},
+    resetButton: {},
+    submitButton: {},
     field: {
         upload: {
             displayFilename: 'filename',
@@ -32,6 +38,15 @@ export const globalParams = {
 };
 
 export default (props) => {
-    merge(globalParams, props);
+    const defaultProps = {};
+    Object.keys(globalParams.field).forEach((name) => {
+        defaultProps[name] = (globalParams.field[name] || {}).defaultProps;
+    });
+    merge(globalParams, props, {
+        field: defaultProps
+    });
+    formHelperPreset({
+        field: defaultProps
+    });
     presetRules(globalParams.rules);
 };

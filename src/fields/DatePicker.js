@@ -7,11 +7,12 @@ const {useOnChange} = hooks;
 const {MonthPicker, RangePicker, WeekPicker} = DatePicker;
 
 const _DatePicker = (props) => {
-    const render = useOnChange(Object.assign({placeholder: ['开始时间', '结束时间']}, props));
+    const render = useOnChange(Object.assign({placeholder: `请选择${props.label || ''}`}, props));
     return render(DatePicker);
 };
 
 _DatePicker.defaultProps = {
+    fieldName: 'datePicker',
     getPopupContainer
 };
 
@@ -20,15 +21,18 @@ const _MonthPicker = (props) => {
     return render(MonthPicker);
 };
 
+_MonthPicker.defaultProps = {
+    fieldName: 'monthDatePicker',
+    getPopupContainer
+};
+
 const _RangePicker = (props) => {
     const render = useOnChange(Object.assign({placeholder: ['开始时间', '结束时间']}, props));
-    // if(props.selectToday){
-    //     return render(RangePickerToday);
-    // }
     return render(RangePicker);
 };
 
 _RangePicker.defaultProps = {
+    fieldName: 'rangeDatePicker',
     getPopupContainer
 };
 
@@ -38,6 +42,7 @@ const _WeekPicker = (props) => {
 };
 
 _WeekPicker.defaultProps = {
+    fieldName: 'weekDatePicker',
     getPopupContainer
 };
 

@@ -8,6 +8,7 @@ import groupBy from 'lodash/groupBy';
 import uniqueId from 'lodash/uniqueId';
 import {hooks} from '@kne/react-form-helper';
 import {globalParams} from "../preset";
+import omit from "lodash/omit";
 
 const {useOnChange} = hooks;
 
@@ -48,7 +49,22 @@ const listToValue = (value) => {
     return (value || []).slice(0).filter(({status}) => status === 'done').map(({response}) => response.results);
 };
 
-const _Upload = ({action, value, onChange, drag, children, displayFilename, accept, fileSize: size, onError, onUploadComplete, onBeforeUpload, maxLength, transformResponse, ...props}) => {
+const _Upload = ({
+                     action,
+                     value,
+                     onChange,
+                     drag,
+                     children,
+                     displayFilename,
+                     accept,
+                     fileSize: size,
+                     onError,
+                     onUploadComplete,
+                     onBeforeUpload,
+                     maxLength,
+                     transformResponse,
+                     ...props
+                 }) => {
     displayFilename = displayFilename || uploadParams.displayFilename;
     value = value || [];
     const [list, setList] = useState([]);
@@ -62,7 +78,7 @@ const _Upload = ({action, value, onChange, drag, children, displayFilename, acce
             return;
         }
         if (info.fileList.length > maxLength) {
-            onError(`上传文件不能超过最大允许数量${maxLength}`, 'xhrError', maxLength);
+            onError(`上传文件不能超过最大允许数量${maxLength}`, 'lengthError', maxLength);
             return;
         }
         if (info.file.status === 'done') {
@@ -94,9 +110,10 @@ const _Upload = ({action, value, onChange, drag, children, displayFilename, acce
         return onBeforeUpload && onBeforeUpload(file);
     };
     const UploadComponent = drag ? Dragger : Upload;
-    return <UploadComponent {...props} action={action || uploadParams.action} fileList={valueList}
+    return <UploadComponent {...omit(uploadParams, ['action', 'transformResponse'])}
+                            action={action || uploadParams.action} fileList={valueList}
                             accept={accept.join(',')} onChange={changeHandler} beforeUpload={beforeUploadHandler}>
-        {children}
+        {typeof children === 'function' ? children({size: props.size}) : children}
     </UploadComponent>
 };
 
@@ -105,7 +122,7 @@ _Upload.defaultProps = {
     accept: [],
     fileSize: 2,
     maxLength: 1,
-    children: <Button><UploadOutlined/>点击上传</Button>,
+    children: ({size}) => <Button size={size}><UploadOutlined/>点击上传</Button>,
     onError: (info) => message.error(info),
     onUploadComplete: () => {
     }
@@ -114,6 +131,10 @@ _Upload.defaultProps = {
 const UploadInput = (props) => {
     const render = useOnChange(props);
     return render(_Upload);
+};
+
+UploadInput.defaultProps = {
+    fieldName: 'upload'
 };
 
 

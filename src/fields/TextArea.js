@@ -8,4 +8,8 @@ const TextArea = (props) => {
     return render(Input.TextArea);
 };
 
+TextArea.defaultProps = {
+    fieldName: 'textArea'
+};
+
 export default TextArea;

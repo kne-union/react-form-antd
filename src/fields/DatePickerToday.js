@@ -81,6 +81,10 @@ const RangePickerToday = (props) => {
     return render(PickerToday);
 };
 
+RangePickerToday.defaultProps = {
+    fieldName: 'rangePickerToday'
+};
+
 RangePickerToday.field = PickerToday;
 
 export default RangePickerToday;

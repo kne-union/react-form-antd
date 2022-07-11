@@ -8,6 +8,7 @@ import {
 import AvatarEditor from "react-avatar-editor";
 import {hooks} from "@kne/react-form-helper";
 import merge from 'lodash/merge';
+import omit from 'lodash/omit';
 
 const {useOnChange} = hooks;
 const avatarParams = globalParams.field.avatar;
@@ -23,6 +24,7 @@ const _Avatar = ({
                      imageType,
                      fileSize: size,
                      children,
+                     extraRender,
                      onError,
                      openEditor,
                      editor: targetEditor,
@@ -166,12 +168,16 @@ const _Avatar = ({
     };
 
     return (<>
-        <Upload className={classnames(className, "react-form-avatar")} listType="picture-card"
+        <Upload {...omit(avatarParams, ['action', 'transformResponse'])}
+                className={classnames(className, "react-form-avatar")} listType="picture-card"
                 showUploadList={false}
                 action={action || avatarParams.action}
                 beforeUpload={beforeUpload} onChange={onChange}>
-            {previewImg && showImageUrl ? previewRender ? previewRender(showImageUrl) :
-                <div className="preview"><img src={showImageUrl} alt="avatar"/></div> : uploadButton}
+            <div className="react-form-avatar-inner">
+                {previewImg && showImageUrl ? previewRender ? previewRender(showImageUrl) :
+                    <div className="preview"><img src={showImageUrl} alt="avatar"/></div> : uploadButton}
+                {extraRender ? extraRender(showImageUrl) : ''}
+            </div>
         </Upload>
     </>);
 };
@@ -180,6 +186,7 @@ _Avatar.defaultProps = {
     imageType: ["image/jpeg", "image/png"],
     fileSize: 2, // 单位MB
     children: <div className="ant-upload-text">点击上传</div>,
+    extraRender: null,
     onError: (info) => message.error(info),
     previewImg: true,
     previewRender: null,
@@ -189,6 +196,10 @@ _Avatar.defaultProps = {
 const AvatarInput = (props) => {
     const render = useOnChange(props);
     return render(_Avatar);
+};
+
+AvatarInput.defaultProps = {
+    fieldName: 'avatar'
 };
 
 AvatarInput.field = _Avatar;

@@ -9,6 +9,7 @@ const InputNumberField = (props) => {
 };
 
 InputNumberField.defaultProps = {
+    fieldName: 'inputNumber',
     autoComplete: 'off'
 };
 

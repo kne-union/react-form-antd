@@ -13,7 +13,13 @@ InputField.Password = (props) => {
     return render(Input.Password);
 };
 
-InputField.Password.defaultProps = InputField.defaultProps = {
+InputField.defaultProps = {
+    fieldName: 'input',
+    autoComplete: 'off'
+};
+
+InputField.Password.defaultProps = {
+    fieldName: 'password',
     autoComplete: 'off'
 };
 

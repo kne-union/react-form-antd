@@ -12,4 +12,8 @@ const CheckboxGroup = (props) => {
 
 CheckboxGroup.Checkbox = Checkbox;
 
+CheckboxGroup.defaultProps = {
+    fieldName: 'checkboxGroup'
+};
+
 export default CheckboxGroup;

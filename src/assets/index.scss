@@ -134,6 +134,12 @@
     position: relative;
   }
 
+  &__field-describable {
+    font-size: 12px;
+    color: #999999;
+    line-height: 20px;
+  }
+
   &__field {
     margin-bottom: 24px;
 
@@ -227,10 +233,11 @@
   }
 }
 
-.data_range_picker{
+.data_range_picker {
   color: rgba(0, 0, 0, 0.85);
   position: relative;
-  .zhijin{
+
+  .zhijin {
     position: absolute;
     line-height: 31px;
     font-size: 14px;
@@ -238,24 +245,27 @@
     margin-left: 12px;
     pointer-events: auto;
   }
-  .zhijin_show{
+
+  .zhijin_show {
     z-index: 9;
   }
 }
 
-.data_range_picker_dis{
-  .ant-picker-input{
-    input{
+.data_range_picker_dis {
+  .ant-picker-input {
+    input {
       color: transparent;
     }
   }
 }
-.svg_box{
+
+.svg_box {
   display: flex;
   align-items: center;
-  color: #bfbfbf;
+  color: rgba(0, 0, 0, 0.5);
   margin: 0 4px;
-  svg{
+
+  svg {
     width: 16px;
     height: 16px;
   }

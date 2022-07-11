@@ -4,14 +4,30 @@ import classnames from 'classnames';
 import ReactForm from '@kne/react-form';
 import {widget} from '@kne/react-form-helper';
 import './assets/index.scss';
+import {globalParams} from './preset';
 
 export * from '@kne/react-form';
 export {hooks, widget, utils} from '@kne/react-form-helper';
 
 const {ScrollToError, EnterSubmit, FormStore, MaxLabelProvider, SizeProvider} = widget;
 
-const Form = forwardRef(({className, cache, enterSubmit, scrollToError, scrollProps, type, size, children, ...props}, ref) => {
+const Form = forwardRef((originProps, ref) => {
+    const {
+        className,
+        cache,
+        enterSubmit,
+        scrollToError,
+        scrollProps,
+        type: originType,
+        size: originSize,
+        children,
+        ...props
+    } = originProps;
     let computedClass = 'react-form';
+    const {type, size} = Object.assign({
+        type: 'default',
+        size: 'middle'
+    }, globalParams, originProps);
     if (type !== 'default') {
         computedClass += `--${type}`;
     }
@@ -43,8 +59,6 @@ const Form = forwardRef(({className, cache, enterSubmit, scrollToError, scrollPr
 });
 
 Form.defaultProps = {
-    type: 'default',
-    size: 'middle',
     scrollToError: true,
     enterSubmit: false,
     scrollProps: {

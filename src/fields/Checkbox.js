@@ -12,4 +12,8 @@ const Checkbox = (props) => {
     return render(WithCheckbox);
 };
 
+Checkbox.defaultProps = {
+    fieldName: 'checkbox'
+};
+
 export default Checkbox;

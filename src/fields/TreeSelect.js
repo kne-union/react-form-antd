@@ -13,6 +13,7 @@ const _TreeSelect = (props) => {
 _TreeSelect.Fetch = withFetch(TreeSelect);
 
 _TreeSelect.defaultProps = _TreeSelect.Fetch.defaultProps = {
+    fieldName: 'treeSelect',
     getPopupContainer
 };
 

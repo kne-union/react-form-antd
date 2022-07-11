@@ -19,6 +19,7 @@ const withFetch = (WrappedComponent) => {
                                            children,
                                            onLoaded,
                                            fetchProps,
+                                           requestParams,
                                            ...props
                                        }) => {
         const refreshRef = useRef(refresh);
@@ -67,8 +68,7 @@ const withFetch = (WrappedComponent) => {
     };
 
     const Fetch = forwardRef((props, ref) => {
-        const emitter = useFetchEmitter();
-        useFetchEmitter();
+        const emitter = useFetchEmitter(ref);
         const render = useOnChange(Object.assign({placeholder: `请选择${props.label}`}, props, {fetchEmitter: emitter}));
         return render(FieldInner);
     });

@@ -20,6 +20,7 @@ const _SelectFetch = withFetch(({
                                     send,
                                     isComplete,
                                     fetchProps,
+                                    requestParams,
                                     ...props
                                 }) => {
     const refreshRef = useRef(refresh);
@@ -72,6 +73,7 @@ SelectFetch.field = forwardRef((props, ref) => {
 });
 
 SelectFetch.defaultProps = {
+    fieldName: 'selectFetch',
     getPopupContainer
 };
 

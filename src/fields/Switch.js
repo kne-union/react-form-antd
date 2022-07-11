@@ -11,4 +11,8 @@ const Switch = (props) => {
     return render(WithSwitch);
 };
 
+Switch.defaultProps = {
+    fieldName: 'switch'
+};
+
 export default Switch;

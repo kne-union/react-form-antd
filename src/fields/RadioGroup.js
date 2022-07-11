@@ -4,7 +4,7 @@ import {hooks} from '@kne/react-form-helper';
 
 const {useOnChange} = hooks;
 
-const RadioGroup = ({onChange, ...props})=>{
+const RadioGroup = ({onChange, ...props}) => {
     const handler = useCallback((e) => {
         onChange && onChange(e.target.value);
     }, [onChange]);
@@ -14,6 +14,10 @@ const RadioGroup = ({onChange, ...props})=>{
 const _RadioGroup = (props) => {
     const render = useOnChange(props);
     return render(RadioGroup);
+};
+
+_RadioGroup.defaultProps = {
+    fieldName: 'radioGroup'
 };
 
 _RadioGroup.Radio = Radio;

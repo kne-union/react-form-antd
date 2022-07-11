@@ -16,6 +16,7 @@ _Select.Option = Select.Option;
 _Select.OptGroup = Select.OptGroup;
 
 _Select.defaultProps = _Select.Fetch.defaultProps = {
+    fieldName: 'select',
     getPopupContainer
 };
 

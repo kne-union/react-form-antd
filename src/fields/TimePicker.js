@@ -12,6 +12,7 @@ const _TimePicker = (props) => {
 };
 
 _TimePicker.defaultProps = {
+    fieldName: 'timePicker',
     getPopupContainer
 };
 
@@ -21,6 +22,7 @@ const _RangePicker = (props) => {
 };
 
 _RangePicker.defaultProps = {
+    fieldName: 'rangeTimePicker',
     getPopupContainer
 };
 

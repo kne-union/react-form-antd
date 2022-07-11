@@ -1,5 +1,5 @@
 import React, {useRef, useEffect} from 'react';
-import {ConfigProvider, Button} from 'antd';
+import {ConfigProvider, Button, Divider} from 'antd';
 import Form, {
     Select,
     Input,
@@ -9,23 +9,15 @@ import Form, {
     Upload,
     GroupList,
     Group,
-    preset,
     useFormContext
 } from '@kne/react-form-antd';
+import SelectFetchDemo from './SelectFetchDemo';
 import zhCN from 'antd/lib/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 
 moment.locale('zh-cn');
 // const { TodayPicker } = DatePicker;
-
-preset({
-    field: {
-        upload: {
-            displayFilename: 'attname'
-        }
-    }
-});
 
 const EventTest = () => {
     const {emitter} = useFormContext();
@@ -57,6 +49,8 @@ const App = () => {
                 {label:'sss',value:1}
             ]}/>
         </FormModal>*/}
+        <SelectFetchDemo/>
+        <Divider/>
         <Form data={{
             name: 'xx',
             // time:['2020-09-12','至今']
