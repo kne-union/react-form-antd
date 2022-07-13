@@ -167,8 +167,15 @@ const _Avatar = ({
         }
     };
 
+    const headers = Object.assign({}, avatarParams.headers);
+
+    if (typeof avatarParams.getHeaders === 'function') {
+        Object.assign(headers, avatarParams.getHeaders())
+    }
+
     return (<>
-        <Upload {...omit(avatarParams, ['action', 'transformResponse'])}
+        <Upload {...omit(avatarParams, ['action', 'transformResponse', 'headers', 'getHeaders'])}
+                headers={headers}
                 className={classnames(className, "react-form-avatar")} listType="picture-card"
                 showUploadList={false}
                 action={action || avatarParams.action}

@@ -109,8 +109,16 @@ const _Upload = ({
         }
         return onBeforeUpload && onBeforeUpload(file);
     };
+
+    const headers = Object.assign({}, uploadParams.headers);
+
+    if (typeof uploadParams.getHeaders === 'function') {
+        Object.assign(headers, uploadParams.getHeaders())
+    }
+
     const UploadComponent = drag ? Dragger : Upload;
     return <UploadComponent {...omit(uploadParams, ['action', 'transformResponse'])}
+                            headers={headers}
                             action={action || uploadParams.action} fileList={valueList}
                             accept={accept.join(',')} onChange={changeHandler} beforeUpload={beforeUploadHandler}>
         {typeof children === 'function' ? children({size: props.size}) : children}

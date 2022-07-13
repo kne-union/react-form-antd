@@ -39,11 +39,9 @@ export const globalParams = {
 
 export default (props) => {
     const defaultProps = {};
+    merge(globalParams, props);
     Object.keys(globalParams.field).forEach((name) => {
         defaultProps[name] = (globalParams.field[name] || {}).defaultProps;
-    });
-    merge(globalParams, props, {
-        field: defaultProps
     });
     formHelperPreset({
         field: defaultProps
