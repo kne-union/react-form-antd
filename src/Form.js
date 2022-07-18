@@ -23,7 +23,8 @@ const Form = forwardRef((originProps, ref) => {
         children,
         ...props
     } = originProps;
-    let computedClass = 'react-form';
+    const baseClass = 'react-form';
+    let computedClass = baseClass;
     const {type, size} = Object.assign({
         type: 'default',
         size: 'middle'
@@ -41,7 +42,7 @@ const Form = forwardRef((originProps, ref) => {
     </MaxLabelProvider>;
 
     return (
-        <form className={classnames(computedClass, className)} onSubmit={(e) => {
+        <form className={classnames(baseClass, computedClass, className)} onSubmit={(e) => {
             e.preventDefault();
             e.stopPropagation();
         }}>

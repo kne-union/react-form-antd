@@ -81,7 +81,7 @@ const _Upload = ({
             onError(`上传文件不能超过最大允许数量${maxLength}`, 'lengthError', maxLength);
             return;
         }
-        if (info.file.status === 'done') {
+        if (info.file.status === 'done' && info.fileList.find(({uid}) => uid === info.file.uid)) {
             info.file.response = (transformResponse || uploadParams.transformResponse)(info.file.response);
             if (info.file.response.code === 200) {
                 info.file.name = computedFilename(info.file.response.results.substr(info.file.response.results.lastIndexOf('/') + 1), displayFilename);
