@@ -35,7 +35,15 @@ const _Avatar = ({
     const [showImageUrl, setImageUrl] = useState(imageUrl);
     const editorRef = useRef();
 
-    const defaultEditor = {open: false, width: 250, height: 250, borderRadius: 1, text: "确定", title: "裁剪图片"};
+    const defaultEditor = {
+        open: false,
+        width: 250,
+        height: 250,
+        borderRadius: 1,
+        text: "确定",
+        cancelText: '取消',
+        title: "裁剪图片"
+    };
     const editor = merge({}, defaultEditor, {open: openEditor}, targetEditor);
 
     useEffect(() => {
@@ -127,11 +135,12 @@ const _Avatar = ({
             /*剪切图像*/
             // editor:{open:false,width:250,height:250,borderRadius:0-100,text:'剪切'}
             if (editor.open) {
-                Modal.success({
+                Modal.confirm({
                     title: editor.title,
                     icon: "",
                     width: editor.width * 2,
                     content: <AvatarEditorBox file={file}/>,
+                    cancelText: editor.cancelText,
                     okText: editor.text,
                     onOk: (close) => {
                         let base64 = editorRef.current.getImage().toDataURL();

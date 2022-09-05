@@ -17,7 +17,7 @@ const PickerToday = ({soFarText, ...props}) => {
         const p = get(props, ['placeholder'], ['开始日期', '结束日期']);
         return {
             start: s ? moment(s) : '',
-            end: d === '至今' ? moment('2099-09-09') : (d ? moment(d) : ''),
+            end: d === '至今' ? null : (d ? moment(d) : ''),
             showZj: d === '至今',
             placeholder: p
         }
@@ -42,7 +42,7 @@ const PickerToday = ({soFarText, ...props}) => {
 
     const foot = () => {
         return (
-            <Button onClick={(v) => {
+            <Button type={newData.showZj ? 'primary' : 'default'} onClick={(v) => {
                 ref_d.current.blur();
                 onChange([newData.start || '', '至今']);
             }}>
