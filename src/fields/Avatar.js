@@ -1,5 +1,6 @@
-import React, {useState, useRef, useEffect} from "react";
-import {Upload, message, Modal, Slider, Row, Col, Space} from "antd";
+import React, {useState, useRef, useEffect, forwardRef} from "react";
+import {Upload, message, Modal, Slider, Row, Col, Tooltip} from "antd";
+import withLayer from '@kne/with-layer';
 import {globalParams} from "../preset";
 import classnames from "classnames";
 import {
@@ -9,9 +10,61 @@ import AvatarEditor from "react-avatar-editor";
 import {hooks} from "@kne/react-form-helper";
 import merge from 'lodash/merge';
 import omit from 'lodash/omit';
+import Rotate from '../assets/rotate';
+import Full from '../assets/full';
+import getPopupContainer from '../common/getPopupContainer';
 
 const {useOnChange} = hooks;
 const avatarParams = globalParams.field.avatar;
+
+const createAvatarEditor = withLayer(({close, file, editor, onComplete, ...props}) => {
+    const editorRef = useRef(null);
+    const [rotate, setRotate] = useState(0);
+    const [scale, setScale] = useState(() => {
+        if (editor.width === editor.height) {
+            return 1;
+        }
+        return 0.35;
+    });
+
+    return <Modal {...props} centered onOk={() => {
+        onComplete && onComplete(editorRef.current.getImage().toDataURL());
+        close();
+    }}>
+        {editor.tips ? <div className="react-form-avatar-tips">{editor.tips}</div> : null}
+        <div style={{
+            "width": editor.width, "margin": "auto"
+        }}>
+            <AvatarEditor
+                ref={editorRef}
+                image={file}
+                width={editor.width}
+                height={editor.height}
+                border={1}
+                borderRadius={editor.borderRadius}
+                color={[24, 144, 255, 1]} // RGBA
+                scale={scale}
+                rotate={rotate}
+            />
+            <Row gutter={4} align="middle">
+                <Col span={4}><Tooltip title="旋转" getPopupContainer={getPopupContainer}><Rotate className="react-form-avatar-btn" onClick={() => {
+                    setRotate((rotate) => {
+                        return rotate + 90;
+                    });
+                }}/></Tooltip></Col>
+                <Col span={4}><Tooltip title="充满" getPopupContainer={getPopupContainer}><Full className="react-form-avatar-btn" onClick={() => {
+                    setScale(1);
+                }}/></Tooltip></Col>
+                <Col flex={1}>
+                    <Slider tooltip={{
+                        formatter: () => '大小',
+                        getPopupContainer
+                    }} value={scale} step={0.05} min={0.2} max={3} onChange={setScale}/>
+                </Col>
+            </Row>
+        </div>
+    </Modal>
+});
 
 
 const _Avatar = ({
@@ -27,6 +80,7 @@ const _Avatar = ({
                      extraRender,
                      onError,
                      openEditor,
+                     editorTips,
                      editor: targetEditor,
                      previewImg,
                      previewRender
@@ -42,9 +96,10 @@ const _Avatar = ({
         borderRadius: 1,
         text: "确定",
         cancelText: '取消',
-        title: "裁剪图片"
+        title: "裁剪图片",
+        tips: null
     };
-    const editor = merge({}, defaultEditor, {open: openEditor}, targetEditor);
+    const editor = merge({}, defaultEditor, {open: openEditor, tips: editorTips}, targetEditor);
 
     useEffect(() => {
         setImageUrl(imageUrl);
@@ -62,52 +117,6 @@ const _Avatar = ({
         return new Blob([u8arr], {
             type: mime
         });
-    };
-
-
-    const AvatarEditorBox = ({file}) => {
-        const [rotate, setRotate] = useState(0);
-        const [scale, setScale] = useState(() => {
-            if (editor.width === editor.height) {
-                return 1;
-            }
-            return 0.35;
-        });
-
-        const onChange = (v) => {
-            setRotate(v);
-        };
-        const onChangeScale = (v) => {
-            setScale(v);
-        };
-        return (<div style={{
-            "width": editor.width, "margin": "auto"
-        }}>
-            <AvatarEditor
-                ref={editorRef}
-                image={file}
-                width={editor.width}
-                height={editor.height}
-                border={1}
-                borderRadius={editor.borderRadius}
-                color={[24, 144, 255, 1]} // RGBA
-                scale={scale}
-                rotate={rotate}
-            />
-            <Row gutter={4}>
-                <Col span={4}><span>旋转</span></Col>
-                <Col span={15}>
-                    <Slider tooltipVisible={false} defaultValue={rotate} min={-180} max={180} onChange={onChange}/>
-                </Col>
-            </Row>
-            <Row gutter={4}>
-                <Col span={4}><span>放大</span></Col>
-                <Col span={15}>
-                    <Slider tooltipVisible={false} defaultValue={scale} step={0.05} min={0.2} max={3}
-                            onChange={onChangeScale}/>
-                </Col>
-            </Row>
-        </div>);
     };
 
     const uploadButton = (<div>
@@ -135,21 +144,20 @@ const _Avatar = ({
             /*剪切图像*/
             // editor:{open:false,width:250,height:250,borderRadius:0-100,text:'剪切'}
             if (editor.open) {
-                Modal.confirm({
+                createAvatarEditor({
+                    editor,
+                    file,
                     title: editor.title,
                     icon: "",
                     width: editor.width * 2,
-                    content: <AvatarEditorBox file={file}/>,
                     cancelText: editor.cancelText,
                     okText: editor.text,
-                    onOk: (close) => {
-                        let base64 = editorRef.current.getImage().toDataURL();
+                    onComplete: (base64) => {
                         setImageUrl(base64);
                         let blob = dataURLtoBlob(base64);
                         const files = new window.File([blob], file.name, {type: file.type});
                         onBeforeUpload && onBeforeUpload(files);
                         resolve(files);
-                        close();
                     }
                 });
             } else {

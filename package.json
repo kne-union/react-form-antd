@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "2.1.35",
+  "version": "2.1.37",
   "description": "把@kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
@@ -64,6 +64,7 @@
     "@kne/react-form-helper": "^1.0.20",
     "@kne/use-control-value": "^0.1.1",
     "@kne/use-event": "^0.1.2",
+    "@kne/with-layer": "^0.1.5",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
     "moment": "^2.29.1",
@@ -83,8 +84,8 @@
     "npm-run-all": "^4.1.5",
     "pify": "^5.0.0",
     "prettier": "^2.4.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-scripts": "^4.0.3"
   }
 }

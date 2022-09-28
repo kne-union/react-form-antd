@@ -94,6 +94,7 @@ const App = () => {
             <Avatar
                 label="租户图标"
                 name="miniIcon"
+                editorTips="我是一段tips"
                 editor={{open: true, width: 200, height: 200}}
                 size={500}
                 imageType={['image/jpeg', 'image/png', 'image/gif']}
