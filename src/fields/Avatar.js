@@ -27,7 +27,7 @@ const createAvatarEditor = withLayer(({close, file, editor, onComplete, ...props
         return 0.35;
     });
 
-    return <Modal {...props} centered onOk={() => {
+    return <Modal {...props} className={editor.className} centered onOk={() => {
         onComplete && onComplete(editorRef.current.getImage().toDataURL());
         close();
     }}>
