@@ -47,16 +47,19 @@ const createAvatarEditor = withLayer(({close, file, editor, onComplete, ...props
                 rotate={rotate}
             />
             <Row gutter={4} align="middle">
-                <Col span={4}><Tooltip title="旋转" getPopupContainer={getPopupContainer}><Rotate className="react-form-avatar-btn" onClick={() => {
+                <Col span={4}><Tooltip title="旋转" placement="bottom" getPopupContainer={getPopupContainer}><Rotate
+                    className="react-form-avatar-btn" onClick={() => {
                     setRotate((rotate) => {
-                        return rotate + 90;
+                        return (rotate - 90) % 360;
                     });
                 }}/></Tooltip></Col>
-                <Col span={4}><Tooltip title="充满" getPopupContainer={getPopupContainer}><Full className="react-form-avatar-btn" onClick={() => {
+                <Col span={4}><Tooltip title="还原" placement="bottom" getPopupContainer={getPopupContainer}><Full
+                    className="react-form-avatar-btn" onClick={() => {
                     setScale(1);
                 }}/></Tooltip></Col>
                 <Col flex={1}>
-                    <Slider tooltip={{
+                    <Slider className="react-form-avatar-slider" tooltip={{
+                        placement: "bottom",
                         formatter: () => '大小',
                         getPopupContainer
                     }} value={scale} step={0.05} min={0.2} max={3} onChange={setScale}/>

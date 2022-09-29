@@ -273,6 +273,12 @@
 
 .react-form-avatar-btn {
   cursor: pointer;
+  padding: 5px;
+  box-sizing: content-box;
+  border-radius: 2px;
+  &:hover {
+    background: #F8F8F8;
+  }
 }
 
 .react-form-avatar-tips {
