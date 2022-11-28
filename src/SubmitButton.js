@@ -5,7 +5,7 @@ import {Button} from 'antd';
 const SubmitButton = ({realTime, disabled, ...props}) => {
     const {isPass, isLoading, ...submitProps} = useSubmit(props);
     return (
-        <Button loading={isLoading} disabled={disabled || (realTime ? !isPass : false)} {...submitProps} {...props}/>);
+        <Button loading={isLoading} disabled={disabled || (realTime ? !isPass : false)} {...props} {...submitProps}/>);
 };
 
 SubmitButton.defaultProps = {
