@@ -1,6 +1,5 @@
 import {TimePicker} from 'antd';
 import {hooks} from '@kne/react-form-helper';
-import getPopupContainer from "../common/getPopupContainer";
 
 const {useOnChange} = hooks;
 
@@ -12,8 +11,7 @@ const _TimePicker = (props) => {
 };
 
 _TimePicker.defaultProps = {
-    fieldName: 'timePicker',
-    getPopupContainer
+    fieldName: 'timePicker'
 };
 
 const _RangePicker = (props) => {
@@ -22,8 +20,7 @@ const _RangePicker = (props) => {
 };
 
 _RangePicker.defaultProps = {
-    fieldName: 'rangeTimePicker',
-    getPopupContainer
+    fieldName: 'rangeTimePicker'
 };
 
 _TimePicker.RangePicker = _RangePicker;

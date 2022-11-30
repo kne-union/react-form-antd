@@ -1,15 +1,7 @@
 import React, {useRef, useEffect} from 'react';
 import {ConfigProvider, Button, Divider} from 'antd';
 import Form, {
-    Select,
-    Input,
-    SubmitButton,
-    Avatar,
-    DatePickerToday,
-    Upload,
-    GroupList,
-    Group,
-    useFormContext
+    Select, Input, SubmitButton, Avatar, DatePickerToday, Upload, GroupList, Group, useFormContext
 } from '@kne/react-form-antd';
 import SelectFetchDemo from './SelectFetchDemo';
 import zhCN from 'antd/lib/locale/zh_CN';
@@ -43,7 +35,11 @@ const App = () => {
     //     console.log(v[1].format('YYYY/MM/DD'));
     // }
     const addButton = useRef();
-    return <ConfigProvider autoInsertSpaceInButton={false} locale={zhCN}>
+    return <ConfigProvider autoInsertSpaceInButton={false} locale={zhCN} theme={{
+        token: {
+            borderRadius: 2
+        }
+    }}>
         {/*<FormModal visible title="哈哈哈">
             <Select name="select" label="哈哈哈" options={[
                 {label:'sss',value:1}
@@ -52,8 +48,7 @@ const App = () => {
         <SelectFetchDemo/>
         <Divider/>
         <Form data={{
-            name: 'xx',
-            // time:['2020-09-12','至今']
+            name: 'xx', // time:['2020-09-12','至今']
         }} onSubmit={(data) => {
             console.log('提交', data);
         }}>
@@ -62,9 +57,7 @@ const App = () => {
                 console.log(data.dataList);
                 return {options: data.dataList};
             }}</Select.Fetch>
-            <Select name="select" label="哈哈哈" options={[
-                {label: 'sss', value: 1}
-            ]}/>
+            <Select name="select" label="哈哈哈" options={[{label: 'sss', value: 1}]}/>
             <Input name="name" label="名称" rule="REQ LEN-0-4"/>
             <Input.Password name="password" label="密码"/>
             <br/>

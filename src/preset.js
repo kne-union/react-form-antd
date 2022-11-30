@@ -13,7 +13,7 @@ export const globalParams = {
     field: {
         upload: {
             displayFilename: 'filename',
-            action: '/open-api/upload_static_file/interview-manager',
+            action: '/upload',
             transformResponse: (response) => {
                 const targetPath = get(response, 'results[0].targetPath');
                 const filename = get(response, 'results[0].filename');

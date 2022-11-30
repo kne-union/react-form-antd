@@ -1,6 +1,5 @@
 import {DatePicker} from 'antd';
 import {hooks} from '@kne/react-form-helper';
-import getPopupContainer from "../common/getPopupContainer";
 
 const {useOnChange} = hooks;
 
@@ -12,8 +11,7 @@ const _DatePicker = (props) => {
 };
 
 _DatePicker.defaultProps = {
-    fieldName: 'datePicker',
-    getPopupContainer
+    fieldName: 'datePicker'
 };
 
 const _MonthPicker = (props) => {
@@ -22,8 +20,7 @@ const _MonthPicker = (props) => {
 };
 
 _MonthPicker.defaultProps = {
-    fieldName: 'monthDatePicker',
-    getPopupContainer
+    fieldName: 'monthDatePicker'
 };
 
 const _RangePicker = (props) => {
@@ -32,8 +29,7 @@ const _RangePicker = (props) => {
 };
 
 _RangePicker.defaultProps = {
-    fieldName: 'rangeDatePicker',
-    getPopupContainer
+    fieldName: 'rangeDatePicker'
 };
 
 const _WeekPicker = (props) => {
@@ -42,8 +38,7 @@ const _WeekPicker = (props) => {
 };
 
 _WeekPicker.defaultProps = {
-    fieldName: 'weekDatePicker',
-    getPopupContainer
+    fieldName: 'weekDatePicker'
 };
 
 _DatePicker.MonthPicker = _MonthPicker;
