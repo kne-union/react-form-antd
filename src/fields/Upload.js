@@ -118,6 +118,7 @@ const _Upload = ({
 
     const UploadComponent = drag ? Dragger : Upload;
     return <UploadComponent {...omit(uploadParams, ['action', 'transformResponse'])}
+                            {...props}
                             headers={headers}
                             action={action || uploadParams.action} fileList={valueList}
                             accept={accept.join(',')} onChange={changeHandler} beforeUpload={beforeUploadHandler}>
