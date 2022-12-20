@@ -13,10 +13,6 @@ import Form, {
 } from '@kne/react-form-antd';
 import SelectFetchDemo from './SelectFetchDemo';
 import zhCN from 'antd/lib/locale/zh_CN';
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-
-moment.locale('zh-cn');
 // const { TodayPicker } = DatePicker;
 
 const EventTest = () => {

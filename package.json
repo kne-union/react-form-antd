@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "2.2.1",
+  "version": "3.0.1-alpha.0",
   "description": "把@kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
@@ -53,7 +53,7 @@
   "homepage": "https://github.com/kne-union/react-form-antd#readme",
   "peerDependencies": {
     "@kne/react-fetch": "1.x",
-    "antd": ">=4.x",
+    "antd": ">=5.x",
     "prop-types": ">=15.x",
     "react": ">=16.x"
   },
@@ -66,13 +66,13 @@
     "@kne/use-event": "^0.1.2",
     "@kne/with-layer": "^0.1.5",
     "classnames": "^2.2.6",
+    "dayjs": "^1.11.7",
     "lodash": "^4.17.15",
-    "moment": "^2.29.1",
     "react-avatar-editor": "^12.0.0"
   },
   "devDependencies": {
     "@kne/react-fetch": "^0.1.12",
-    "antd": "^4.16.13",
+    "antd": "^5.0.7",
     "axios": "^0.21.4",
     "cross-env": "^7.0.3",
     "fs-extra": "^9.0.1",
