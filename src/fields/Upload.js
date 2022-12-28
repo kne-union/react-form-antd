@@ -16,6 +16,14 @@ const {Dragger} = Upload;
 
 const uploadParams = globalParams.field.upload;
 
+const decodeURIComponentSafe = (str) => {
+    try {
+        return decodeURIComponent(str);
+    } catch (e) {
+        return str;
+    }
+};
+
 const computedFilename = (path, displayFilename = 'filename') => {
     const strArray = path.split('?');
     if (strArray[1]) {
@@ -25,7 +33,7 @@ const computedFilename = (path, displayFilename = 'filename') => {
             query[key] = value;
         });
         if (query[displayFilename]) {
-            return decodeURIComponent(query[displayFilename]);
+            return decodeURIComponentSafe(query[displayFilename]);
         }
     }
     return path;
@@ -70,7 +78,7 @@ const _Upload = ({
     const [list, setList] = useState([]);
     const valueList = useMemo(() => {
         return valueToList(value.filter((url) => {
-            return !list.find((file) => get(file, 'response.results') === url);
+            return !list.find((file) => get(file, 'response.results') === decodeURIComponentSafe(url));
         }), displayFilename).concat(list);
     }, [list, value, displayFilename]);
     const changeHandler = (info) => {
