@@ -105,10 +105,14 @@ const _Upload = ({
         }
         setList(info.fileList);
     };
-    const beforeUploadHandler = (file) => {
+    const beforeUploadHandler = (file, fileList) => {
         const isLt = file.size / 1024 / 1024 < size;
         if (!isLt) {
             onError(`文件不能超过${size}MB!`, 'sizeError', {size, fileSize: file.size});
+            return false;
+        }
+        if (fileList > maxLength) {
+            onError(`上传文件不能超过最大允许数量${maxLength}`, 'lengthError', maxLength);
             return false;
         }
         if (maxLength === 1) {
