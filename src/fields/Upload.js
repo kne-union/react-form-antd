@@ -103,7 +103,7 @@ const _Upload = ({
             onError(`文件不能超过${size}MB!`, 'sizeError', {size, fileSize: file.size});
             return false;
         }
-        if (fileList > maxLength) {
+        if (fileList?.length > maxLength) {
             onError(`上传文件不能超过最大允许数量${maxLength}`, 'lengthError', maxLength);
             return false;
         }
