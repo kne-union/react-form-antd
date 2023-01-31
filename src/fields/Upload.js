@@ -16,6 +16,14 @@ const {Dragger} = Upload;
 
 const uploadParams = globalParams.field.upload;
 
+const decodeURIComponentSafe = (str) => {
+    try {
+        return decodeURIComponent(str);
+    } catch (e) {
+        return str;
+    }
+};
+
 const computedFilename = (path, displayFilename = 'filename') => {
     const strArray = path.split('?');
     if (strArray[1]) {
@@ -25,7 +33,7 @@ const computedFilename = (path, displayFilename = 'filename') => {
             query[key] = value;
         });
         if (query[displayFilename]) {
-            return decodeURIComponent(query[displayFilename]);
+            return decodeURIComponentSafe(query[displayFilename]);
         }
     }
     return path;
@@ -70,7 +78,7 @@ const _Upload = ({
     const [list, setList] = useState([]);
     const valueList = useMemo(() => {
         return valueToList(value.filter((url) => {
-            return !list.find((file) => get(file, 'response.results') === url);
+            return !list.find((file) => get(file, 'response.results') === decodeURIComponentSafe(url));
         }), displayFilename).concat(list);
     }, [list, value, displayFilename]);
     const changeHandler = (info) => {
@@ -97,10 +105,14 @@ const _Upload = ({
         }
         setList(info.fileList);
     };
-    const beforeUploadHandler = (file) => {
+    const beforeUploadHandler = (file, fileList) => {
         const isLt = file.size / 1024 / 1024 < size;
         if (!isLt) {
             onError(`文件不能超过${size}MB!`, 'sizeError', {size, fileSize: file.size});
+            return false;
+        }
+        if (fileList?.length > maxLength) {
+            onError(`上传文件不能超过最大允许数量${maxLength}`, 'lengthError', maxLength);
             return false;
         }
         if (maxLength === 1) {
@@ -118,6 +130,7 @@ const _Upload = ({
 
     const UploadComponent = drag ? Dragger : Upload;
     return <UploadComponent {...omit(uploadParams, ['action', 'transformResponse'])}
+                            {...props}
                             headers={headers}
                             action={action || uploadParams.action} fileList={valueList}
                             accept={accept.join(',')} onChange={changeHandler} beforeUpload={beforeUploadHandler}>
