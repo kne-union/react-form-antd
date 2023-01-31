@@ -85,7 +85,7 @@ const _Upload = ({
         if (['uploading', 'done', 'error', 'removed'].indexOf(info.file.status) === -1) {
             return;
         }
-        if (info.fileList?.length) {
+        if (info.fileList?.length > maxLength) {
             if (JSON.stringify(info.file) === JSON.stringify(info.fileList[info.fileList?.length - 1])) {
               onError(`上传文件不能超过最大允许数量${maxLength}`, 'lengthError', maxLength);
             }
