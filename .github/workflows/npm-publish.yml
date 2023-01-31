@@ -6,9 +6,11 @@ name: Node.js Package
 on:
   pull_request:
     branches: [master]
-
+    types:
+      - closed
 jobs:
   publish-npm:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
