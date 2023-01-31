@@ -85,8 +85,10 @@ const _Upload = ({
         if (['uploading', 'done', 'error', 'removed'].indexOf(info.file.status) === -1) {
             return;
         }
-        if (info.fileList.length > maxLength) {
-            onError(`上传文件不能超过最大允许数量${maxLength}`, 'lengthError', maxLength);
+        if (info.fileList?.length) {
+            if (JSON.stringify(info.file) === JSON.stringify(info.fileList[info.fileList?.length - 1])) {
+              onError(`上传文件不能超过最大允许数量${maxLength}`, 'lengthError', maxLength);
+            }
             return;
         }
         if (info.file.status === 'done' && info.fileList.find(({uid}) => uid === info.file.uid)) {
@@ -105,14 +107,10 @@ const _Upload = ({
         }
         setList(info.fileList);
     };
-    const beforeUploadHandler = (file, fileList) => {
+    const beforeUploadHandler = (file) => {
         const isLt = file.size / 1024 / 1024 < size;
         if (!isLt) {
             onError(`文件不能超过${size}MB!`, 'sizeError', {size, fileSize: file.size});
-            return false;
-        }
-        if (fileList?.length > maxLength) {
-            onError(`上传文件不能超过最大允许数量${maxLength}`, 'lengthError', maxLength);
             return false;
         }
         if (maxLength === 1) {
