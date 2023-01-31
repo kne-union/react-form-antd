@@ -18,6 +18,6 @@ jobs:
       - run: npm i --legacy-peer-deps
       - run: npm run build:lib
       - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
       - run: wget https://npmmirror.com/sync/@kne/react-form-antd
-    env:
-      NODE_AUTH_TOKEN: ${{secrets.npm_token}}
