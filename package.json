@@ -1,7 +1,7 @@
 {
   "name": "@kne/react-form-antd",
   "version": "3.0.7",
-  "description": "把@kne/react-form 表单校验逻辑应用到antd",
+  "description": "把 @kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
