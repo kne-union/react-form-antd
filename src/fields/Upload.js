@@ -78,7 +78,7 @@ const _Upload = ({
     const [list, setList] = useState([]);
     const valueList = useMemo(() => {
         return valueToList(value.filter((url) => {
-            return !list.find((file) => get(file, 'response.results') === decodeURIComponentSafe(url));
+            return !list.find((file) => decodeURIComponentSafe(get(file, 'response.results', '')) === decodeURIComponentSafe(url));
         }), displayFilename).concat(list);
     }, [list, value, displayFilename]);
     const changeHandler = (info) => {
@@ -87,7 +87,7 @@ const _Upload = ({
         }
         if (info.fileList?.length > maxLength) {
             if (JSON.stringify(info.file) === JSON.stringify(info.fileList[info.fileList?.length - 1])) {
-              onError(`上传文件不能超过最大允许数量${maxLength}`, 'lengthError', maxLength);
+                onError(`上传文件不能超过最大允许数量${maxLength}`, 'lengthError', maxLength);
             }
             return;
         }
