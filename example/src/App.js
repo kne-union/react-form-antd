@@ -5,10 +5,6 @@ import Form, {
 } from '@kne/react-form-antd';
 import SelectFetchDemo from './SelectFetchDemo';
 import zhCN from 'antd/lib/locale/zh_CN';
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-
-moment.locale('zh-cn');
 // const { TodayPicker } = DatePicker;
 
 const EventTest = () => {
@@ -58,7 +54,7 @@ const App = () => {
                 return {options: data.dataList};
             }}</Select.Fetch>
             <Select name="select" label="哈哈哈" options={[{label: 'sss', value: 1}]}/>
-            <Input name="name" label="名称" rule="REQ LEN-0-4"/>
+            <Input name="name" label="名称" realtime rule="REQ LEN-0-4"/>
             <Input.Password name="password" label="密码"/>
             <br/>
             <Group name="target">
