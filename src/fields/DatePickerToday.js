@@ -1,6 +1,6 @@
 import {Button, DatePicker} from 'antd';
 import React, {useRef, useEffect, useMemo} from 'react'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import get from 'lodash/get'
 import useControlValue from '@kne/use-control-value'
 import {hooks} from '@kne/react-form-helper';
@@ -16,8 +16,8 @@ const PickerToday = ({soFarText, ...props}) => {
         const d = get(data, 1, '');
         const p = get(props, ['placeholder'], ['开始日期', '结束日期']);
         return {
-            start: s ? moment(s) : '',
-            end: d === '至今' ? null : (d ? moment(d) : ''),
+            start: s ? dayjs(s) : '',
+            end: d === '至今' ? null : (d ? dayjs(d) : ''),
             showZj: d === '至今',
             placeholder: p
         }
