@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "3.0.9",
+  "version": "3.0.10",
   "description": "把 @kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
