@@ -105,7 +105,20 @@ const _Upload = ({
         if (['done', 'removed'].indexOf(info.file.status) > -1) {
             onChange(listToValue(done));
         }
-        setList(info.fileList);
+        setList((list) => {
+            const newList = list.slice(0);
+            const index = list.findIndex(({uid}) => uid === info.file.uid);
+            if (info.file.status === 'removed') {
+                index > -1 && newList.splice(index, 1);
+                return newList;
+            }
+            if (index === -1) {
+                newList.push(info.file);
+                return newList;
+            }
+            newList.splice(index, 1, info.file);
+            return newList;
+        });
     };
     const beforeUploadHandler = (file) => {
         const isLt = file.size / 1024 / 1024 < size;
