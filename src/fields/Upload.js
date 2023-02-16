@@ -91,22 +91,21 @@ const _Upload = ({
             }
             return;
         }
+        if (info.file.status === 'done' && info.fileList.find(({uid}) => uid === info.file.uid)) {
+            info.file.response = (transformResponse || uploadParams.transformResponse)(info.file.response);
+            if (info.file.response.code === 200) {
+                info.file.name = computedFilename(info.file.response.results.substr(info.file.response.results.lastIndexOf('/') + 1), displayFilename);
+                onUploadComplete(info);
+            } else {
+                info.file.status = 'error';
+                onError(info.file.response.msg, 'xhrError', info.file.response);
+            }
+        }
+        const {done} = groupBy(info.fileList, (file) => file.status === 'done' ? 'done' : 'uploading');
+        if (['done', 'removed'].indexOf(info.file.status) > -1) {
+            onChange(listToValue(done));
+        }
         setList((list) => {
-            if (info.file.status === 'done' && list.find(({uid}) => uid === info.file.uid)) {
-                info.file.response = (transformResponse || uploadParams.transformResponse)(info.file.response);
-                if (info.file.response.code === 200) {
-                    info.file.name = computedFilename(info.file.response.results.substr(info.file.response.results.lastIndexOf('/') + 1), displayFilename);
-                    onUploadComplete(info);
-                } else {
-                    info.file.status = 'error';
-                    onError(info.file.response.msg, 'xhrError', info.file.response);
-                }
-            }
-            const {done} = groupBy(list, (file) => file.status === 'done' ? 'done' : 'uploading');
-            if (['done', 'removed'].indexOf(info.file.status) > -1) {
-                onChange(listToValue(done));
-            }
-
             const newList = list.slice(0);
             const index = list.findIndex(({uid}) => uid === info.file.uid);
             if (info.file.status === 'removed') {
