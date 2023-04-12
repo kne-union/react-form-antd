@@ -9,7 +9,8 @@ const WithCheckbox = withChecked(_Checkbox);
 const Checkbox = (props) => {
     const checkedProps = useCheckedToValue(Object.assign({}, props, {
         onChange: (e) => {
-            props.onChange && props.onChange(e.target.checked);
+            e.target.type = 'checkbox';
+            props.onChange && props.onChange(e);
         }
     }));
     const render = useOnChange(checkedProps);
