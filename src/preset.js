@@ -4,17 +4,9 @@ import get from "lodash/get";
 import {preset as formHelperPreset} from '@kne/react-form-helper';
 
 export const globalParams = {
-    type: 'default',
-    size: 'middle',
-    rules: {},
-    formModal: {},
-    resetButton: {},
-    submitButton: {},
-    field: {
+    type: 'default', size: 'middle', rules: {}, formModal: {}, resetButton: {}, submitButton: {}, field: {
         upload: {
-            displayFilename: 'filename',
-            action: '/upload',
-            transformResponse: (response) => {
+            displayFilename: 'filename', action: '/upload', transformResponse: (response) => {
                 const targetPath = get(response, 'results[0].targetPath');
                 const filename = get(response, 'results[0].filename');
                 return {
@@ -23,16 +15,12 @@ export const globalParams = {
                     results: targetPath + (filename ? `?${globalParams.field.upload.displayFilename}=` + encodeURIComponent(filename) : '')
                 };
             }
-        },
-        avatar: {
+        }, avatar: {
             transformResponse: (response) => {
                 return {
-                    code: response.code,
-                    results: response.results,
-                    msg: response.msg
+                    code: response.code, results: response.results, msg: response.msg
                 }
-            },
-            action: '/upload'
+            }, action: '/upload'
         }
     }
 };
@@ -44,7 +32,7 @@ export default (props) => {
         defaultProps[name] = (globalParams.field[name] || {}).defaultProps;
     });
     formHelperPreset({
-        field: defaultProps
+        field: defaultProps, render: globalParams.render
     });
     presetRules(globalParams.rules);
 };
