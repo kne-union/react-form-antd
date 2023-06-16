@@ -32,7 +32,7 @@ export default (props) => {
         defaultProps[name] = (globalParams.field[name] || {}).defaultProps;
     });
     formHelperPreset({
-        field: defaultProps, render: globalParams.render
+        field: defaultProps, globalProps: globalParams.globalProps
     });
     presetRules(globalParams.rules);
 };
