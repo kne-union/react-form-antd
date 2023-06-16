@@ -1,7 +1,7 @@
 import React, {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import ReactForm from '@kne/react-form';
+import {Form as ReactForm} from '@kne/react-form';
 import {widget} from '@kne/react-form-helper';
 import './assets/index.scss';
 import {globalParams} from './preset';
