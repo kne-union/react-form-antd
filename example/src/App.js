@@ -19,8 +19,6 @@ const EventTest = () => {
 
 
 const App = () => {
-
-
     const onChange = (v) => {
         console.log(v);
     }
