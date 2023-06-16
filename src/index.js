@@ -18,6 +18,7 @@ import Upload$ from './fields/Upload';
 
 export * from './Form';
 export default Form;
+export {Form};
 export {default as preset} from './preset';
 export {default as FormModal} from './FormModal';
 export {default as ResetButton} from './ResetButton';
