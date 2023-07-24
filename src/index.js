@@ -14,6 +14,7 @@ import DatePicker from './fields/DatePicker';
 import CheckboxGroup from './fields/CheckboxGroup';
 import Checkbox from './fields/Checkbox';
 import Cascader from './fields/Cascader';
+import Avatar from './fields/Avatar';
 
 export * from './Form';
 export default Form;
@@ -22,6 +23,6 @@ export {default as preset} from './preset';
 export {default as ResetButton} from './ResetButton';
 export {default as SubmitButton} from './SubmitButton';
 export {default as CancelButton} from './CancelButton';
-export {Upload, TreeSelect, TimePicker, TextArea, Switch, Select, RadioGroup, InputNumber, Input, DatePickerToday, DatePicker, CheckboxGroup, Checkbox, Cascader};
+export {Upload, TreeSelect, TimePicker, TextArea, Switch, Select, RadioGroup, InputNumber, Input, DatePickerToday, DatePicker, CheckboxGroup, Checkbox, Cascader, Avatar};
 
-export const fields = { Upload, TreeSelect, TimePicker, TextArea, Switch, Select, RadioGroup, InputNumber, Input, DatePickerToday, DatePicker, CheckboxGroup, Checkbox, Cascader };
+export const fields = { Upload, TreeSelect, TimePicker, TextArea, Switch, Select, RadioGroup, InputNumber, Input, DatePickerToday, DatePicker, CheckboxGroup, Checkbox, Cascader, Avatar };
