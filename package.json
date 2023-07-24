@@ -1,9 +1,9 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "3.0.25",
+  "version": "3.0.26",
   "description": "把 @kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.js",
-  "module": "dist/index.modern.js",
+  "module": "dist/index.modern.mjs",
   "source": "src/index.js",
   "scripts": {
     "init": "npm install --legacy-peer-deps && cd example && npm install --legacy-peer-deps",
