@@ -1,6 +1,5 @@
 import {preset as presetRules} from '@kne/react-form';
-import merge from 'lodash/merge';
-import get from "lodash/get";
+import {merge, get} from 'lodash';
 import {preset as formHelperPreset} from '@kne/react-form-helper';
 
 export const globalParams = {

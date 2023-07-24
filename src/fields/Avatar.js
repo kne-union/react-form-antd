@@ -8,8 +8,7 @@ import {
 } from "@ant-design/icons";
 import AvatarEditor from "react-avatar-editor";
 import {hooks} from "@kne/react-form-helper";
-import merge from 'lodash/merge';
-import omit from 'lodash/omit';
+import {merge, omit} from 'lodash';
 import Rotate from '../assets/rotate';
 import Full from '../assets/full';
 import getPopupContainer from '../common/getPopupContainer';
