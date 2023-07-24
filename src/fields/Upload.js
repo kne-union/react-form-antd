@@ -3,12 +3,9 @@ import {Upload, message, Button} from 'antd';
 import {
     UploadOutlined
 } from '@ant-design/icons';
-import get from 'lodash/get';
-import groupBy from 'lodash/groupBy';
-import uniqueId from 'lodash/uniqueId';
+import {get, groupBy, uniqueId, omit} from 'lodash';
 import {hooks} from '@kne/react-form-helper';
 import {globalParams} from "../preset";
-import omit from "lodash/omit";
 
 const {useOnChange} = hooks;
 
