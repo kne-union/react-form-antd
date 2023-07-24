@@ -1,7 +1,7 @@
 import React, {useRef, useEffect} from 'react';
 import {ConfigProvider, Button, Divider} from 'antd';
 import Form, {
-    Select, Input, SubmitButton, Avatar, DatePickerToday, Upload, GroupList, Group, useFormContext
+    Select, Input, SubmitButton, DatePickerToday, Upload, GroupList, Group, useFormContext
 } from '@kne/react-form-antd';
 import SelectFetchDemo from './SelectFetchDemo';
 import zhCN from 'antd/lib/locale/zh_CN';
@@ -78,14 +78,6 @@ const App = () => {
                     </>;
                 }}
             </GroupList>
-            <Avatar
-                label="租户图标"
-                name="miniIcon"
-                editorTips="我是一段tips"
-                editor={{open: true, width: 200, height: 200}}
-                size={500}
-                imageType={['image/jpeg', 'image/png', 'image/gif']}
-            />
             <Upload label="文件" name="file"
                     value={['http://app.knxgalaxy.com/api/io/file/data/clickpaas/files/G3823/30614080ab084c6eb7262fbfd8676090.jpg?attname=90b8748f5f56784caa6dfc66fa5fcf18.jpg']}/>
             <DatePickerToday label="时间" name="time" selectToday={true} onChange={onChange}/>

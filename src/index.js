@@ -17,6 +17,7 @@ import Cascader from './fields/Cascader';
 
 export * from './Form';
 export default Form;
+export const FormAntd = Form;
 export {default as preset} from './preset';
 export {default as ResetButton} from './ResetButton';
 export {default as SubmitButton} from './SubmitButton';
