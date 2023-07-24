@@ -6,6 +6,7 @@ import {
 import {get, groupBy, uniqueId, omit} from 'lodash';
 import {hooks} from '@kne/react-form-helper';
 import {globalParams} from "../preset";
+import AvatarInput from "./Avatar.js";
 
 const {useOnChange} = hooks;
 
@@ -167,6 +168,6 @@ UploadInput.defaultProps = {
 };
 
 
-UploadInput.field = _Upload;
+UploadInput.field = AvatarInput.Field = _Upload;
 
 export default UploadInput;
