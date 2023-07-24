@@ -60,7 +60,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@babel/runtime": "^7.10.3",
-    "@kne/react-form": "^2.1.10",
+    "@kne/react-form": "^2.1.11",
     "@kne/react-form-helper": "^1.0.35",
     "@kne/use-control-value": "^0.1.1",
     "@kne/use-event": "^0.1.2",
