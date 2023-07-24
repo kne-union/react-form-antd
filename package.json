@@ -1,9 +1,10 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "3.0.26",
+  "version": "3.0.27",
+  "type": "module",
   "description": "把 @kne/react-form 表单校验逻辑应用到antd",
-  "main": "dist/index.js",
-  "module": "dist/index.modern.mjs",
+  "main": "dist/index.cjs",
+  "module": "dist/index.modern.js",
   "source": "src/index.js",
   "scripts": {
     "init": "npm install --legacy-peer-deps && cd example && npm install --legacy-peer-deps",
@@ -60,8 +61,8 @@
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@babel/runtime": "^7.10.3",
-    "@kne/react-form": "^2.1.11",
-    "@kne/react-form-helper": "^1.0.35",
+    "@kne/react-form": "^2.1.12",
+    "@kne/react-form-helper": "^1.0.36",
     "@kne/use-control-value": "^0.1.1",
     "@kne/use-event": "^0.1.2",
     "@kne/with-layer": "^0.1.5",
