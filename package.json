@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "3.0.29",
+  "version": "3.0.30",
   "type": "module",
   "description": "把 @kne/react-form 表单校验逻辑应用到antd",
   "main": "dist/index.cjs",
