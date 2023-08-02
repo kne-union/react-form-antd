@@ -7,7 +7,7 @@ import {hooks} from '@kne/react-form-helper';
 
 const {useOnChange} = hooks;
 
-const PickerToday = ({soFarText, ...props}) => {
+const PickerToday = ({soFarText, startProps, endProps, ...props}) => {
     const [data, onChange] = useControlValue(props);
     const ref_d = useRef();
     const newData = useMemo(() => {
@@ -52,7 +52,7 @@ const PickerToday = ({soFarText, ...props}) => {
     }
     return (
         <div style={{display: 'flex'}}>
-            <DatePicker {...{showToday: false, ...props, placeholder: newData.placeholder[0], value: newData.start}}
+            <DatePicker {...{showToday: false, ...props, placeholder: newData.placeholder[0], ...startProps, value: newData.start}}
                         onChange={startChange}/>
             <div className={'svg_box'}>
                 <svg viewBox="0 0 1024 1024" focusable="false" data-icon="swap-right" width="1em" height="1em"
@@ -67,6 +67,7 @@ const PickerToday = ({soFarText, ...props}) => {
                     showToday: false,
                     ...props,
                     placeholder: newData.showZj ? '' : newData.placeholder[1],
+                    ...endProps,
                     value: newData.end
                 }} ref={ref_d}
                             onChange={endChange} renderExtraFooter={foot}/>
