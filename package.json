@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "3.0.32",
+  "version": "3.0.33",
   "syntax": {
     "esmodules": true
   },
@@ -63,7 +63,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@babel/runtime": "^7.10.3",
-    "@kne/react-form": "^2.1.14",
+    "@kne/react-form": "^2.1.16",
     "@kne/react-form-helper": "^1.0.36",
     "@kne/use-control-value": "^0.1.1",
     "@kne/use-event": "^0.1.3",
