@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "3.0.34",
+  "version": "3.0.35",
   "syntax": {
     "esmodules": true
   },
@@ -70,7 +70,8 @@
     "@kne/with-layer": "^0.1.5",
     "classnames": "^2.2.6",
     "dayjs": "^1.11.7",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "react-avatar-editor": "^13.0.0"
   },
   "devDependencies": {
     "@kne/microbundle": "^0.15.4",
