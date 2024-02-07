@@ -1,10 +1,9 @@
 {
   "files": {
-    "main.css": "/react-form-antd/static/css/main.70916a01.css",
-    "main.js": "/react-form-antd/static/js/main.a9f4c44d.js",
-    "react_form_antd_3_1_1.js": "/react-form-antd/remoteEntry.js",
-    "static/css/848.04a9321f.chunk.css": "/react-form-antd/static/css/848.04a9321f.chunk.css",
-    "static/js/848.554a6eaf.chunk.js": "/react-form-antd/static/js/848.554a6eaf.chunk.js",
+    "main.js": "/react-form-antd/static/js/main.ae785c05.js",
+    "react_form_antd_3_1_2.js": "/react-form-antd/remoteEntry.js",
+    "static/css/848.8ed6a760.chunk.css": "/react-form-antd/static/css/848.8ed6a760.chunk.css",
+    "static/js/848.2d0edf5a.chunk.js": "/react-form-antd/static/js/848.2d0edf5a.chunk.js",
     "static/js/792.6060de20.chunk.js": "/react-form-antd/static/js/792.6060de20.chunk.js",
     "static/js/947.1173f3c5.chunk.js": "/react-form-antd/static/js/947.1173f3c5.chunk.js",
     "static/js/876.62caea4a.chunk.js": "/react-form-antd/static/js/876.62caea4a.chunk.js",
@@ -14,7 +13,8 @@
     "static/js/868.f2f4e8c0.chunk.js": "/react-form-antd/static/js/868.f2f4e8c0.chunk.js",
     "static/js/732.a0c2f9cc.chunk.js": "/react-form-antd/static/js/732.a0c2f9cc.chunk.js",
     "static/js/136.6109d6c4.chunk.js": "/react-form-antd/static/js/136.6109d6c4.chunk.js",
-    "static/js/192.4ee6a557.chunk.js": "/react-form-antd/static/js/192.4ee6a557.chunk.js",
+    "static/css/624.7ad9085a.chunk.css": "/react-form-antd/static/css/624.7ad9085a.chunk.css",
+    "static/js/624.c063c05d.chunk.js": "/react-form-antd/static/js/624.c063c05d.chunk.js",
     "static/js/268.ff661c72.chunk.js": "/react-form-antd/static/js/268.ff661c72.chunk.js",
     "static/js/80.606025e3.chunk.js": "/react-form-antd/static/js/80.606025e3.chunk.js",
     "static/js/636.585a9717.chunk.js": "/react-form-antd/static/js/636.585a9717.chunk.js",
@@ -32,11 +32,10 @@
     "static/js/112.19b36b8c.chunk.js": "/react-form-antd/static/js/112.19b36b8c.chunk.js",
     "static/js/884.0d73a1f3.chunk.js": "/react-form-antd/static/js/884.0d73a1f3.chunk.js",
     "index.html": "/react-form-antd/index.html",
-    "main.70916a01.css.map": "/react-form-antd/static/css/main.70916a01.css.map",
-    "main.a9f4c44d.js.map": "/react-form-antd/static/js/main.a9f4c44d.js.map",
+    "main.ae785c05.js.map": "/react-form-antd/static/js/main.ae785c05.js.map",
     "remoteEntry.js.map": "/react-form-antd/remoteEntry.js.map",
-    "848.04a9321f.chunk.css.map": "/react-form-antd/static/css/848.04a9321f.chunk.css.map",
-    "848.554a6eaf.chunk.js.map": "/react-form-antd/static/js/848.554a6eaf.chunk.js.map",
+    "848.8ed6a760.chunk.css.map": "/react-form-antd/static/css/848.8ed6a760.chunk.css.map",
+    "848.2d0edf5a.chunk.js.map": "/react-form-antd/static/js/848.2d0edf5a.chunk.js.map",
     "792.6060de20.chunk.js.map": "/react-form-antd/static/js/792.6060de20.chunk.js.map",
     "947.1173f3c5.chunk.js.map": "/react-form-antd/static/js/947.1173f3c5.chunk.js.map",
     "876.62caea4a.chunk.js.map": "/react-form-antd/static/js/876.62caea4a.chunk.js.map",
@@ -46,7 +45,8 @@
     "868.f2f4e8c0.chunk.js.map": "/react-form-antd/static/js/868.f2f4e8c0.chunk.js.map",
     "732.a0c2f9cc.chunk.js.map": "/react-form-antd/static/js/732.a0c2f9cc.chunk.js.map",
     "136.6109d6c4.chunk.js.map": "/react-form-antd/static/js/136.6109d6c4.chunk.js.map",
-    "192.4ee6a557.chunk.js.map": "/react-form-antd/static/js/192.4ee6a557.chunk.js.map",
+    "624.7ad9085a.chunk.css.map": "/react-form-antd/static/css/624.7ad9085a.chunk.css.map",
+    "624.c063c05d.chunk.js.map": "/react-form-antd/static/js/624.c063c05d.chunk.js.map",
     "268.ff661c72.chunk.js.map": "/react-form-antd/static/js/268.ff661c72.chunk.js.map",
     "80.606025e3.chunk.js.map": "/react-form-antd/static/js/80.606025e3.chunk.js.map",
     "636.585a9717.chunk.js.map": "/react-form-antd/static/js/636.585a9717.chunk.js.map",
@@ -65,7 +65,6 @@
     "884.0d73a1f3.chunk.js.map": "/react-form-antd/static/js/884.0d73a1f3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.70916a01.css",
-    "static/js/main.a9f4c44d.js"
+    "static/js/main.ae785c05.js"
   ]
 }
