@@ -11,6 +11,9 @@
           "packageName": "@kne/react-form-antd"
         },
         {
+          "packageName": "@kne/react-form-antd/dist/index.css"
+        },
+        {
           "name": "antd",
           "packageName": "antd"
         }
