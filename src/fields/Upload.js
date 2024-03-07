@@ -168,6 +168,6 @@ UploadInput.defaultProps = {
 };
 
 
-UploadInput.field = AvatarInput.Field = _Upload;
+UploadInput.Field = AvatarInput.Field = _Upload;
 
 export default UploadInput;
