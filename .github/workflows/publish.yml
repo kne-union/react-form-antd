@@ -10,5 +10,5 @@ jobs:
     uses: kne-union/actions/.github/workflows/publish-libs-workflow.yml@master
     secrets: inherit
     with:
-      package_name: @kne/react-form-antd
-      example_package_name: @kne-components/react-form-antd
+      package_name: '@kne/react-form-antd'
+      example_package_name: '@kne-components/react-form-antd'
