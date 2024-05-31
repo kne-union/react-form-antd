@@ -1,5 +1,5 @@
 const {Button} = antd;
-const {Form, Select, Input, Group, GroupList, SubmitButton, DatePickerToday} = reactFormAntd;
+const {Form, Select, Input, Group, GroupList, SubmitButton, DatePickerToday, Rate, Slider} = reactFormAntd;
 const {useRef} = React;
 
 const Example = () => {
@@ -8,6 +8,8 @@ const Example = () => {
         <Select name="select" label="哈哈哈" options={[{label: 'sss', value: 1}]}/>
         <Input name="name" label="名称" realtime rule="REQ LEN-0-4"/>
         <Input.Password name="password" label="密码"/>
+        <Rate name="rate" label="评分"/>
+        <Slider name="slider" label="滑动条"/>
         <br/>
         <Group name="target">
             <Input name="name" label="名称"/>

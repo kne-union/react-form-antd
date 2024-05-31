@@ -30,11 +30,11 @@ npm i --save @kne/react-form-antd
 
 - 这里填写示例标题
 - 这里填写示例说明
-- reactFormAntd(@kne/react-form-antd),(@kne/react-form-antd/dist/index.css),antd(antd)
+- reactFormAntd(@kne/current-lib),(@kne/current-lib/dist/index.css),antd(antd)
 
 ```jsx
 const {Button} = antd;
-const {Form, Select, Input, Group, GroupList, SubmitButton, DatePickerToday} = reactFormAntd;
+const {Form, Select, Input, Group, GroupList, SubmitButton, DatePickerToday, Rate, Slider} = reactFormAntd;
 const {useRef} = React;
 
 const Example = () => {
@@ -43,6 +43,8 @@ const Example = () => {
         <Select name="select" label="哈哈哈" options={[{label: 'sss', value: 1}]}/>
         <Input name="name" label="名称" realtime rule="REQ LEN-0-4"/>
         <Input.Password name="password" label="密码"/>
+        <Rate name="rate" label="评分"/>
+        <Slider name="slider" label="滑动条"/>
         <br/>
         <Group name="target">
             <Input name="name" label="名称"/>
