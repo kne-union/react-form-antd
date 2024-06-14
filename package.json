@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "3.1.4",
+  "version": "3.1.5",
   "syntax": {
     "esmodules": true
   },
