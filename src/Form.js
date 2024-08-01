@@ -1,5 +1,4 @@
 import React, {forwardRef} from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import ReactForm from '@kne/react-form';
 import {widget} from '@kne/react-form-helper';
@@ -13,15 +12,9 @@ const {ScrollToError, EnterSubmit, FormStore, MaxLabelProvider, SizeProvider} = 
 
 const Form = forwardRef((originProps, ref) => {
     const {
-        className,
-        cache,
-        enterSubmit,
-        scrollToError,
-        scrollProps,
-        type: originType,
-        size: originSize,
-        children,
-        ...props
+        className, cache, enterSubmit = false, scrollToError = true, scrollProps = {
+            block: 'center'
+        }, type: originType, size: originSize, children, ...props
     } = originProps;
     const baseClass = 'react-form';
     let computedClass = baseClass;
@@ -56,13 +49,7 @@ const Form = forwardRef((originProps, ref) => {
     </form>);
 });
 
-Form.defaultProps = {
-    scrollToError: true, enterSubmit: false, scrollProps: {
-        block: 'center'
-    }
-};
-
-Form.propTypes = {
+/*Form.propTypes = {
     className: PropTypes.string,
     type: PropTypes.oneOf(['inline', 'default', 'inner']),
     size: PropTypes.oneOf(['small', 'middle', 'large']),
@@ -73,6 +60,6 @@ Form.propTypes = {
         behavior: PropTypes.oneOf(['auto', 'smooth']),
         inline: PropTypes.oneOf(['start', 'center', 'end', 'nearest'])
     })
-};
+};*/
 
 export default Form;
