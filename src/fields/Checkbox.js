@@ -7,6 +7,9 @@ const {withChecked} = hoc;
 const WithCheckbox = withChecked(_Checkbox);
 
 const Checkbox = (props) => {
+    props = Object.assign({}, {
+        fieldName: 'checkbox'
+    }, props);
     const checkedProps = useCheckedToValue(Object.assign({}, props, {
         onChange: (e) => {
             e.target.type = 'checkbox';
@@ -17,8 +20,5 @@ const Checkbox = (props) => {
     return render(WithCheckbox);
 };
 
-Checkbox.defaultProps = {
-    fieldName: 'checkbox'
-};
-
+Checkbox.Field = _Checkbox;
 export default Checkbox;

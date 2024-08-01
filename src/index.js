@@ -1,6 +1,4 @@
 import Form from './Form';
-
-import Upload from './fields/Upload';
 import TreeSelect from './fields/TreeSelect';
 import TimePicker from './fields/TimePicker';
 import TextArea from './fields/TextArea';
@@ -14,7 +12,6 @@ import DatePicker from './fields/DatePicker';
 import CheckboxGroup from './fields/CheckboxGroup';
 import Checkbox from './fields/Checkbox';
 import Cascader from './fields/Cascader';
-import Avatar from './fields/Avatar';
 import Rate from './fields/Rate';
 import Slider from './fields/Slider';
 
@@ -26,7 +23,6 @@ export {default as ResetButton} from './ResetButton';
 export {default as SubmitButton} from './SubmitButton';
 export {default as CancelButton} from './CancelButton';
 export {
-    Upload,
     TreeSelect,
     TimePicker,
     TextArea,
@@ -40,13 +36,11 @@ export {
     CheckboxGroup,
     Checkbox,
     Cascader,
-    Avatar,
     Rate,
     Slider
 };
 
 export const fields = {
-    Upload,
     TreeSelect,
     TimePicker,
     TextArea,
@@ -60,7 +54,6 @@ export const fields = {
     CheckboxGroup,
     Checkbox,
     Cascader,
-    Avatar,
     Rate,
     Slider
 };

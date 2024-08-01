@@ -4,12 +4,13 @@ import {hooks} from '@kne/react-form-helper';
 const {useOnChange} = hooks;
 
 const Slider = (props) => {
+    props = Object.assign({}, {
+        fieldName: 'slider'
+    }, props);
     const render = useOnChange(Object.assign({}, props));
     return render(_Slider);
 };
 
-Slider.defaultProps = {
-    fieldName: 'slider'
-};
+Slider.Field = _Slider;
 
 export default Slider;
