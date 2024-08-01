@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "3.1.5",
+  "version": "4.0.0-alpha.0",
   "syntax": {
     "esmodules": true
   },
@@ -9,21 +9,22 @@
   "module": "dist/index.modern.js",
   "source": "src/index.js",
   "scripts": {
+    "init": "husky && npm run init-example",
+    "start": "run-p start:lib start:md start:example",
+    "build": "run-s build:lib build:md build:example",
     "init-example": "modules-dev-libs-init",
-    "create-fields": "node ./scripts/createIndex.mjs",
-    "start": "run-p start:lib start:example",
-    "build": "run-s create-fields build:lib build:example",
+    "build:md": "npx @kne/md-doc",
+    "start:md": "npx @kne/md-doc --watch",
     "build:lib": "microbundle --no-compress --format modern,cjs --jsx React.createElement --jsxFragment React.Fragment",
     "start:lib": "microbundle watch --no-compress --format modern,cjs --jsx React.createElement --jsxFragment React.Fragment",
-    "test": "run-s test:unit test:lint test:build",
+    "build:example": "cd example && npm run build",
+    "start:example": "cd example && npm run start",
     "test:build": "run-s build",
     "test:lint": "eslint .",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
-    "build:example": "cd example && npm run build",
-    "start:example": "cd example && npm run start",
-    "deploy": "gh-pages -d example/build",
-    "prettier": "prettier --config .prettierrc --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
+    "prettier": "prettier --config .prettierrc --write '{src/**/*,index,prompts}.{js,jsx,ts,tsx,json,css,scss}'",
+    "lint-staged": "npx lint-staged"
   },
   "repository": {
     "type": "git",
@@ -55,40 +56,25 @@
   },
   "homepage": "https://github.com/kne-union/react-form-antd#readme",
   "peerDependencies": {
-    "@kne/react-fetch": "1.x",
     "antd": ">=5.x",
-    "prop-types": ">=15.x",
-    "react": ">=16.x"
+    "react": ">=18.x"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.2.1",
-    "@babel/runtime": "^7.10.3",
-    "@kne/react-form": "^2.1.16",
-    "@kne/react-form-helper": "^1.0.36",
+    "@kne/react-form": "3.1.0-alpha.5",
+    "@kne/react-form-helper": "3.0.0-alpha.0",
     "@kne/use-control-value": "^0.1.1",
-    "@kne/use-event": "^0.1.3",
-    "@kne/with-layer": "^0.1.5",
     "classnames": "^2.2.6",
     "dayjs": "^1.11.7",
-    "lodash": "^4.17.15",
-    "react-avatar-editor": "^13.0.0"
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0",
-    "@kne/microbundle": "^0.15.4",
-    "@kne/modules-dev": "^2.0.3",
-    "@kne/react-fetch": "^0.1.12",
-    "antd": "^5.0.2",
-    "axios": "^0.21.4",
+    "@kne/microbundle": "^0.15.5",
+    "@kne/modules-dev": "^2.0.19",
+    "@kne/react-form": "^3.1.0-alpha.4",
     "cross-env": "^7.0.3",
-    "fs-extra": "^9.0.1",
-    "gh-pages": "^3.2.3",
-    "glob": "^10.3.3",
-    "husky": "^7.0.2",
-    "sass": "1.75.0",
+    "husky": "^9.0.11",
     "npm-run-all": "^4.1.5",
-    "pify": "^5.0.0",
-    "prettier": "^2.4.1",
+    "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }

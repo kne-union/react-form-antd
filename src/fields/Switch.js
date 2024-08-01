@@ -6,13 +6,14 @@ const {withChecked} = hoc;
 const WithSwitch = withChecked(_Switch);
 
 const Switch = (props) => {
+    props = Object.assign({}, {
+        fieldName: 'switch'
+    }, props);
     const checkedProps = useCheckedToValue(props);
     const render = useOnChange(checkedProps);
     return render(WithSwitch);
 };
 
-Switch.defaultProps = {
-    fieldName: 'switch'
-};
+Switch.Field = _Switch;
 
 export default Switch;

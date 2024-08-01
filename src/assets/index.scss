@@ -217,22 +217,6 @@
   }
 }
 
-.react-form-avatar {
-  .preview {
-    width: 85px;
-    height: 85px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    img {
-      max-width: 100%;
-      max-height: 100%;
-    }
-  }
-}
-
 .data_range_picker {
   color: rgba(0, 0, 0, 0.85);
   position: relative;
@@ -257,32 +241,4 @@
       color: transparent;
     }
   }
-}
-
-.svg_box {
-  display: flex;
-  align-items: center;
-  color: rgba(0, 0, 0, 0.5);
-  margin: 0 4px;
-
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-.react-form-avatar-btn {
-  cursor: pointer;
-  padding: 5px;
-  box-sizing: content-box;
-  border-radius: 2px;
-  &:hover {
-    background: #F8F8F8;
-  }
-}
-
-.react-form-avatar-tips {
-  margin-bottom: 14px;
-  color: #999;
-  font-size: 12px;
 }
