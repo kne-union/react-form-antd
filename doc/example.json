@@ -8,10 +8,10 @@
       "scope": [
         {
           "name": "reactFormAntd",
-          "packageName": "@kne/current-lib"
+          "packageName": "@kne/current-lib_react-form-antd"
         },
         {
-          "packageName": "@kne/current-lib/dist/index.css"
+          "packageName": "@kne/current-lib_react-form-antd/dist/index.css"
         },
         {
           "name": "antd",

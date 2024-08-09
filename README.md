@@ -30,7 +30,7 @@ npm i --save @kne/react-form-antd
 
 - 这里填写示例标题
 - 这里填写示例说明
-- reactFormAntd(@kne/current-lib),(@kne/current-lib/dist/index.css),antd(antd)
+- reactFormAntd(@kne/current-lib_react-form-antd),(@kne/current-lib_react-form-antd/dist/index.css),antd(antd)
 
 ```jsx
 const {Button} = antd;
