@@ -1,7 +1,7 @@
 name: Publish Npm Package
 on:
   pull_request:
-    branches: [master]
+    branches: [ 'master','3.0' ]
     types:
       - closed
 jobs:
