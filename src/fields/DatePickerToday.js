@@ -8,7 +8,7 @@ import withLocale, {useIntl} from '../withLocale';
 
 const {useOnChange} = hooks;
 
-const PickerTodayInner = ({soFarText, ...props}) => {
+const PickerTodayInner = ({soFarText, soFarValue = 'soFar', ...props}) => {
     const {formatMessage} = useIntl();
     const [data, onChange] = useControlValue(props);
     const [openStart, setOpenStart] = useState(false);
@@ -30,8 +30,8 @@ const PickerTodayInner = ({soFarText, ...props}) => {
     // 判断是否为"至今"
     const isSoFar = useMemo(() => {
         const [, end] = data || [];
-        return end === 'soFar';
-    }, [data]);
+        return end === soFarValue;
+    }, [data, soFarValue]);
 
     // 解析数据
     const parsedValue = useMemo(() => {
@@ -103,11 +103,11 @@ const PickerTodayInner = ({soFarText, ...props}) => {
     // 点击"至今"按钮
     const handleSoFarClick = useCallback(() => {
         if (!tempStart) return;
-        onChange([tempStart.toISOString(), 'soFar']);
+        onChange([tempStart.toISOString(), soFarValue]);
         setOpenEnd(false);
         setTempStart(null);
         setTempEnd(null);
-    }, [tempStart, onChange]);
+    }, [tempStart, onChange, soFarValue]);
 
     // 处理开始时间弹窗关闭（未完成选择）
     const handleStartOpenChange = useCallback((open) => {

@@ -1,40 +1,59 @@
-const {Button} = antd;
-const {default: Form, Select, Input, Group, GroupList, SubmitButton, DatePickerToday, Rate, Slider} = reactFormAntd;
-const {useRef} = React;
+const {default: Form, Input, InputNumber, Select, TextArea, Switch, Checkbox, CheckboxGroup, RadioGroup, DatePicker, TimePicker, Rate, Slider, SubmitButton} = _ReactFormAntd;
+const {Flex, Space, Divider} = antd;
+const {useState} = React;
 
-const Example = () => {
-    const addButton = useRef();
-    return <Form>
-        <Select name="select" label="哈哈哈" options={[{label: 'sss', value: 1}]}/>
-        <Input name="name" label="名称" realtime rule="REQ LEN-0-4"/>
-        <Input.Password name="password" label="密码"/>
-        <Rate name="rate" label="评分"/>
-        <Slider name="slider" label="滑动条"/>
-        <br/>
-        <Input name="target[0].name" label="名称"/>
-        <Input name="target[0].des" label="描述"/>
-        <Input name="target[1].name" label="名称"/>
-        <Input name="target[1].des" label="描述"/>
-        <br/>
-        <div>
-            <Button onClick={() => {
-                addButton.current.onAdd();
-            }}>添加</Button>
-        </div>
-        <GroupList name="list" ref={addButton}>
-            {({onRemove}) => {
-                return <div>
-                    <Button onClick={onRemove}>删除</Button>
-                    <Input name="name" label="名称"/>
-                    <Input name="des" label="描述"/>
-                </div>;
-            }}
-        </GroupList>
-        <DatePickerToday label="时间" name="time" selectToday={true} onChange={(value) => {
-            console.log('value', value);
-        }}/>
-        <SubmitButton>提交</SubmitButton>
-    </Form>
+const BaseExample = () => {
+    const [formData, setFormData] = useState(null);
+    return (
+        <Flex vertical gap={24}>
+            <Form
+                onSubmit={(data) => {
+                    console.log('表单提交数据:', data);
+                    setFormData(data);
+                }}
+            >
+                <Flex vertical gap={16}>
+                    <Input name="username" label="用户名" rule="REQ" placeholder="请输入用户名" />
+                    <Input.Password name="password" label="密码" rule="REQ LEN-6-20" placeholder="请输入6-20位密码" />
+                    <InputNumber name="age" label="年龄" rule="REQ NUM" min={0} max={150} placeholder="请输入年龄" />
+                    <Select
+                        name="gender"
+                        label="性别"
+                        rule="REQ"
+                        placeholder="请选择性别"
+                        options={[
+                            {label: '男', value: 'male'},
+                            {label: '女', value: 'female'}
+                        ]}
+                    />
+                    <TextArea name="description" label="个人简介" placeholder="请输入个人简介" rows={3} />
+                    <RadioGroup name="status" label="状态" rule="REQ" options={[{label: '启用', value: 1}, {label: '禁用', value: 0}]} />
+                    <CheckboxGroup
+                        name="hobbies"
+                        label="兴趣爱好"
+                        options={[
+                            {label: '阅读', value: 'reading'},
+                            {label: '运动', value: 'sports'},
+                            {label: '音乐', value: 'music'},
+                            {label: '旅行', value: 'travel'}
+                        ]}
+                    />
+                    <Switch name="subscribe" label="订阅通知" />
+                    <Rate name="rating" label="评分" allowHalf />
+                    <Slider name="progress" label="进度" />
+                    <DatePicker name="birthday" label="出生日期" rule="REQ" />
+                    <TimePicker name="appointmentTime" label="预约时间" />
+                    <SubmitButton>提交表单</SubmitButton>
+                </Flex>
+            </Form>
+            {formData && (
+                <>
+                    <Divider>提交数据</Divider>
+                    <pre style={{background: '#f5f5f5', padding: 12, borderRadius: 4}}>{JSON.stringify(formData, null, 2)}</pre>
+                </>
+            )}
+        </Flex>
+    );
 };
 
-render(<Example/>);
+render(<BaseExample />);
