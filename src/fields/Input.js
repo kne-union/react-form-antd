@@ -1,26 +1,32 @@
 import {Input} from 'antd';
 import {hooks} from '@kne/react-form-helper';
+import withLocale, {useIntl} from '../withLocale';
 
 const {useDecorator} = hooks;
 
-const InputField = (props) => {
-    props = Object.assign({}, {
+const InputFieldInner = (props) => {
+    const {formatMessage} = useIntl();
+    const mergedProps = Object.assign({}, {
         fieldName: 'input', autoComplete: 'off'
     }, props);
-    const render = useDecorator(Object.assign({placeholder: `请输入${props.label}`}, props));
+    const render = useDecorator(Object.assign({placeholder: formatMessage({id: 'PleaseInput'}, {label: mergedProps.label})}, mergedProps));
     return render(Input);
 };
 
-InputField.Field = Input;
+InputFieldInner.Field = Input;
 
-InputField.Password = (props) => {
-    props = Object.assign({}, {
+const PasswordInner = (props) => {
+    const {formatMessage} = useIntl();
+    const mergedProps = Object.assign({}, {
         fieldName: 'password', autoComplete: 'off'
     }, props);
-    const render = useDecorator(Object.assign({placeholder: `请输入${props.label}`}, props));
+    const render = useDecorator(Object.assign({placeholder: formatMessage({id: 'PleaseInput'}, {label: mergedProps.label})}, mergedProps));
     return render(Input.Password);
 };
 
-InputField.Password.Field = Input.Password;
+PasswordInner.Field = Input.Password;
+
+const InputField = withLocale(InputFieldInner);
+InputField.Password = withLocale(PasswordInner);
 
 export default InputField;

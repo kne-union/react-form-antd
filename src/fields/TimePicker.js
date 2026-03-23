@@ -1,30 +1,34 @@
 import {TimePicker} from 'antd';
 import {hooks} from '@kne/react-form-helper';
+import withLocale, {useIntl} from '../withLocale';
 
 const {useOnChange} = hooks;
 
 const {RangePicker} = TimePicker;
 
-const _TimePicker = (props) => {
-    props = Object.assign({}, {
+const TimePickerInner = (props) => {
+    const {formatMessage} = useIntl();
+    const mergedProps = Object.assign({}, {
         fieldName: 'timePicker'
     }, props);
-    const render = useOnChange(Object.assign({placeholder: `请选择${props.label || ''}`}, props));
+    const render = useOnChange(Object.assign({placeholder: formatMessage({id: 'PleaseSelect'}, {label: mergedProps.label || ''})}, mergedProps));
     return render(TimePicker);
 };
 
-_TimePicker.Field = TimePicker;
+TimePickerInner.Field = TimePicker;
 
-const _RangePicker = (props) => {
-    props = Object.assign({}, {
+const RangePickerInner = (props) => {
+    const {formatMessage} = useIntl();
+    const mergedProps = Object.assign({}, {
         fieldName: 'rangeTimePicker'
     }, props);
-    const render = useOnChange(Object.assign({placeholder: `请选择${props.label || ''}`}, props));
+    const render = useOnChange(Object.assign({placeholder: formatMessage({id: 'PleaseSelect'}, {label: mergedProps.label || ''})}, mergedProps));
     return render(RangePicker);
 };
 
-_RangePicker.Field = RangePicker;
+RangePickerInner.Field = RangePicker;
 
-_TimePicker.RangePicker = _RangePicker;
+const _TimePicker = withLocale(TimePickerInner);
+_TimePicker.RangePicker = withLocale(RangePickerInner);
 
 export default _TimePicker;

@@ -1,18 +1,14 @@
-
 # react-form-antd
-
 
 ### 描述
 
 把 @kne/react-form 表单校验逻辑应用到antd
-
 
 ### 安装
 
 ```shell
 npm i --save @kne/react-form-antd
 ```
-
 
 ### 概述
 
@@ -39,7 +35,7 @@ const {useRef} = React;
 
 const Example = () => {
     const addButton = useRef();
-    return <Form debug>
+    return <Form>
         <Select name="select" label="哈哈哈" options={[{label: 'sss', value: 1}]}/>
         <Input name="name" label="名称" realtime rule="REQ LEN-0-4"/>
         <Input.Password name="password" label="密码"/>
@@ -65,7 +61,9 @@ const Example = () => {
                 </div>;
             }}
         </GroupList>
-        <DatePickerToday label="时间" name="time" selectToday={true}/>
+        <DatePickerToday label="时间" name="time" selectToday={true} onChange={(value) => {
+            console.log('value', value);
+        }}/>
         <SubmitButton>提交</SubmitButton>
     </Form>
 };
@@ -74,7 +72,5 @@ render(<Example/>);
 
 ```
 
-
 ### API
-
 

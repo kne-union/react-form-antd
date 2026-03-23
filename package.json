@@ -60,8 +60,9 @@
     "react": ">=18.x"
   },
   "dependencies": {
-    "@kne/react-form": "^3.1.2",
+    "@kne/react-form": "^3.1.6",
     "@kne/react-form-helper": "^3.0.2",
+    "@kne/react-intl": "^0.1.12",
     "@kne/use-control-value": "^0.1.1",
     "classnames": "^2.2.6",
     "dayjs": "^1.11.7",
@@ -70,7 +71,6 @@
   "devDependencies": {
     "@kne/microbundle": "^0.15.5",
     "@kne/modules-dev": "^2.1.2",
-    "@kne/react-form": "^3.1.0",
     "cross-env": "^7.0.3",
     "husky": "^9.0.11",
     "npm-run-all": "^4.1.5",
