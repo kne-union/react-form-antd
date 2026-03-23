@@ -242,3 +242,125 @@
     }
   }
 }
+
+.svg_box {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.react-form__field-input {
+  .data_range_picker {
+    flex: 1;
+  }
+}
+
+// 垂直布局下的特殊处理
+.react-form--inner {
+  .svg_box {
+    padding: 0 4px;
+  }
+  
+  .ant-picker {
+    flex: 1;
+    width: 100%;
+  }
+  
+  .date-picker-today-container {
+    width: 100%;
+  }
+}
+
+// DatePickerToday 样式
+.date-picker-today-container {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+
+  .date-picker-today-inputs {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    padding: 0 11px;
+    background: #fff;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      border-color: #4096ff;
+    }
+
+    &:focus-within {
+      border-color: #4096ff;
+      box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+    }
+
+    .date-picker-today-start,
+    .date-picker-today-end {
+      display: flex;
+      align-items: center;
+
+      .ant-input {
+        border: none;
+        padding: 0;
+        height: 30px;
+        cursor: pointer;
+        width: 110px;
+        outline: none;
+        background: transparent;
+        color: rgba(0, 0, 0, 0.85);
+        font-size: 14px;
+
+        &::placeholder {
+          color: rgba(0, 0, 0, 0.25);
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
+
+      .ant-input.so-far-active {
+        color: rgba(0, 0, 0, 0.85);
+        font-weight: 500;
+      }
+    }
+
+    .date-picker-today-separator {
+      padding: 0 8px;
+      color: rgba(0, 0, 0, 0.25);
+      line-height: 30px;
+    }
+
+    .date-picker-today-suffix {
+      display: flex;
+      align-items: center;
+      padding-left: 4px;
+      color: rgba(0, 0, 0, 0.25);
+
+      .date-picker-today-clear {
+        color: rgba(0, 0, 0, 0.25);
+        font-size: 12px;
+        transition: color 0.2s;
+        cursor: pointer;
+
+        &:hover {
+          color: rgba(0, 0, 0, 0.45);
+        }
+      }
+    }
+  }
+
+  // 隐藏的 DatePicker 触发器
+  .ant-picker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0 !important;
+    height: 0 !important;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}

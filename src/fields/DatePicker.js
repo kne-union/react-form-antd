@@ -1,53 +1,58 @@
 import {DatePicker} from 'antd';
 import {hooks} from '@kne/react-form-helper';
+import withLocale, {useIntl} from '../withLocale';
 
 const {useOnChange} = hooks;
 
 const {MonthPicker, RangePicker, WeekPicker} = DatePicker;
 
-const _DatePicker = (props) => {
-    props = Object.assign({}, {
+const DatePickerInner = (props) => {
+    const {formatMessage} = useIntl();
+    const mergedProps = Object.assign({}, {
         fieldName: 'datePicker'
     }, props);
-    const render = useOnChange(Object.assign({placeholder: `请选择${props.label || ''}`}, props));
+    const render = useOnChange(Object.assign({placeholder: formatMessage({id: 'PleaseSelect'}, {label: mergedProps.label || ''})}, mergedProps));
     return render(DatePicker);
 };
 
-_DatePicker.Field = DatePicker;
+DatePickerInner.Field = DatePicker;
 
-const _MonthPicker = (props) => {
-    props = Object.assign({}, {
+const MonthPickerInner = (props) => {
+    const {formatMessage} = useIntl();
+    const mergedProps = Object.assign({}, {
         fieldName: 'monthDatePicker'
     }, props);
-    const render = useOnChange(Object.assign({placeholder: ['开始时间', '结束时间']}, props));
+    const render = useOnChange(Object.assign({placeholder: [formatMessage({id: 'StartTime'}), formatMessage({id: 'EndTime'})]}, mergedProps));
     return render(MonthPicker);
 };
 
-_MonthPicker.Field = MonthPicker;
+MonthPickerInner.Field = MonthPicker;
 
-const _RangePicker = (props) => {
-    props = Object.assign({}, {
+const RangePickerInner = (props) => {
+    const {formatMessage} = useIntl();
+    const mergedProps = Object.assign({}, {
         fieldName: 'rangeDatePicker'
     }, props);
-    const render = useOnChange(Object.assign({placeholder: ['开始时间', '结束时间']}, props));
+    const render = useOnChange(Object.assign({placeholder: [formatMessage({id: 'StartTime'}), formatMessage({id: 'EndTime'})]}, mergedProps));
     return render(RangePicker);
 };
 
-_RangePicker.Field = RangePicker;
+RangePickerInner.Field = RangePicker;
 
-const _WeekPicker = (props) => {
-    props = Object.assign({}, {
+const WeekPickerInner = (props) => {
+    const {formatMessage} = useIntl();
+    const mergedProps = Object.assign({}, {
         fieldName: 'weekDatePicker'
     }, props);
-    const render = useOnChange(Object.assign({placeholder: ['开始时间', '结束时间']}, props));
+    const render = useOnChange(Object.assign({placeholder: [formatMessage({id: 'StartTime'}), formatMessage({id: 'EndTime'})]}, mergedProps));
     return render(WeekPicker);
 };
 
-_WeekPicker.Field = WeekPicker;
+WeekPickerInner.Field = WeekPicker;
 
-_DatePicker.MonthPicker = _MonthPicker;
-_DatePicker.RangePicker = _RangePicker;
-_DatePicker.WeekPicker = _WeekPicker;
-
+const _DatePicker = withLocale(DatePickerInner);
+_DatePicker.MonthPicker = withLocale(MonthPickerInner);
+_DatePicker.RangePicker = withLocale(RangePickerInner);
+_DatePicker.WeekPicker = withLocale(WeekPickerInner);
 
 export default _DatePicker;
