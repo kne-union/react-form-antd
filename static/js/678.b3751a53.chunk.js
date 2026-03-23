@@ -1,0 +1,2 @@
+"use strict";(globalThis.webpackChunk_kne_components_react_form_antd=globalThis.webpackChunk_kne_components_react_form_antd||[]).push([[678],{78678(n,e,t){t.d(e,{A:()=>c});var r=t(94922);const c=function(n){let e=arguments.length>1&&void 0!==arguments[1]&&arguments[1];const t=(0,r.useRef)(n);return e||(t.current=n),(0,r.useCallback)(function(){return t.current&&t.current(...arguments)},[])}}}]);
+//# sourceMappingURL=678.b3751a53.chunk.js.map
