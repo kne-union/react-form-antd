@@ -42,6 +42,8 @@ const DatePickerExample = () => {
                     <Flex vertical gap={16}>
                         <DatePickerToday name="basicToday" label="基础日期范围" />
                         <DatePickerToday name="requiredToday" label="必选范围" rule="REQ" />
+                        <DatePickerToday name="monthPicker" label="月份选择" picker="month" />
+                        <DatePickerToday name="yearPicker" label="年份选择" picker="year" />
                         <DatePickerToday
                             name="customSoFarText"
                             label="自定义至今文本"

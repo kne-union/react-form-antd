@@ -8,7 +8,7 @@ import withLocale, {useIntl} from '../withLocale';
 
 const {useOnChange} = hooks;
 
-const PickerTodayInner = ({soFarText, soFarValue = 'soFar', ...props}) => {
+const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', ...props}) => {
     const {formatMessage} = useIntl();
     const [data, onChange] = useControlValue(props);
     const [openStart, setOpenStart] = useState(false);
@@ -189,6 +189,7 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', ...props}) => {
 
         {/* 开始时间 DatePicker */}
         <DatePicker
+            picker={picker}
             open={openStart}
             onOpenChange={handleStartOpenChange}
             value={tempStart || parsedValue.start}
@@ -202,6 +203,7 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', ...props}) => {
 
         {/* 结束时间 DatePicker */}
         <DatePicker
+            picker={picker}
             open={openEnd}
             onOpenChange={handleEndOpenChange}
             value={tempEnd || parsedValue.end}

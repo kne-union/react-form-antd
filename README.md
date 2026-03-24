@@ -556,6 +556,8 @@ const DatePickerExample = () => {
                     <Flex vertical gap={16}>
                         <DatePickerToday name="basicToday" label="基础日期范围" />
                         <DatePickerToday name="requiredToday" label="必选范围" rule="REQ" />
+                        <DatePickerToday name="monthPicker" label="月份选择" picker="month" />
+                        <DatePickerToday name="yearPicker" label="年份选择" picker="year" />
                         <DatePickerToday
                             name="customSoFarText"
                             label="自定义至今文本"
@@ -1331,14 +1333,15 @@ render(<ButtonsExample />);
 
 #### 属性
 
-| 属性         | 类型         | 默认值       | 描述                             |
-|------------|------------|-----------|--------------------------------|
-| name       | `string`   | -         | 字段名称（必填）                       |
-| label      | `string`   | -         | 字段标签                           |
-| rule       | `string`   | -         | 校验规则                           |
-| soFarText  | `string`   | `'至今'`    | "至今"按钮显示的文本                    |
-| soFarValue | `string`   | `'soFar'` | 选择"至今"时的结束日期值，可通过此值判断是否选择了至今   |
-| onChange   | `function` | -         | 值变化回调 `([start, end]) => void` |
+| 属性         | 类型                                       | 默认值       | 描述                             |
+|------------|------------------------------------------|-----------|--------------------------------|
+| name       | `string`                                 | -         | 字段名称（必填）                       |
+| label      | `string`                                 | -         | 字段标签                           |
+| rule       | `string`                                 | -         | 校验规则                           |
+| picker     | `'date' \| 'week' \| 'month' \| 'year'` | `'date'`  | 选择器类型                          |
+| soFarText  | `string`                                 | `'至今'`    | "至今"按钮显示的文本                    |
+| soFarValue | `string`                                 | `'soFar'` | 选择"至今"时的结束日期值，可通过此值判断是否选择了至今   |
+| onChange   | `function`                               | -         | 值变化回调 `([start, end]) => void` |
 
 #### 返回值说明
 
