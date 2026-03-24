@@ -21,6 +21,17 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', ...
 
     const soFarLabel = soFarText || formatMessage({id: 'SoFar'});
 
+    // 根据 picker 类型获取格式化字符串
+    const formatPattern = useMemo(() => {
+        const patterns = {
+            date: 'YYYY-MM-DD',
+            week: 'YYYY-wo',
+            month: 'YYYY-MM',
+            year: 'YYYY'
+        };
+        return patterns[picker] || 'YYYY-MM-DD';
+    }, [picker]);
+
     // 判断是否有值
     const hasValue = useMemo(() => {
         const [start, end] = data || [];
@@ -45,16 +56,16 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', ...
     const displayText = useMemo(() => {
         // 开始时间：有临时值时显示临时值
         const startText = tempStart
-            ? tempStart.format('YYYY-MM-DD')
-            : (parsedValue.start ? parsedValue.start.format('YYYY-MM-DD') : '');
+            ? tempStart.format(formatPattern)
+            : (parsedValue.start ? parsedValue.start.format(formatPattern) : '');
 
         // 结束时间：有临时值时显示临时值
         const endText = tempEnd
-            ? tempEnd.format('YYYY-MM-DD')
-            : (isSoFar ? soFarLabel : (parsedValue.end ? parsedValue.end.format('YYYY-MM-DD') : ''));
+            ? tempEnd.format(formatPattern)
+            : (isSoFar ? soFarLabel : (parsedValue.end ? parsedValue.end.format(formatPattern) : ''));
 
         return {start: startText, end: endText};
-    }, [parsedValue, isSoFar, soFarLabel, tempStart, tempEnd]);
+    }, [parsedValue, isSoFar, soFarLabel, tempStart, tempEnd, formatPattern]);
 
     // 点击整个Input框时，先弹出开始时间选择
     const handleInputClick = useCallback(() => {
@@ -151,8 +162,15 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', ...
     // 结束时间的可选日期（不能早于开始时间）
     const endDisabledDate = useCallback((current) => {
         if (!tempStart) return false;
-        return current && current < tempStart.startOf('day');
-    }, [tempStart]);
+        const startOfMap = {
+            date: 'day',
+            week: 'week',
+            month: 'month',
+            year: 'year'
+        };
+        const unit = startOfMap[picker] || 'day';
+        return current && current < tempStart.startOf(unit);
+    }, [tempStart, picker]);
 
     return (<div className="date-picker-today-container" ref={containerRef}>
         <div 
