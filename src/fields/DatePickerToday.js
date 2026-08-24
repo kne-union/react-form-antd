@@ -4,11 +4,12 @@ import React, {useRef, useMemo, useCallback, useState} from 'react'
 import dayjs from 'dayjs'
 import useControlValue from '@kne/use-control-value'
 import {hooks} from '@kne/react-form-helper';
-import withLocale, {useIntl} from '../withLocale';
+import {useIntl} from '@kne/react-intl';
+import withLocale from '../withLocale';
 
 const {useOnChange} = hooks;
 
-const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', ...props}) => {
+const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', placeholder, ...props}) => {
     const {formatMessage} = useIntl();
     const [data, onChange] = useControlValue(props);
     const [openStart, setOpenStart] = useState(false);
@@ -20,6 +21,9 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', ...
     const isSwitchingRef = useRef(false); // 标记是否正在切换到结束时间选择
 
     const soFarLabel = soFarText || formatMessage({id: 'SoFar'});
+    const placeholderList = Array.isArray(placeholder) ? placeholder : [];
+    const startPlaceholder = placeholderList[0] || formatMessage({id: 'StartDate'});
+    const endPlaceholder = placeholderList[1] || formatMessage({id: 'EndDate'});
 
     // 根据 picker 类型获取格式化字符串
     const formatPattern = useMemo(() => {
@@ -182,7 +186,7 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', ...
             <div className="date-picker-today-start">
                 <input
                     readOnly
-                    placeholder={formatMessage({id: 'StartDate'})}
+                    placeholder={startPlaceholder}
                     value={displayText.start}
                     className="ant-input"
                 />
@@ -191,7 +195,7 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', ...
             <div className="date-picker-today-end">
                 <input
                     readOnly
-                    placeholder={formatMessage({id: 'EndDate'})}
+                    placeholder={endPlaceholder}
                     value={displayText.end}
                     className={`ant-input ${isSoFar ? 'so-far-active' : ''}`}
                 />
