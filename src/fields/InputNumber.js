@@ -1,6 +1,7 @@
 import {InputNumber} from 'antd';
 import {hooks} from '@kne/react-form-helper';
-import withLocale, {useIntl} from '../withLocale';
+import {useIntl} from '@kne/react-intl';
+import withLocale from '../withLocale';
 
 const {useDecorator} = hooks;
 

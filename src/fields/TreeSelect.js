@@ -1,6 +1,7 @@
 import {TreeSelect} from 'antd';
 import {hooks} from '@kne/react-form-helper';
-import withLocale, {useIntl} from '../withLocale';
+import {useIntl} from '@kne/react-intl';
+import withLocale from '../withLocale';
 
 const {useOnChange} = hooks;
 
