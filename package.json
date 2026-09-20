@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "4.1.3",
+  "version": "4.1.4",
   "syntax": {
     "esmodules": true
   },
@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "@kne/react-form": "^3.1.8",
-    "@kne/react-form-helper": "^3.0.2",
+    "@kne/react-form-helper": "^3.0.3",
     "@kne/react-intl": "^0.1.12",
     "@kne/use-control-value": "^0.1.1",
     "classnames": "^2.2.6",
