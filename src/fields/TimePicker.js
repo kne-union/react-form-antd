@@ -2,10 +2,14 @@ import {TimePicker} from 'antd';
 import {hooks} from '@kne/react-form-helper';
 import {useIntl} from '@kne/react-intl';
 import withLocale from '../withLocale';
+import withDayjsValue from '../utils/withDayjsValue';
 
 const {useOnChange} = hooks;
 
 const {RangePicker} = TimePicker;
+
+const DayjsTimePicker = withDayjsValue(TimePicker);
+const DayjsRangePicker = withDayjsValue(RangePicker);
 
 const TimePickerInner = (props) => {
     const {formatMessage} = useIntl();
@@ -13,10 +17,10 @@ const TimePickerInner = (props) => {
         fieldName: 'timePicker'
     }, props);
     const render = useOnChange(Object.assign({placeholder: formatMessage({id: 'PleaseSelect'}, {label: mergedProps.label || ''})}, mergedProps));
-    return render(TimePicker);
+    return render(DayjsTimePicker);
 };
 
-TimePickerInner.Field = TimePicker;
+TimePickerInner.Field = DayjsTimePicker;
 
 const RangePickerInner = (props) => {
     const {formatMessage} = useIntl();
@@ -24,10 +28,10 @@ const RangePickerInner = (props) => {
         fieldName: 'rangeTimePicker'
     }, props);
     const render = useOnChange(Object.assign({placeholder: formatMessage({id: 'PleaseSelect'}, {label: mergedProps.label || ''})}, mergedProps));
-    return render(RangePicker);
+    return render(DayjsRangePicker);
 };
 
-RangePickerInner.Field = RangePicker;
+RangePickerInner.Field = DayjsRangePicker;
 
 const _TimePicker = withLocale(TimePickerInner);
 _TimePicker.RangePicker = withLocale(RangePickerInner);
