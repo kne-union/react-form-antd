@@ -1,0 +1,361 @@
+@keyframes react-form-antd-mobile-expand-down {
+  from {
+    max-height: 0;
+  }
+
+  to {
+    max-height: var(--react-form-antd-mobile-popup-height, 100vh);
+  }
+}
+
+@keyframes react-form-antd-mobile-collapse-up {
+  from {
+    max-height: var(--react-form-antd-mobile-popup-height, 100vh);
+    opacity: 1;
+  }
+
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes react-form-antd-mobile-mask-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes react-form-antd-mobile-mask-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.react-form-antd-mobile-anchor {
+  display: contents;
+}
+
+.react-form-antd-mobile-anchor.is-mobile {
+  .ant-select,
+  .ant-select-input,
+  .ant-select-placeholder,
+  .ant-select-content,
+  .ant-select-content-value,
+  .ant-select-selection-search-input,
+  .ant-picker-input > input,
+  .ant-select-selection-item,
+  .ant-select-selection-placeholder {
+    font-size: 16px !important;
+  }
+
+  .ant-select {
+    --ant-select-font-size: 16px;
+  }
+}
+
+.react-form-antd-mobile-mask {
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.45);
+  animation: react-form-antd-mobile-mask-in 180ms ease-out both;
+
+  &.kne-is-viewport {
+    position: fixed;
+  }
+
+  &.kne-is-boundary {
+    position: absolute;
+    width: 100%;
+  }
+
+  &.is-leave {
+    animation: react-form-antd-mobile-mask-out 180ms ease-out both;
+  }
+}
+
+.react-form-antd-mobile-popup {
+  left: 0 !important;
+  right: auto !important;
+  top: var(--react-form-antd-mobile-popup-top) !important;
+  width: var(--kne-viewport-width, 100vw);
+  max-width: var(--kne-viewport-width, 100vw);
+  max-height: var(--react-form-antd-mobile-popup-height, 100vh);
+  overflow: hidden;
+  background: #fff;
+  border-radius: 0 0 var(--radius-default, 2px) var(--radius-default, 2px) !important;
+  animation: react-form-antd-mobile-expand-down 180ms ease-out both;
+
+  &.kne-is-viewport {
+    position: fixed !important;
+    width: var(--kne-viewport-width, 100vw) !important;
+    max-width: var(--kne-viewport-width, 100vw) !important;
+    min-width: var(--kne-viewport-width, 100vw) !important;
+  }
+
+  &.kne-is-boundary {
+    position: absolute !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  &.ant-slide-up-enter,
+  &.ant-slide-up-appear,
+  &.ant-slide-up-enter-active,
+  &.ant-slide-up-appear-active,
+  &.ant-slide-up-leave,
+  &.ant-slide-up-leave-active {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .ant-select-dropdown,
+  .ant-cascader-dropdown,
+  .ant-tree-select-dropdown {
+    border-radius: 0 0 var(--radius-default, 2px) var(--radius-default, 2px) !important;
+  }
+
+  .ant-picker-panel-container,
+  .ant-picker-panels,
+  .ant-select-item-option-content,
+  .ant-cascader-menus {
+    max-width: 100%;
+  }
+
+  .ant-select-dropdown,
+  .ant-cascader-menus,
+  .ant-select-tree {
+    overflow: auto;
+    max-height: var(--react-form-antd-mobile-popup-height, 100vh);
+  }
+
+  .ant-select-item {
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .ant-select-item-option-content,
+  .ant-cascader-menu-item-content {
+    white-space: normal;
+  }
+
+  .ant-cascader-menu-item,
+  .ant-select-tree-node-content-wrapper {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .ant-picker-range-arrow {
+    display: none !important;
+  }
+}
+
+// Select / TreeSelect / Cascader：朝向 field 的一边不要阴影
+.react-form-antd-mobile-popup:not(.is-picker):not(.is-range) {
+  clip-path: inset(0 -40px -40px -40px);
+}
+
+.react-form-antd-mobile-popup.is-above:not(.is-picker):not(.is-range) {
+  top: auto !important;
+  bottom: var(--react-form-antd-mobile-popup-bottom) !important;
+  border-radius: var(--radius-default, 2px) var(--radius-default, 2px) 0 0 !important;
+  transform: none !important;
+  animation: none !important;
+  clip-path: inset(-40px -40px 0 -40px);
+}
+
+.react-form-antd-mobile-popup.is-picker,
+.react-form-antd-mobile-popup.is-range {
+  overflow: visible;
+  background: transparent;
+  animation: none;
+  border-radius: 0 !important;
+
+  &.is-above {
+    top: auto !important;
+    bottom: var(--react-form-antd-mobile-popup-bottom) !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    transform: none !important;
+
+    .ant-picker-panel-container {
+      margin: 0 !important;
+      border-radius: var(--ant-border-radius-lg, 8px) var(--ant-border-radius-lg, 8px) 0 0 !important;
+      // 裁掉朝向输入框的底边阴影，上方和左右阴影保留
+      clip-path: inset(-40px -40px 0 -40px);
+    }
+  }
+
+  &:not(.is-above) {
+    .ant-picker-panel-container {
+      margin: 0 !important;
+      border-radius: 0 0 var(--ant-border-radius-lg, 8px) var(--ant-border-radius-lg, 8px) !important;
+      // 裁掉朝向输入框的上沿阴影，避免圆角处露出遮罩
+      clip-path: inset(0 -40px -40px -40px);
+    }
+  }
+
+  .ant-picker-panel-container,
+  .ant-picker-panel-layout,
+  .ant-picker-panel,
+  .ant-picker-footer,
+  .ant-picker-header,
+  .ant-picker-body,
+  .ant-picker-content,
+  .ant-picker-date-panel,
+  .ant-picker-week-panel,
+  .ant-picker-month-panel,
+  .ant-picker-quarter-panel,
+  .ant-picker-year-panel,
+  .ant-picker-decade-panel,
+  .ant-picker-time-panel {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .ant-picker-content {
+    table-layout: fixed;
+  }
+
+  .ant-picker-panel-container {
+    display: block !important;
+    overflow: visible;
+    max-height: none;
+    width: 100% !important;
+    min-width: 100% !important;
+    background: #fff !important;
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .ant-picker-panel-layout {
+    max-height: var(--react-form-antd-mobile-popup-height, 100vh);
+    overflow: auto;
+    width: 100%;
+  }
+
+  // TimePicker：panel-layout 是 flex，time-panel 默认 flex:0 1 auto 只会吃内容宽（~113px），
+  // 必须让 time-panel / content 拉伸到全宽，三列才能均分。
+  &:has(.ant-picker-time-panel) {
+    background: #fff !important;
+    overflow: hidden;
+
+    .ant-picker-panel-container {
+      clip-path: none !important;
+      box-shadow: none !important;
+      border-radius: inherit !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    .ant-picker-panel-layout {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      width: 100% !important;
+      flex: 1 1 auto !important;
+    }
+  }
+
+  .ant-picker-time-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    align-self: stretch !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    background: #fff;
+
+    .ant-picker-content {
+      display: flex !important;
+      flex: 1 1 auto !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      height: min(280px, calc(var(--react-form-antd-mobile-popup-height, 50vh) - 56px));
+    }
+  }
+
+  .ant-picker-time-panel-column {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    text-align: center;
+    overflow-y: auto !important;
+
+    > li.ant-picker-time-panel-cell {
+      margin-inline: 4px;
+
+      .ant-picker-time-panel-cell-inner {
+        width: 100% !important;
+        max-width: none !important;
+        min-height: 44px;
+        height: 44px !important;
+        line-height: 44px !important;
+        padding-inline: 0 !important;
+        text-align: center;
+        border-radius: 6px;
+      }
+
+      &.ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner {
+        background: rgba(0, 0, 0, 0.04);
+        font-weight: 600;
+      }
+    }
+  }
+
+  .ant-picker-footer {
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    background: #fff;
+  }
+
+  .ant-picker-ok {
+    margin-inline-start: auto;
+  }
+}
+
+.react-form-antd-mobile-popup.is-range {
+  // antd 范围弹层用上下 padding 给箭头留位（约 16px * 2/3）。
+  // 弹层背景透明时，这段空白会把遮罩露成一条灰边。
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+
+  .ant-picker-panels,
+  .ant-picker-panel-layout {
+    flex-direction: column;
+  }
+}
+
+.react-form-antd-mobile-popup:not(.is-picker):not(.is-range):not(.is-above).ant-slide-up-enter,
+.react-form-antd-mobile-popup:not(.is-picker):not(.is-range):not(.is-above).ant-slide-up-appear,
+.react-form-antd-mobile-popup:not(.is-picker):not(.is-range):not(.is-above).ant-slide-up-enter-prepare,
+.react-form-antd-mobile-popup:not(.is-picker):not(.is-range):not(.is-above).ant-slide-up-appear-prepare,
+.react-form-antd-mobile-popup:not(.is-picker):not(.is-range):not(.is-above).ant-slide-up-enter-start,
+.react-form-antd-mobile-popup:not(.is-picker):not(.is-range):not(.is-above).ant-slide-up-appear-start,
+.react-form-antd-mobile-popup:not(.is-picker):not(.is-range):not(.is-above).ant-slide-up-enter-active,
+.react-form-antd-mobile-popup:not(.is-picker):not(.is-range):not(.is-above).ant-slide-up-appear-active {
+  transform: none !important;
+  transition: none !important;
+  animation: react-form-antd-mobile-expand-down 180ms ease-out both !important;
+}
+
+.react-form-antd-mobile-popup:not(.is-picker):not(.is-range):not(.is-above).ant-slide-up-leave,
+.react-form-antd-mobile-popup:not(.is-picker):not(.is-range):not(.is-above).ant-slide-up-leave-active {
+  transform: none !important;
+  transition: none !important;
+  pointer-events: none !important;
+  animation: react-form-antd-mobile-collapse-up 120ms ease-out both !important;
+}

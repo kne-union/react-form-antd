@@ -6,6 +6,7 @@ import useControlValue from '@kne/use-control-value'
 import {hooks} from '@kne/react-form-helper';
 import {useIntl} from '@kne/react-intl';
 import withLocale from '../withLocale';
+import useMobileFieldPopup from '../mobilePopup/useMobileFieldPopup';
 
 const {useOnChange} = hooks;
 
@@ -154,18 +155,38 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', pla
         setTempEnd(date);
     }, []);
 
+    // antd 6 的 DatePicker 不再把 onSelect 交给日期面板（仅 time 还走旧回调）。
+    // 相同日期时 onChange / onCalendarChange 也不会触发，所以在格子点击上提交。
+    const renderSelectableCell = useCallback((handler) => (current, info) => {
+        const originNode = info?.originNode;
+        if (!originNode || info.type !== picker) {
+            return originNode;
+        }
+        return React.cloneElement(originNode, {
+            onClick: event => {
+                const cell = event.currentTarget?.closest?.('.ant-picker-cell');
+                if (cell && cell.classList.contains('ant-picker-cell-disabled')) {
+                    return;
+                }
+                handler(current);
+                if (typeof originNode.props.onClick === 'function') {
+                    originNode.props.onClick(event);
+                }
+            }
+        });
+    }, [picker]);
+
     // 空的 footer（用于开始时间，保持高度一致）
     const renderEmptyFooter = useCallback(() => (<div style={{height: 40}}/>), []);
 
     // 带至今按钮的 footer
     const renderExtraFooter = useCallback(() => {
-        const isCurrentSoFar = !tempStart && isSoFar;
         return (<div style={{textAlign: 'right'}}>
-            <Button type={isCurrentSoFar ? 'primary' : 'default'} onClick={handleSoFarClick}>
+            <Button variant="text" color="primary" onClick={handleSoFarClick}>
                 {soFarLabel}
             </Button>
         </div>);
-    }, [isSoFar, tempStart, handleSoFarClick, soFarLabel]);
+    }, [handleSoFarClick, soFarLabel]);
 
     // 结束时间的可选日期（不能早于开始时间）
     const endDisabledDate = useCallback((current) => {
@@ -180,7 +201,28 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', pla
         return current && current < tempStart.startOf(unit);
     }, [tempStart, picker]);
 
-    return (<div className="date-picker-today-container" ref={containerRef}>
+    const startPopup = useMobileFieldPopup({
+        kind: 'picker',
+        open: openStart,
+        onOpenChange: handleStartOpenChange,
+        anchorRef: containerRef
+    });
+    const endPopup = useMobileFieldPopup({
+        kind: 'picker',
+        open: openEnd,
+        onOpenChange: handleEndOpenChange,
+        anchorRef: containerRef
+    });
+
+    const setContainerRef = useCallback(node => {
+        containerRef.current = node;
+        startPopup.setAnchor?.(node);
+        endPopup.setAnchor?.(node);
+    }, [endPopup.setAnchor, startPopup.setAnchor]);
+
+    return (<div className="date-picker-today-container" ref={setContainerRef}>
+        {startPopup.mask}
+        {endPopup.mask}
         <div 
             className="date-picker-today-inputs" 
             onClick={handleInputClick}
@@ -219,12 +261,13 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', pla
             open={openStart}
             onOpenChange={handleStartOpenChange}
             value={tempStart || parsedValue.start}
-            onSelect={handleStartSelect}
+            cellRender={renderSelectableCell(handleStartSelect)}
             renderExtraFooter={renderEmptyFooter}
             showNow={false}
             getPopupContainer={() => containerRef.current || document.body}
             style={{width: 0, height: 0, visibility: 'hidden', position: 'absolute'}}
             placement="bottomLeft"
+            {...startPopup.popupProps}
         />
 
         {/* 结束时间 DatePicker */}
@@ -233,7 +276,7 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', pla
             open={openEnd}
             onOpenChange={handleEndOpenChange}
             value={tempEnd || parsedValue.end}
-            onSelect={handleEndSelect}
+            cellRender={renderSelectableCell(handleEndSelect)}
             onPanelChange={handleEndPanelChange}
             disabledDate={endDisabledDate}
             renderExtraFooter={renderExtraFooter}
@@ -241,6 +284,7 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', pla
             getPopupContainer={() => containerRef.current || document.body}
             style={{width: 0, height: 0, visibility: 'hidden', position: 'absolute'}}
             placement="bottomLeft"
+            {...endPopup.popupProps}
         />
     </div>);
 };

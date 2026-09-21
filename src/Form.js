@@ -2,7 +2,9 @@ import React, {forwardRef} from 'react';
 import classnames from 'classnames';
 import ReactForm from '@kne/react-form';
 import {widget} from '@kne/react-form-helper';
+import {useIsMobile} from '@kne/responsive-utils';
 import './assets/index.scss';
+import './mobileText/style.scss';
 import {globalParams} from './preset';
 
 export * from '@kne/react-form';
@@ -16,6 +18,7 @@ const Form = forwardRef((originProps, ref) => {
             block: 'center'
         }, type: originType, size: originSize, children, ...props
     } = originProps;
+    const isMobile = useIsMobile();
     const baseClass = 'react-form';
     let computedClass = baseClass;
     const {type, size} = Object.assign({
@@ -33,7 +36,7 @@ const Form = forwardRef((originProps, ref) => {
         {children}
     </MaxLabelProvider>;
 
-    return (<form className={classnames(baseClass, computedClass, className)} onSubmit={(e) => {
+    return (<form className={classnames(baseClass, computedClass, isMobile && 'is-mobile', className)} onSubmit={(e) => {
         e.preventDefault();
         e.stopPropagation();
     }}>
