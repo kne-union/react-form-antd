@@ -2,10 +2,20 @@ import {DatePicker} from 'antd';
 import {hooks} from '@kne/react-form-helper';
 import {useIntl} from '@kne/react-intl';
 import withLocale from '../withLocale';
+import withDayjsValue from '../utils/withDayjsValue';
 
 const {useOnChange} = hooks;
 
 const {MonthPicker, RangePicker, WeekPicker} = DatePicker;
+
+const DayjsDatePicker = withDayjsValue(DatePicker, {stripTime: true, defaultPicker: 'date'});
+const DayjsMonthPicker = MonthPicker
+  ? withDayjsValue(MonthPicker, {stripTime: true, defaultPicker: 'month'})
+  : DayjsDatePicker;
+const DayjsRangePicker = withDayjsValue(RangePicker, {stripTime: true, defaultPicker: 'date'});
+const DayjsWeekPicker = WeekPicker
+  ? withDayjsValue(WeekPicker, {stripTime: true, defaultPicker: 'week'})
+  : DayjsDatePicker;
 
 const DatePickerInner = (props) => {
     const {formatMessage} = useIntl();
@@ -13,10 +23,10 @@ const DatePickerInner = (props) => {
         fieldName: 'datePicker'
     }, props);
     const render = useOnChange(Object.assign({placeholder: formatMessage({id: 'PleaseSelect'}, {label: mergedProps.label || ''})}, mergedProps));
-    return render(DatePicker);
+    return render(DayjsDatePicker);
 };
 
-DatePickerInner.Field = DatePicker;
+DatePickerInner.Field = DayjsDatePicker;
 
 const MonthPickerInner = (props) => {
     const {formatMessage} = useIntl();
@@ -24,10 +34,10 @@ const MonthPickerInner = (props) => {
         fieldName: 'monthDatePicker'
     }, props);
     const render = useOnChange(Object.assign({placeholder: [formatMessage({id: 'StartTime'}), formatMessage({id: 'EndTime'})]}, mergedProps));
-    return render(MonthPicker);
+    return render(DayjsMonthPicker);
 };
 
-MonthPickerInner.Field = MonthPicker;
+MonthPickerInner.Field = DayjsMonthPicker;
 
 const RangePickerInner = (props) => {
     const {formatMessage} = useIntl();
@@ -35,10 +45,10 @@ const RangePickerInner = (props) => {
         fieldName: 'rangeDatePicker'
     }, props);
     const render = useOnChange(Object.assign({placeholder: [formatMessage({id: 'StartTime'}), formatMessage({id: 'EndTime'})]}, mergedProps));
-    return render(RangePicker);
+    return render(DayjsRangePicker);
 };
 
-RangePickerInner.Field = RangePicker;
+RangePickerInner.Field = DayjsRangePicker;
 
 const WeekPickerInner = (props) => {
     const {formatMessage} = useIntl();
@@ -46,10 +56,10 @@ const WeekPickerInner = (props) => {
         fieldName: 'weekDatePicker'
     }, props);
     const render = useOnChange(Object.assign({placeholder: [formatMessage({id: 'StartTime'}), formatMessage({id: 'EndTime'})]}, mergedProps));
-    return render(WeekPicker);
+    return render(DayjsWeekPicker);
 };
 
-WeekPickerInner.Field = WeekPicker;
+WeekPickerInner.Field = DayjsWeekPicker;
 
 const _DatePicker = withLocale(DatePickerInner);
 _DatePicker.MonthPicker = withLocale(MonthPickerInner);

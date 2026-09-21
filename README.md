@@ -539,6 +539,23 @@ const DatePickerExample = () => {
                 </Form>
             </Card>
 
+            <Card title="字符串初始值（兼容 antd 6）" size="small">
+                <Form
+                    data={{
+                        stringDate: '2024-06-15',
+                        stringRange: ['2024-01-01', '2024-12-31'],
+                        stringTime: '14:30:00'
+                    }}
+                    onSubmit={setFormData}
+                >
+                    <Flex vertical gap={16}>
+                        <DatePicker name="stringDate" label="日期字符串" placeholder="请选择日期" />
+                        <DatePicker.RangePicker name="stringRange" label="范围字符串" placeholder={['开始日期', '结束日期']} />
+                        <TimePicker name="stringTime" label="时间字符串" format="HH:mm:ss" placeholder="请选择时间" />
+                    </Flex>
+                </Form>
+            </Card>
+
             <Card title="TimePicker 时间选择" size="small">
                 <Form onSubmit={setFormData}>
                     <Flex vertical gap={16}>
