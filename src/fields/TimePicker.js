@@ -3,13 +3,14 @@ import {hooks} from '@kne/react-form-helper';
 import {useIntl} from '@kne/react-intl';
 import withLocale from '../withLocale';
 import withDayjsValue from '../utils/withDayjsValue';
+import withMobilePopup from '../mobilePopup/withMobilePopup';
 
 const {useOnChange} = hooks;
 
 const {RangePicker} = TimePicker;
 
-const DayjsTimePicker = withDayjsValue(TimePicker);
-const DayjsRangePicker = withDayjsValue(RangePicker);
+const DayjsTimePicker = withMobilePopup(withDayjsValue(TimePicker), {kind: 'picker'});
+const DayjsRangePicker = withMobilePopup(withDayjsValue(RangePicker), {kind: 'range-picker'});
 
 const TimePickerInner = (props) => {
     const {formatMessage} = useIntl();

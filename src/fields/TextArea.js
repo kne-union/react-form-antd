@@ -2,8 +2,11 @@ import {Input} from 'antd';
 import {hooks} from '@kne/react-form-helper';
 import {useIntl} from '@kne/react-intl';
 import withLocale from '../withLocale';
+import withMobileText from '../mobileText/withMobileText';
 
 const {useDecorator} = hooks;
+
+const MobileTextArea = withMobileText(Input.TextArea);
 
 const TextAreaInner = (props) => {
     const {formatMessage} = useIntl();
@@ -11,7 +14,7 @@ const TextAreaInner = (props) => {
         fieldName: 'textArea'
     }, props);
     const render = useDecorator(Object.assign({placeholder: formatMessage({id: 'PleaseInput'}, {label: mergedProps.label})}, mergedProps));
-    return render(Input.TextArea);
+    return render(MobileTextArea);
 };
 
 TextAreaInner.Field = Input.TextArea;

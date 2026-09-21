@@ -1,0 +1,48 @@
+@use '~@kne/responsive-utils/scss' as resp;
+
+@mixin mobile-field-font {
+  .react-form__field-label {
+    font-size: 16px !important;
+  }
+
+  .ant-input,
+  textarea.ant-input,
+  .ant-input-number,
+  .ant-input-number-input,
+  .ant-select,
+  .ant-select-input,
+  .ant-select-placeholder,
+  .ant-select-content,
+  .ant-select-content-value,
+  .ant-select-selection-item,
+  .ant-select-selection-placeholder,
+  .ant-select-selection-search-input,
+  .ant-picker-input > input,
+  .ant-cascader-input,
+  .ant-radio-wrapper,
+  .ant-checkbox-wrapper,
+  .date-picker-today-container .ant-input {
+    font-size: 16px !important;
+  }
+
+  // antd 6 Select 用 CSS 变量控制字号，只改 font-size 盖不住 sm 尺寸
+  .ant-select {
+    --ant-select-font-size: 16px;
+  }
+}
+
+.react-form-antd-mobile-text.ant-input,
+.react-form-antd-mobile-text input.ant-input,
+.react-form-antd-mobile-text textarea.ant-input {
+  font-size: 16px !important;
+}
+
+.react-form.is-mobile {
+  @include mobile-field-font;
+}
+
+@include resp.mobile-container {
+  .react-form {
+    @include mobile-field-font;
+  }
+}

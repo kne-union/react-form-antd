@@ -3,18 +3,19 @@ import {hooks} from '@kne/react-form-helper';
 import {useIntl} from '@kne/react-intl';
 import withLocale from '../withLocale';
 import withDayjsValue from '../utils/withDayjsValue';
+import withMobilePopup from '../mobilePopup/withMobilePopup';
 
 const {useOnChange} = hooks;
 
 const {MonthPicker, RangePicker, WeekPicker} = DatePicker;
 
-const DayjsDatePicker = withDayjsValue(DatePicker, {stripTime: true, defaultPicker: 'date'});
+const DayjsDatePicker = withMobilePopup(withDayjsValue(DatePicker, {stripTime: true, defaultPicker: 'date'}), {kind: 'picker'});
 const DayjsMonthPicker = MonthPicker
-  ? withDayjsValue(MonthPicker, {stripTime: true, defaultPicker: 'month'})
+  ? withMobilePopup(withDayjsValue(MonthPicker, {stripTime: true, defaultPicker: 'month'}), {kind: 'picker'})
   : DayjsDatePicker;
-const DayjsRangePicker = withDayjsValue(RangePicker, {stripTime: true, defaultPicker: 'date'});
+const DayjsRangePicker = withMobilePopup(withDayjsValue(RangePicker, {stripTime: true, defaultPicker: 'date'}), {kind: 'range-picker'});
 const DayjsWeekPicker = WeekPicker
-  ? withDayjsValue(WeekPicker, {stripTime: true, defaultPicker: 'week'})
+  ? withMobilePopup(withDayjsValue(WeekPicker, {stripTime: true, defaultPicker: 'week'}), {kind: 'picker'})
   : DayjsDatePicker;
 
 const DatePickerInner = (props) => {
@@ -33,7 +34,7 @@ const MonthPickerInner = (props) => {
     const mergedProps = Object.assign({}, {
         fieldName: 'monthDatePicker'
     }, props);
-    const render = useOnChange(Object.assign({placeholder: [formatMessage({id: 'StartTime'}), formatMessage({id: 'EndTime'})]}, mergedProps));
+    const render = useOnChange(Object.assign({placeholder: formatMessage({id: 'PleaseSelect'}, {label: mergedProps.label || ''})}, mergedProps));
     return render(DayjsMonthPicker);
 };
 
@@ -55,7 +56,7 @@ const WeekPickerInner = (props) => {
     const mergedProps = Object.assign({}, {
         fieldName: 'weekDatePicker'
     }, props);
-    const render = useOnChange(Object.assign({placeholder: [formatMessage({id: 'StartTime'}), formatMessage({id: 'EndTime'})]}, mergedProps));
+    const render = useOnChange(Object.assign({placeholder: formatMessage({id: 'PleaseSelect'}, {label: mergedProps.label || ''})}, mergedProps));
     return render(DayjsWeekPicker);
 };
 

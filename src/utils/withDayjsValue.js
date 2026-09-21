@@ -50,7 +50,8 @@ const withDayjsValue = (WrappedComponent, options = {}) => {
           ref={ref}
           format={format}
           showTime={showTime}
-          picker={picker}
+          // 勿传 picker={undefined}：会经 antd restProps 覆盖 Month/Week/Time 等预设的 picker
+          {...(picker !== undefined ? {picker} : null)}
           value={mergedValue}
           defaultValue={mergedDefaultValue}
           onChange={handleChange}
