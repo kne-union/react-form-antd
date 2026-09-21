@@ -89,10 +89,14 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', pla
         setOpenEnd(false);
     }, [onChange]);
 
-    // 处理开始时间变化
-    const handleStartChange = useCallback((date) => {
+    // 开始日期确认后切到结束选择。
+    // 必须用 onSelect：已有值时再次点选同一天，antd 的 onChange 不会触发，弹层会直接关闭。
+    const switchToEndPicker = useCallback((date) => {
+        if (!date) {
+            return;
+        }
         setTempStart(date);
-        isSwitchingRef.current = true; // 标记正在切换
+        isSwitchingRef.current = true;
         setOpenStart(false);
         setTimeout(() => {
             setOpenEnd(true);
@@ -100,19 +104,19 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', pla
         }, 100);
     }, []);
 
-    // 处理结束时间变化（选择日期时实时更新显示，选择后确认值）
-    const handleEndChange = useCallback((date) => {
-        if (date) {
-            // 选择了有效日期，确认值
-            if (!tempStart) return;
-            onChange([tempStart.toISOString(), date.toISOString()]);
-            setOpenEnd(false);
-            setTempStart(null);
-            setTempEnd(null);
-        } else {
-            // 清空选择
-            setTempEnd(null);
+    const handleStartSelect = useCallback((date) => {
+        switchToEndPicker(date);
+    }, [switchToEndPicker]);
+
+    // 结束日期确认（同样用 onSelect，避免与当前结束值相同时无法提交）
+    const handleEndSelect = useCallback((date) => {
+        if (!date || !tempStart) {
+            return;
         }
+        onChange([tempStart.toISOString(), date.toISOString()]);
+        setOpenEnd(false);
+        setTempStart(null);
+        setTempEnd(null);
     }, [tempStart, onChange]);
 
     // 点击"至今"按钮
@@ -215,7 +219,7 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', pla
             open={openStart}
             onOpenChange={handleStartOpenChange}
             value={tempStart || parsedValue.start}
-            onChange={handleStartChange}
+            onSelect={handleStartSelect}
             renderExtraFooter={renderEmptyFooter}
             showNow={false}
             getPopupContainer={() => containerRef.current || document.body}
@@ -229,7 +233,7 @@ const PickerTodayInner = ({soFarText, soFarValue = 'soFar', picker = 'date', pla
             open={openEnd}
             onOpenChange={handleEndOpenChange}
             value={tempEnd || parsedValue.end}
-            onChange={handleEndChange}
+            onSelect={handleEndSelect}
             onPanelChange={handleEndPanelChange}
             disabledDate={endDisabledDate}
             renderExtraFooter={renderExtraFooter}
