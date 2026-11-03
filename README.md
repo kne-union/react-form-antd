@@ -257,8 +257,8 @@ const InputExample = () => {
                             placeholder="请再次输入密码"
                         />
                         <Divider>带前缀/后缀</Divider>
-                        <Input name="price" label="价格" addonBefore="¥" placeholder="请输入金额" />
-                        <Input name="website" label="网址" addonAfter=".com" placeholder="请输入网站名称" />
+                        <Input name="price" label="价格" prefix="¥" placeholder="请输入金额" />
+                        <Input name="website" label="网址" suffix=".com" placeholder="请输入网站名称" />
                     </Flex>
                 </Form>
             </Card>
@@ -1194,6 +1194,55 @@ render(<ButtonsExample />);
 
 ```
 
+- 移动端布局
+- 移动端默认采用纵向卡片布局（label 在上、字段分隔线、按钮整宽）；登录等场景可用 mobile={false} 关闭布局适配，Select 弹层遮罩、16px 字号等字段级优化仍生效
+- _ReactFormAntd(@kne/current-lib_react-form-antd),(@kne/current-lib_react-form-antd/dist/index.css),antd(antd)
+
+```jsx
+const {default: Form, Input, Select, DatePicker, InputNumber, SubmitButton, useFormIsMobile} = _ReactFormAntd;
+const {Flex, Card, Tag} = antd;
+
+const LayoutState = () => {
+    const isMobile = useFormIsMobile();
+    return <Tag color={isMobile ? 'blue' : 'default'}>{isMobile ? '移动端布局' : 'PC 布局'}</Tag>;
+};
+
+const MobileExample = () => {
+    return (<Flex vertical gap={24}>
+        <Card title="移动端自动适配（默认）" size="small">
+            <Form type="default" onSubmit={data => console.log('提交报销单', data)}>
+                <LayoutState/>
+                <Input name="title" label="报销事由" rule="REQ" placeholder="如：上海客户拜访差旅"/>
+                <Select name="category" label="费用类型" rule="REQ" options={[
+                    {label: '交通费', value: 'traffic'},
+                    {label: '住宿费', value: 'hotel'},
+                    {label: '餐饮费', value: 'meal'}
+                ]}/>
+                <InputNumber name="amount" label="金额（元）" rule="REQ" min={0} precision={2}/>
+                <DatePicker name="date" label="发生日期" rule="REQ"/>
+                <SubmitButton>提交报销</SubmitButton>
+            </Form>
+        </Card>
+
+        <Card title="登录场景：mobile={false} 关闭移动端布局" size="small">
+            <Form type="inner" mobile={false} onSubmit={data => console.log('登录', data)}>
+                <LayoutState/>
+                <Input name="account" label="账号" rule="REQ" placeholder="手机号 / 邮箱"/>
+                <Input.Password name="password" label="密码" rule="REQ" placeholder="请输入密码"/>
+                <Select name="tenant" label="登录租户" options={[
+                    {label: '总部', value: 'hq'},
+                    {label: '华东分公司', value: 'east'}
+                ]}/>
+                <SubmitButton block>登录</SubmitButton>
+            </Form>
+        </Card>
+    </Flex>);
+};
+
+render(<MobileExample/>);
+
+```
+
 ### API
 
 ##### 属性
@@ -1207,7 +1256,12 @@ render(<ButtonsExample />);
 | enterSubmit   | `boolean`                          | `false`             | 是否支持回车提交                       |
 | scrollToError | `boolean`                          | `true`              | 校验失败时是否滚动到错误字段                 |
 | scrollProps   | `object`                           | `{block: 'center'}` | 滚动配置，参考 Element.scrollIntoView |
+| mobile        | `boolean`                          | -                   | 传 `false` 关闭本表单的移动端布局（如登录页）；只影响布局，Select 弹层遮罩、16px 字号等字段级移动端优化仍按设备生效。不传时继承外层 Form，再回退到 preset 与设备判断 |
 | onSubmit      | `function`                         | -                   | 表单提交回调函数                       |
+
+##### useFormIsMobile
+
+在 Form 内部获取当前是否应使用移动端布局：Form 设置了 `mobile={false}` 时返回 `false`，否则按设备判断。`useFormMobile` 返回 Form 上 `mobile` 的原始值，`FormMobileContext` 为对应 Context。
 
 ---
 
@@ -1534,6 +1588,7 @@ import {preset} from '@kne/react-form-antd';
 preset({
     type: 'default',     // 默认表单类型
     size: 'middle',      // 默认表单尺寸
+    mobile: undefined,   // 全局设为 false 可关闭所有表单的移动端布局
     rules: {             // 自定义校验规则
         PHONE: {
             reg: /^1[3-9]\d{9}$/,
