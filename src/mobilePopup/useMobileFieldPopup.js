@@ -77,18 +77,12 @@ const useMobileFieldPopup = ({
     disabled = false,
     unlockTriggerWidth = false,
     syncListHeight = false,
-    dropdownVisibleEvent = false,
     anchorRef: anchorRefProp,
     open: openProp,
     onOpenChange,
-    onDropdownVisibleChange,
     getPopupContainer: getPopupContainerProp,
     classNames: classNamesProp,
     styles: stylesProp,
-    popupClassName,
-    dropdownClassName,
-    popupStyle,
-    dropdownStyle,
     placement,
     zIndex,
     inputReadOnly,
@@ -342,8 +336,7 @@ const useMobileFieldPopup = ({
             updatePopupMetrics();
         }
         onOpenChange && onOpenChange(next);
-        onDropdownVisibleChange && onDropdownVisibleChange(next);
-    }, [controlled, isMobile, onDropdownVisibleChange, onOpenChange, updatePopupMetrics]);
+    }, [controlled, isMobile, onOpenChange, updatePopupMetrics]);
 
     const close = useCallback(() => {
         emitOpenChange(false);
@@ -375,8 +368,6 @@ const useMobileFieldPopup = ({
         zIndex: panelZIndex
     };
 
-    const mergedPopupStyle = Object.assign({}, popupStyle, dropdownStyle, mobilePopupStyle);
-
     let popupProps = {};
     if (isMobile) {
         popupProps = {
@@ -387,16 +378,9 @@ const useMobileFieldPopup = ({
             // 位置由我们按可用空间计算，禁止 antd 再自动翻转，否则遮罩会和弹层错位
             autoAdjustOverflow: false,
             transitionName: '',
-            popupClassName: classnames(popupClassName, popupClass),
-            dropdownClassName: classnames(dropdownClassName, popupClass),
-            popupStyle: mergedPopupStyle,
-            dropdownStyle: mergedPopupStyle,
             classNames: mergeClassNames(classNamesProp, popupClass),
             styles: mergeStyles(stylesProp, mobilePopupStyle)
         };
-        if (dropdownVisibleEvent) {
-            popupProps.onDropdownVisibleChange = emitOpenChange;
-        }
         if (kind === 'picker' || kind === 'range-picker') {
             popupProps.inputReadOnly = inputReadOnly !== undefined ? inputReadOnly : true;
         }

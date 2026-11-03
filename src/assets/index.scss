@@ -163,7 +163,7 @@
         }
         @include error-state;
 
-        .ant-select-selection, .ant-input, .ant-radio-inner {
+        .ant-input, .ant-radio-inner {
           @include error-state;
         }
 
@@ -180,11 +180,9 @@
         }
 
         &.ant-select {
-          > .ant-select-selector {
-            @include error-border;
-          }
+          --ant-select-border-color: #fc3333 !important;
 
-          &.ant-select-focused > .ant-select-selector {
+          &.ant-select-focused {
             @include error-focus;
           }
         }

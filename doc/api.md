@@ -9,7 +9,12 @@
 | enterSubmit   | `boolean`                          | `false`             | 是否支持回车提交                       |
 | scrollToError | `boolean`                          | `true`              | 校验失败时是否滚动到错误字段                 |
 | scrollProps   | `object`                           | `{block: 'center'}` | 滚动配置，参考 Element.scrollIntoView |
+| mobile        | `boolean`                          | -                   | 传 `false` 关闭本表单的移动端布局（如登录页）；只影响布局，Select 弹层遮罩、16px 字号等字段级移动端优化仍按设备生效。不传时继承外层 Form，再回退到 preset 与设备判断 |
 | onSubmit      | `function`                         | -                   | 表单提交回调函数                       |
+
+#### useFormIsMobile
+
+在 Form 内部获取当前是否应使用移动端布局：Form 设置了 `mobile={false}` 时返回 `false`，否则按设备判断。`useFormMobile` 返回 Form 上 `mobile` 的原始值，`FormMobileContext` 为对应 Context。
 
 ---
 
@@ -336,6 +341,7 @@ import {preset} from '@kne/react-form-antd';
 preset({
     type: 'default',     // 默认表单类型
     size: 'middle',      // 默认表单尺寸
+    mobile: undefined,   // 全局设为 false 可关闭所有表单的移动端布局
     rules: {             // 自定义校验规则
         PHONE: {
             reg: /^1[3-9]\d{9}$/,

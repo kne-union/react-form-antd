@@ -9,8 +9,7 @@ const {useOnChange} = hooks;
 const MobileSelect = withMobilePopup(Select, {
     kind: 'select',
     unlockTriggerWidth: true,
-    syncListHeight: true,
-    dropdownVisibleEvent: true
+    syncListHeight: true
 });
 
 const SelectInner = (props) => {

@@ -180,6 +180,24 @@
           "packageName": "antd"
         }
       ]
+    },
+    {
+      "title": "移动端布局",
+      "description": "移动端默认采用纵向卡片布局（label 在上、字段分隔线、按钮整宽）；登录等场景可用 mobile={false} 关闭布局适配，Select 弹层遮罩、16px 字号等字段级优化仍生效",
+      "code": "./mobile.js",
+      "scope": [
+        {
+          "name": "_ReactFormAntd",
+          "packageName": "@kne/current-lib_react-form-antd"
+        },
+        {
+          "packageName": "@kne/current-lib_react-form-antd/dist/index.css"
+        },
+        {
+          "name": "antd",
+          "packageName": "antd"
+        }
+      ]
     }
   ]
 }
