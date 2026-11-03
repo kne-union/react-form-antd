@@ -1,0 +1,157 @@
+@use '~@kne/responsive-utils/scss' as resp;
+
+// 对齐 antd-mobile Form 竖直布局（https://mobile.ant.design/~demos/form-demo1）：
+// label 15px #666 在上、控件无边框、字段间 #eee 细分隔线、底部按钮整宽
+// 只管表单布局；Form mobile={false} 时带 is-mobile-disabled，整段不生效
+$mobile-border-color: #eee;
+$mobile-label-color: #666;
+$mobile-text-color: #333;
+$mobile-placeholder-color: #ccc;
+$mobile-danger-color: #ff3141;
+$mobile-fill-color: #f5f5f5;
+
+@mixin borderless-control {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+  padding-inline: 0 !important;
+}
+
+@mixin mobile-layout {
+  .react-form__field {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 0 !important;
+    padding: 12px 0;
+    border-bottom: 1px solid $mobile-border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .react-form__field-main {
+    flex-direction: column;
+  }
+
+  .react-form__field-label {
+    min-width: auto !important;
+    margin: 0 0 6px;
+    padding-left: 0;
+    text-align: left;
+    font-size: 15px !important;
+    font-weight: normal !important;
+    line-height: 1.5;
+    color: $mobile-label-color;
+
+    &.is-req:before {
+      position: static;
+      transform: none;
+      margin-right: 2px;
+      color: $mobile-danger-color;
+      font-weight: normal;
+    }
+  }
+
+  .react-form__field-input {
+    align-self: stretch;
+    width: 100%;
+  }
+
+  // 桌面端绝对定位悬在字段间距里；移动端回到文档流，否则压线
+  // 单行报错占用字段底部内边距（-6 + 16 + 2 = 12），高度不变；多行再撑开
+  .react-form__field.is-error {
+    padding-bottom: 2px;
+  }
+
+  .react-form__field-error {
+    position: static;
+    margin-top: -6px;
+    font-size: 12px;
+    line-height: 16px;
+    color: $mobile-danger-color !important;
+  }
+
+  // 控件去边框、去底色、贴左
+  .react-form__field-input {
+    .ant-input,
+    .ant-input-affix-wrapper,
+    .ant-input-number:not(.react-form-antd-mobile-stepper),
+    .ant-picker {
+      @include borderless-control;
+      color: $mobile-text-color;
+    }
+
+    .date-picker-today-inputs {
+      @include borderless-control;
+    }
+
+    .ant-input-affix-wrapper .ant-input {
+      padding-inline: 0 !important;
+    }
+
+    .ant-input-number:not(.react-form-antd-mobile-stepper) .ant-input-number-input {
+      padding-inline: 0 !important;
+    }
+
+    // 对齐 antd-mobile Stepper：无外框、无分隔线，加减按钮与数值区为浅灰块
+    .react-form-antd-mobile-stepper.ant-input-number-mode-spinner {
+      gap: 2px;
+      border-color: transparent !important;
+      box-shadow: none !important;
+      background: transparent !important;
+
+      .ant-input-number-action {
+        border: none !important;
+        border-radius: 2px;
+        background: $mobile-fill-color;
+        color: $mobile-text-color;
+      }
+
+      .ant-input-number-input {
+        border-radius: 2px;
+        background: $mobile-fill-color;
+        text-align: center;
+      }
+    }
+
+    .ant-select {
+      --ant-select-border-color: transparent !important;
+      --ant-select-background-color: transparent !important;
+      --ant-select-padding-horizontal: 0px !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
+    input::placeholder,
+    textarea::placeholder,
+    .ant-select-placeholder {
+      color: $mobile-placeholder-color !important;
+    }
+
+    .ant-input-disabled,
+    .ant-input[disabled],
+    .ant-picker-disabled,
+    .ant-select-disabled,
+    .ant-input-number-disabled {
+      color: $mobile-placeholder-color !important;
+    }
+  }
+
+  .react-form__action-button {
+    width: 100%;
+    height: 48px;
+    font-size: 17px;
+    border-radius: 4px;
+  }
+}
+
+.react-form.is-mobile:not(.is-mobile-disabled) {
+  @include mobile-layout;
+}
+
+@include resp.mobile-container {
+  .react-form:not(.is-mobile-disabled) {
+    @include mobile-layout;
+  }
+}

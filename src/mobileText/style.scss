@@ -1,10 +1,7 @@
 @use '~@kne/responsive-utils/scss' as resp;
 
+// 只管可聚焦控件（iOS 聚焦字号 <16px 会放大页面）；label 字号属于布局，见 mobileLayout
 @mixin mobile-field-font {
-  .react-form__field-label {
-    font-size: 16px !important;
-  }
-
   .ant-input,
   textarea.ant-input,
   .ant-input-number,
@@ -15,10 +12,7 @@
   .ant-select-content,
   .ant-select-content-value,
   .ant-select-selection-item,
-  .ant-select-selection-placeholder,
-  .ant-select-selection-search-input,
   .ant-picker-input > input,
-  .ant-cascader-input,
   .ant-radio-wrapper,
   .ant-checkbox-wrapper,
   .date-picker-today-container .ant-input {

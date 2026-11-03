@@ -1,6 +1,6 @@
 {
   "name": "@kne/react-form-antd",
-  "version": "4.1.8",
+  "version": "4.1.9",
   "syntax": {
     "esmodules": true
   },
@@ -56,7 +56,7 @@
   },
   "homepage": "https://github.com/kne-union/react-form-antd#readme",
   "peerDependencies": {
-    "antd": ">=5.x",
+    "antd": ">=6",
     "react": ">=18.x"
   },
   "dependencies": {

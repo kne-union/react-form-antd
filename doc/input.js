@@ -23,8 +23,8 @@ const InputExample = () => {
                             placeholder="请再次输入密码"
                         />
                         <Divider>带前缀/后缀</Divider>
-                        <Input name="price" label="价格" addonBefore="¥" placeholder="请输入金额" />
-                        <Input name="website" label="网址" addonAfter=".com" placeholder="请输入网站名称" />
+                        <Input name="price" label="价格" prefix="¥" placeholder="请输入金额" />
+                        <Input name="website" label="网址" suffix=".com" placeholder="请输入网站名称" />
                     </Flex>
                 </Form>
             </Card>
