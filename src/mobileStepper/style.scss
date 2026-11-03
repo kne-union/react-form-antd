@@ -1,0 +1,33 @@
+// 移动端 spinner 模式：外观沿用 Input，两侧加减按钮为与输入框等高的正方形
+.react-form-antd-mobile-stepper.ant-input-number {
+  width: 100%;
+
+  // antd 6 InputNumber 的 lg 未用 borderRadiusLG，与 Input 对齐
+  &.ant-input-number-lg {
+    border-radius: var(--ant-border-radius-lg, 8px);
+  }
+
+  &.ant-input-number-mode-spinner {
+    // 按钮按下的背景须裁在外框圆角内
+    overflow: hidden;
+
+    .ant-input-number-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: stretch;
+      // 宽 = 字号 × 行高 + 上下内边距（aspect-ratio 在 stretch 下不生效）
+      width: calc(1em * var(--ant-line-height, 1.5714) + 2 * var(--ant-input-number-input-padding-block, 4px));
+      padding-inline: 0;
+      font-size: inherit;
+
+      .anticon {
+        font-size: 14px;
+      }
+    }
+
+    &.ant-input-number-lg .ant-input-number-action {
+      width: calc(1em * var(--ant-line-height-lg, 1.5) + 2 * var(--ant-input-number-input-padding-block, 7px));
+    }
+  }
+}

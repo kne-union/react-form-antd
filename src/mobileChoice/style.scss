@@ -1,0 +1,91 @@
+@use '~@kne/responsive-utils/scss' as resp;
+
+$choice-height: 44px;
+$choice-button-height: 40px;
+
+@mixin mobile-choice {
+  // 选项热区高于 label 行高，用负外边距让首行选项与 label 居中对齐
+  --react-form-choice-label-height: 30px;
+  --react-form-choice-offset: calc((var(--react-form-choice-label-height) - #{$choice-height}) / 2);
+  --react-form-choice-button-offset: calc((var(--react-form-choice-label-height) - #{$choice-button-height}) / 2);
+
+  &.react-form--small {
+    --react-form-choice-label-height: 24px;
+  }
+
+  &.react-form--large,
+  &.react-form--inline--large {
+    --react-form-choice-label-height: 34px;
+  }
+
+  // inner 布局 label 在上方，不需要对齐偏移
+  &[class*='react-form--inner'] {
+    --react-form-choice-offset: 0px;
+    --react-form-choice-button-offset: 0px;
+  }
+
+  .react-form__field-input > .ant-checkbox-wrapper {
+    margin-block: var(--react-form-choice-offset);
+  }
+
+  .react-form__field-input > .ant-checkbox-group > .ant-checkbox-wrapper:first-child,
+  .react-form__field-input > .ant-radio-group > .ant-radio-wrapper:first-child {
+    margin-top: var(--react-form-choice-offset);
+  }
+
+  .react-form__field-input > .ant-checkbox-group > .ant-checkbox-wrapper:last-child,
+  .react-form__field-input > .ant-radio-group > .ant-radio-wrapper:last-child {
+    margin-bottom: var(--react-form-choice-offset);
+  }
+
+  .react-form__field-input > .ant-radio-group > .ant-radio-button-wrapper {
+    margin-block: var(--react-form-choice-button-offset);
+  }
+
+  // antd 6 勾选框尺寸由挂在选项元素自身的 CSS 变量控制，需在选项元素上覆盖
+  .ant-checkbox-wrapper,
+  .ant-radio-wrapper {
+    --ant-control-interactive-size: 20px;
+    --ant-radio-radio-size: 20;
+    --ant-radio-dot-size: 10;
+    align-items: center;
+    min-height: $choice-height;
+    margin-inline: 0;
+  }
+
+  .ant-checkbox-group,
+  .ant-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    column-gap: 0;
+  }
+
+  .ant-checkbox-group > .ant-checkbox-wrapper,
+  .ant-radio-group > .ant-radio-wrapper {
+    flex: 0 0 100%;
+  }
+
+  .ant-radio-group > .ant-radio-button-wrapper {
+    flex: 1 1 0;
+    min-width: 0;
+    height: $choice-button-height;
+    line-height: $choice-button-height - 2px;
+    padding-inline: 8px;
+    font-size: 16px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.react-form.is-mobile {
+  @include mobile-choice;
+}
+
+@include resp.mobile-container {
+  .react-form {
+    @include mobile-choice;
+  }
+}

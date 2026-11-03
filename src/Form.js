@@ -5,6 +5,7 @@ import {widget} from '@kne/react-form-helper';
 import {useIsMobile} from '@kne/responsive-utils';
 import './assets/index.scss';
 import './mobileText/style.scss';
+import './mobileChoice/style.scss';
 import {globalParams} from './preset';
 
 export * from '@kne/react-form';
