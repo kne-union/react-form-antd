@@ -6,6 +6,7 @@
 $mobile-border-color: #eee;
 $mobile-label-color: #666;
 $mobile-text-color: #333;
+$mobile-arrow-color: #999;
 $mobile-placeholder-color: #ccc;
 $mobile-danger-color: #ff3141;
 $mobile-fill-color: #f5f5f5;
@@ -63,6 +64,12 @@ $mobile-fill-color: #f5f5f5;
   // 单行报错占用字段底部内边距（-6 + 16 + 2 = 12），高度不变；多行再撑开
   .react-form__field.is-error {
     padding-bottom: 2px;
+
+    // 移动端只靠红字提示，压过 assets 里错误态的红色描边
+    .ant-select {
+      --ant-select-border-color: transparent !important;
+      border-color: transparent !important;
+    }
   }
 
   .react-form__field-error {
@@ -73,8 +80,25 @@ $mobile-fill-color: #f5f5f5;
     color: $mobile-danger-color !important;
   }
 
+  // 步进器为实底灰块，上提会压住控件
+  .react-form-antd-mobile-stepper + .react-form__field-error {
+    margin-top: 4px;
+  }
+
   // 控件去边框、去底色、贴左
   .react-form__field-input {
+    // @kne/super-select 的 SelectInput 读取这些变量
+    --super-select-input-border-color: transparent;
+    --super-select-input-hover-border-color: transparent;
+    --super-select-input-bg: transparent;
+    --super-select-input-disabled-bg: transparent;
+    --super-select-input-padding-x: 0px;
+    --super-select-input-color: #{$mobile-text-color};
+    --super-select-input-placeholder-color: #{$mobile-placeholder-color};
+    --super-select-input-disabled-color: #{$mobile-placeholder-color};
+    --super-select-input-icon-color: #{$mobile-arrow-color};
+    --super-select-input-arrow-rotate: -90deg;
+
     .ant-input,
     .ant-input-affix-wrapper,
     .ant-input-number:not(.react-form-antd-mobile-stepper),
@@ -123,6 +147,16 @@ $mobile-fill-color: #f5f5f5;
       box-shadow: none !important;
       outline: none !important;
     }
+
+    // 对齐 antd-mobile 列表项：下拉箭头朝右、浅灰
+    .ant-select-suffix {
+      color: $mobile-arrow-color;
+
+      .anticon-down {
+        transform: rotate(-90deg);
+      }
+    }
+
     input::placeholder,
     textarea::placeholder,
     .ant-select-placeholder {
