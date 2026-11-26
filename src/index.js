@@ -5,11 +5,13 @@ import TextArea from './fields/TextArea';
 import Switch from './fields/Switch';
 import Select from './fields/Select';
 import RadioGroup from './fields/RadioGroup';
+import RadioGroupOther from './fields/RadioGroupOther';
 import InputNumber from './fields/InputNumber';
 import Input from './fields/Input';
 import DatePickerToday from './fields/DatePickerToday';
 import DatePicker from './fields/DatePicker';
 import CheckboxGroup from './fields/CheckboxGroup';
+import CheckboxGroupOther from './fields/CheckboxGroupOther';
 import Checkbox from './fields/Checkbox';
 import Cascader from './fields/Cascader';
 import Rate from './fields/Rate';
@@ -30,11 +32,13 @@ export {
     Switch,
     Select,
     RadioGroup,
+    RadioGroupOther,
     InputNumber,
     Input,
     DatePickerToday,
     DatePicker,
     CheckboxGroup,
+    CheckboxGroupOther,
     Checkbox,
     Cascader,
     Rate,
@@ -48,11 +52,13 @@ export const fields = {
     Switch,
     Select,
     RadioGroup,
+    RadioGroupOther,
     InputNumber,
     Input,
     DatePickerToday,
     DatePicker,
     CheckboxGroup,
+    CheckboxGroupOther,
     Checkbox,
     Cascader,
     Rate,

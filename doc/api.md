@@ -207,6 +207,9 @@
 | rule     | `string`  | -       | 校验规则                    |
 | options  | `array`   | -       | 选项数据 `[{label, value}]` |
 | disabled | `boolean` | `false` | 是否禁用                    |
+| modern   | `boolean` | `false` | 使用新版无边框色块样式：选项前带序号，单选为圆形、多选为圆角方形，选中后序号填充主题色 |
+| indexType | `'letter' \| 'number' \| 'check'` | `'letter'` | `modern` 下序号类型：字母 A/B/C、数字 1/2/3，或 `check` 不显示序号、选中时显示对勾 |
+| block    | `boolean` | `false` | 块级选项：纵向排列、每项等宽占满整行、长文案自动换行，适合问卷类长题；可与 `modern` 组合。题干较长时建议配合 `Form type="inner"` 让标签在上方 |
 
 ---
 
@@ -222,6 +225,34 @@
 | options     | `array`                 | -           | 选项数据 `[{label, value}]` |
 | optionType  | `'default' \| 'button'` | `'default'` | 选项类型                    |
 | buttonStyle | `'outline' \| 'solid'`  | `'outline'` | 按钮样式                    |
+| modern      | `boolean`               | `false`     | 使用新版无边框色块样式（同 CheckboxGroup），`optionType="button"` 时不生效 |
+| indexType   | `'letter' \| 'number' \| 'check'` | `'letter'`  | `modern` 下序号类型（同 CheckboxGroup） |
+| block       | `boolean`               | `false`     | 块级选项（同 CheckboxGroup），`optionType="button"` 时不生效 |
+
+全局开启可通过 `preset({field: {radioGroup: {defaultProps: {modern: true}}, checkboxGroup: {defaultProps: {modern: true}}}})`，「其他」字段对应 `radioGroupOther`、`checkboxGroupOther`。
+
+---
+
+### RadioGroupOther / CheckboxGroupOther 带「其他」的单选组 / 复选框组
+
+在 `options` 末尾自动追加「其他」选项，选中「其他」时在下方显示 TextArea 填写补充内容。只支持 `options` 方式传入选项。
+
+字段值格式：
+
+- RadioGroupOther：`{value: 选中值, other: 其他内容}`，选中非「其他」项时只有 `value`
+- CheckboxGroupOther：`{value: 选中值数组, other: 其他内容}`，未勾选「其他」时只有 `value`
+
+`rule="REQ"` 只校验是否有选中项，不校验「其他」内容是否填写。
+
+#### 属性
+
+除下表外，RadioGroupOther 支持 RadioGroup 的属性，CheckboxGroupOther 支持 CheckboxGroup 的属性。
+
+| 属性          | 类型                | 默认值                            | 描述                         |
+|-------------|-------------------|--------------------------------|----------------------------|
+| options     | `array`           | -                              | 选项数据 `[{label, value}]`，不含「其他」 |
+| otherOption | `{label, value}`  | `{label: '其他', value: 'other'}` | 「其他」选项的文案与值                |
+| otherProps  | `object`          | -                              | 透传给「其他」TextArea 的属性，如 `placeholder`、`maxLength`、`showCount` |
 
 ---
 

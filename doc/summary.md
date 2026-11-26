@@ -33,6 +33,7 @@
 - Checkbox - 复选框
 - CheckboxGroup - 复选框组
 - RadioGroup - 单选框组
+- CheckboxGroupOther / RadioGroupOther - 带「其他」选项的复选框组 / 单选框组，选中「其他」时显示 TextArea
 
 **其他**
 - Rate - 评分
