@@ -5,7 +5,9 @@ const locale = {
   EndTime: 'End Time',
   StartDate: 'Start Date',
   EndDate: 'End Date',
-  SoFar: 'Present'
+  SoFar: 'Present',
+  Other: 'Other',
+  PleaseInputOther: 'Please enter other content'
 };
 
 export default locale;

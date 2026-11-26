@@ -93,7 +93,7 @@
     },
     {
       "title": "多选和单选组件",
-      "description": "展示Checkbox、CheckboxGroup、RadioGroup组件的使用方法",
+      "description": "展示Checkbox、CheckboxGroup、RadioGroup、CheckboxGroupOther、RadioGroupOther组件的使用方法",
       "code": "./checkbox-radio.js",
       "scope": [
         {

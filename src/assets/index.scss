@@ -7,6 +7,189 @@
     width: 100%;
   }
 
+  #{$root + '__field-other'} {
+    display: block;
+    margin-top: 8px;
+  }
+
+  #{$root + '__choice-modern'} {
+    --react-form-choice-index-size: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    counter-reset: react-form-choice;
+
+    > .ant-radio-wrapper,
+    > .ant-checkbox-wrapper {
+      box-sizing: border-box;
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--ant-control-height, 32px);
+      margin-inline: 0;
+      position: relative;
+      padding: 5px 14px 5px 6px;
+      border-radius: var(--ant-border-radius-lg, 8px);
+      background: var(--ant-color-fill-tertiary, rgba(0, 0, 0, 0.04));
+      counter-increment: react-form-choice;
+      transition: background-color 0.2s, color 0.2s;
+
+      &:hover {
+        background: var(--ant-color-fill-secondary, rgba(0, 0, 0, 0.06));
+      }
+
+      &:has(input:focus-visible) {
+        outline: 2px solid var(--ant-color-primary-border, #91caff);
+        outline-offset: 1px;
+      }
+
+      // 序号：单选为圆形、多选为圆角方形
+      &::before {
+        content: counter(react-form-choice, upper-alpha);
+        display: flex;
+        flex: none;
+        align-items: center;
+        justify-content: center;
+        width: var(--react-form-choice-index-size);
+        height: var(--react-form-choice-index-size);
+        margin-inline-end: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1;
+        color: var(--ant-color-text-secondary, rgba(0, 0, 0, 0.65));
+        background: var(--ant-color-fill-secondary, rgba(0, 0, 0, 0.06));
+        transition: background-color 0.2s, color 0.2s;
+      }
+
+      // 原生控件保留在 DOM 中以支持键盘与读屏
+      > .ant-radio,
+      > .ant-checkbox {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: 0;
+        overflow: hidden;
+        opacity: 0;
+      }
+
+      > .ant-radio + span,
+      > .ant-checkbox + span {
+        padding-inline: 0;
+      }
+    }
+
+    > .ant-radio-wrapper::before {
+      border-radius: 50%;
+    }
+
+    > .ant-checkbox-wrapper::before {
+      border-radius: 6px;
+    }
+
+    &#{$root + '__choice-modern--number'} > .ant-radio-wrapper::before,
+    &#{$root + '__choice-modern--number'} > .ant-checkbox-wrapper::before {
+      content: counter(react-form-choice);
+    }
+
+    > .ant-radio-wrapper-checked,
+    > .ant-checkbox-wrapper-checked {
+      &,
+      &:hover {
+        background: var(--ant-color-primary-bg, #e6f4ff);
+        color: var(--ant-color-primary-text, #0958d9);
+      }
+
+      &::before {
+        color: #fff;
+        background: var(--ant-color-primary, #1677ff);
+      }
+    }
+
+    > .ant-radio-wrapper-disabled,
+    > .ant-checkbox-wrapper-disabled {
+      &,
+      &:hover {
+        background: var(--ant-color-fill-quaternary, rgba(0, 0, 0, 0.02));
+        color: var(--ant-color-text-disabled, rgba(0, 0, 0, 0.25));
+      }
+
+      &::before {
+        color: var(--ant-color-text-disabled, rgba(0, 0, 0, 0.25));
+        background: var(--ant-color-fill-tertiary, rgba(0, 0, 0, 0.04));
+      }
+    }
+
+    > .ant-radio-wrapper-checked.ant-radio-wrapper-disabled::before,
+    > .ant-checkbox-wrapper-checked.ant-checkbox-wrapper-disabled::before {
+      color: #fff;
+      background: var(--ant-color-text-disabled, rgba(0, 0, 0, 0.25));
+    }
+
+    &#{$root + '__choice-modern--check'} {
+      $check-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.2l2.6 2.6L12 5.4' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+      > .ant-radio-wrapper::before,
+      > .ant-checkbox-wrapper::before {
+        content: '';
+      }
+
+      > .ant-radio-wrapper-checked::before,
+      > .ant-checkbox-wrapper-checked::before {
+        background: $check-icon center / 70% no-repeat, var(--ant-color-primary, #1677ff);
+      }
+
+      > .ant-radio-wrapper-checked.ant-radio-wrapper-disabled::before,
+      > .ant-checkbox-wrapper-checked.ant-checkbox-wrapper-disabled::before {
+        background: $check-icon center / 70% no-repeat, var(--ant-color-text-disabled, rgba(0, 0, 0, 0.25));
+      }
+    }
+  }
+
+  #{$root + '__choice-block'} {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    row-gap: 8px;
+    width: 100%;
+
+    > .ant-radio-wrapper,
+    > .ant-checkbox-wrapper {
+      box-sizing: border-box;
+      display: flex;
+      flex: none;
+      align-items: flex-start;
+      align-self: stretch;
+      width: 100%;
+      margin-inline: 0;
+
+      > .ant-radio,
+      > .ant-checkbox {
+        align-self: flex-start;
+        margin-top: calc((1em * var(--ant-line-height, 1.5715) - var(--ant-control-interactive-size, 16px)) / 2);
+      }
+
+      > .ant-radio + span,
+      > .ant-checkbox + span {
+        flex: 1;
+        min-width: 0;
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+    }
+  }
+
+  #{$root + '__choice-modern'}#{$root + '__choice-block'} {
+    > .ant-radio-wrapper,
+    > .ant-checkbox-wrapper {
+      padding: 10px 16px 10px 12px;
+      border-radius: var(--ant-border-radius-lg, 8px);
+
+      &::before {
+        margin-top: calc((1em * var(--ant-line-height, 1.5715) - var(--react-form-choice-index-size)) / 2);
+      }
+    }
+  }
+
   &--large {
     @extend #{$root};
 
@@ -169,6 +352,11 @@
 
         .ant-upload.ant-upload-select-picture-card {
           @include error-border;
+        }
+
+        &#{$root + '__choice-modern'} > .ant-radio-wrapper,
+        &#{$root + '__choice-modern'} > .ant-checkbox-wrapper {
+          background: var(--ant-color-error-bg, #fff2f0);
         }
 
         &.ant-input-affix-wrapper .ant-input {
