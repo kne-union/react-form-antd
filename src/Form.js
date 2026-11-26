@@ -8,7 +8,7 @@ import './mobileText/style.scss';
 import './mobileChoice/style.scss';
 import './mobileLayout/style.scss';
 import {globalParams} from './preset';
-import {FormMobileContext, useFormMobile} from './mobileContext';
+import {FormMobileContext, useFormMobile, FormNestContext, useFormNest} from './mobileContext';
 
 export * from '@kne/react-form';
 export {hooks, widget, utils, hoc} from '@kne/react-form-helper';
@@ -24,6 +24,8 @@ const Form = forwardRef((originProps, ref) => {
     const isMobile = useIsMobile();
     const parentMobile = useFormMobile();
     const mobile = originMobile !== undefined ? originMobile : (parentMobile !== undefined ? parentMobile : globalParams.mobile);
+    const nested = useFormNest();
+    const FormTag = nested ? 'div' : 'form';
     const baseClass = 'react-form';
     let computedClass = baseClass;
     const {type, size} = Object.assign({
@@ -41,22 +43,24 @@ const Form = forwardRef((originProps, ref) => {
         {children}
     </MaxLabelProvider>;
 
-    return (<form className={classnames(baseClass, computedClass, isMobile && 'is-mobile', mobile === false && 'is-mobile-disabled', className)} onSubmit={(e) => {
+    return (<FormTag className={classnames(baseClass, computedClass, isMobile && 'is-mobile', mobile === false && 'is-mobile-disabled', className)} onSubmit={(e) => {
         e.preventDefault();
         e.stopPropagation();
     }}>
-        <FormMobileContext.Provider value={mobile}>
-            <SizeProvider value={{size}}>
-                <ReactForm {...props} ref={ref}>
-                    {cache ? <FormStore cache={cache}/> : null}
-                    {scrollToError ? <ScrollToError scrollProps={scrollProps}/> : null}
-                    {enterSubmit ? <EnterSubmit>
-                        {maxLabel}
-                    </EnterSubmit> : maxLabel}
-                </ReactForm>
-            </SizeProvider>
-        </FormMobileContext.Provider>
-    </form>);
+        <FormNestContext.Provider value={true}>
+            <FormMobileContext.Provider value={mobile}>
+                <SizeProvider value={{size}}>
+                    <ReactForm {...props} ref={ref}>
+                        {cache ? <FormStore cache={cache}/> : null}
+                        {scrollToError ? <ScrollToError scrollProps={scrollProps}/> : null}
+                        {enterSubmit ? <EnterSubmit>
+                            {maxLabel}
+                        </EnterSubmit> : maxLabel}
+                    </ReactForm>
+                </SizeProvider>
+            </FormMobileContext.Provider>
+        </FormNestContext.Provider>
+    </FormTag>);
 });
 
 /*Form.propTypes = {
